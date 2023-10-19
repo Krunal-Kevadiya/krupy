@@ -1,0 +1,130 @@
+[tool.poetry]
+name = "krupy"
+version = "0.1.1"
+description = "A library for rendering project templates."
+license = "MIT"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+authors = ["Krunal Kevadiya <kevadiyakrunal22@gmail.com>"]
+homepage = "https://github.com/krunal-kevadiya/krupy"
+repository = "https://github.com/krunal-kevadiya/krupy.git"
+readme = "README.md"
+
+[tool.poetry.scripts]
+krupy = "krupy.__main__:krupy_app_run"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/krunal-kevadiya/krupy/issues"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0" # HACK https://github.com/PyCQA/isort/issues/1945
+colorama = ">=0.4.3"
+decorator = ">=5.1.1"
+dunamai = ">=1.7.0"
+funcy = ">=1.17"
+jinja2 = ">=3.1.1"
+jinja2-ansible-filters = ">=1.3.1"
+packaging = ">=23.0"
+pathspec = ">=0.9.0"
+plumbum = ">=1.6.9"
+pydantic = ">=2.0.3"
+pygments = ">=2.7.1"
+pyyaml = ">=5.3.1"
+pyyaml-include = ">=1.2"
+typing-extensions = { version = ">=3.7.4,<5.0.0", python = "<3.9" }
+questionary = ">=1.8.1"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+mypy = ">=0.931"
+pexpect = ">=4.8.0"
+poethepoet = ">=0.12.3"
+pre-commit = ">=2.17.0"
+pytest = ">=7.2.0"
+pytest-cov = ">=3.0.0"
+pytest-xdist = ">=2.5.0"
+types-backports = ">=0.1.3"
+types-decorator = ">=5.1.1"
+types-pyyaml = ">=6.0.4"
+types-psutil = "*"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+markdown-exec = ">=1.3.0"
+mkdocs-material = ">=8.2,<10.0.0"
+mkdocstrings = { version = ">=0.19.0", extras = ["python"] }
+
+[tool.poe.tasks.clean]
+script = "devtasks:clean"
+help = "remove build/python artifacts"
+
+[tool.poe.tasks.coverage]
+cmd = "pytest --cov-report html --cov krupy krupy tests"
+help = "generate an HTML report of the coverage"
+
+[tool.poe.tasks.dev-setup]
+script = "devtasks:dev_setup"
+help = "set up local development environment"
+
+[tool.poe.tasks.docs]
+cmd = "mkdocs serve"
+help = "start local docs server"
+
+[tool.poe.tasks.test]
+cmd = "pytest --color=yes"
+help = "run tests"
+
+[tool.poe.tasks.types]
+cmd = "mypy ."
+help = "run the type (mypy) checker on the codebase"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+style = "pep440"
+vcs = "git"
+
+[tool.black]
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+known_first_party = ["krupy"]
+
+[tool.mypy]
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+warn_no_return = false
+
+[tool.pydocstyle]
+match_dir = "^krupy"
+add_ignore = ["D105", "D107"]
+
+[tool.pytest.ini_options]
+addopts = "-n auto -ra"
+markers = [
+    "impure: needs network or is not 100% reproducible"
+]
+
+[tool.commitizen]
+annotated_tag = true
+changelog_incremental = true
+tag_format = "v$version"
+update_changelog_on_bump = true
+version = "8.3.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
