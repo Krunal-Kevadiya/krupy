@@ -48,7 +48,7 @@ MISSING = MissingType(object())
 def path_is_absolute(value: Path) -> Path:
     """Require absolute paths in an argument."""
     if not value.is_absolute():
-        from errors import PathNotAbsoluteError
+        from .errors import PathNotAbsoluteError
 
         raise PathNotAbsoluteError(path=value)
     return value
@@ -57,7 +57,7 @@ def path_is_absolute(value: Path) -> Path:
 def path_is_relative(value: Path) -> Path:
     """Require relative paths in an argument."""
     if value.is_absolute():
-        from errors import PathNotRelativeError
+        from .errors import PathNotRelativeError
 
         raise PathNotRelativeError(path=value)
     return value

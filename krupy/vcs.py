@@ -10,12 +10,13 @@ from warnings import warn
 from packaging import version
 from packaging.version import InvalidVersion, Version
 from plumbum import TF, ProcessExecutionError, colors, local
+from plumbum.machines import LocalCommand
 
 from .errors import DirtyLocalWarning, ShallowCloneWarning
 from .types import OptBool, OptStr, OptStrOrPath, StrOrPath
 
 
-def get_git(context_dir: OptStrOrPath = None):
+def get_git(context_dir: OptStrOrPath = None) -> LocalCommand:
     """Gets `git` command, or fails if it's not available"""
     command = local["git"]
     if context_dir:
@@ -23,7 +24,7 @@ def get_git(context_dir: OptStrOrPath = None):
     return command
 
 
-def get_git_version():
+def get_git_version() -> Version:
     git = get_git()
 
     return Version(re.findall(r"\d+\.\d+\.\d+", git("version"))[0])
@@ -85,9 +86,9 @@ def get_repo(url: str) -> OptStr:
         url:
             Valid examples:
 
-            - gh:krunal-kevadiya/krupy
-            - gl:krunal-kevadiya/krupy
-            - git@github.com:krunal-kevadiya/krupy.git
+            - gh:Krunal-Kevadiya/krupy
+            - gl:Krunal-Kevadiya/krupy
+            - git@github.com:Krunal-Kevadiya/krupy.git
             - git+https://mywebsiteisagitrepo.example.com/
             - /local/path/to/git/repo
             - /local/path/to/git/bundle/file.bundle
@@ -191,7 +192,7 @@ def clone(url: str, ref: OptStr = None) -> str:
                     f"--work-tree={url_abspath}",
                     "commit",
                     "-m",
-                    "krupy automated commit for draft changes",
+                    "Krupy automated commit for draft changes",
                     "--no-verify",
                 )
                 warn(

@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "krupy"
-version = "0.1.1"
+# This version is a placeholder autoupdated by poetry-dynamic-versioning
+version = "0.0.0"
 description = "A library for rendering project templates."
 license = "MIT"
 classifiers = [
@@ -14,15 +15,15 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 authors = ["Krunal Kevadiya <kevadiyakrunal22@gmail.com>"]
-homepage = "https://github.com/krunal-kevadiya/krupy"
-repository = "https://github.com/krunal-kevadiya/krupy.git"
+homepage = "https://github.com/Krunal-Kevadiya/krupy"
+repository = "https://github.com/Krunal-Kevadiya/krupy.git"
 readme = "README.md"
 
 [tool.poetry.scripts]
 krupy = "krupy.__main__:krupy_app_run"
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/krunal-kevadiya/krupy/issues"
+"Bug Tracker" = "https://github.com/Krunal-Kevadiya/krupy/issues"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4.0" # HACK https://github.com/PyCQA/isort/issues/1945
@@ -35,12 +36,12 @@ jinja2-ansible-filters = ">=1.3.1"
 packaging = ">=23.0"
 pathspec = ">=0.9.0"
 plumbum = ">=1.6.9"
-pydantic = ">=2.0.3"
+pydantic = ">=2.4.2"
 pygments = ">=2.7.1"
 pyyaml = ">=5.3.1"
 pyyaml-include = ">=1.2"
-typing-extensions = { version = ">=3.7.4,<5.0.0", python = "<3.9" }
 questionary = ">=1.8.1"
+typing-extensions = { version = ">=3.7.4,<5.0.0", python = "<3.9" }
 
 [tool.poetry.group.dev]
 optional = true
@@ -66,6 +67,13 @@ markdown-exec = ">=1.3.0"
 mkdocs-material = ">=8.2,<10.0.0"
 mkdocstrings = { version = ">=0.19.0", extras = ["python"] }
 
+[tool.poetry.group.build]
+# Helper group just for helping nix to build properly
+optional = true
+
+[tool.poetry.group.build.dependencies]
+poetry-dynamic-versioning = ">=1.1.0"
+
 [tool.poe.tasks.clean]
 script = "devtasks:clean"
 help = "remove build/python artifacts"
@@ -81,6 +89,10 @@ help = "set up local development environment"
 [tool.poe.tasks.docs]
 cmd = "mkdocs serve"
 help = "start local docs server"
+
+[tool.poe.tasks.lint]
+script = "devtasks:lint"
+help = "check (and auto-fix) style with pre-commit"
 
 [tool.poe.tasks.test]
 cmd = "pytest --color=yes"
@@ -126,5 +138,5 @@ update_changelog_on_bump = true
 version = "8.3.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+requires = ["poetry-core>=1.7.0", "poetry-dynamic-versioning>=1.1.0"]
 build-backend = "poetry_dynamic_versioning.backend"

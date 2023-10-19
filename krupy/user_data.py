@@ -17,32 +17,19 @@ from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.validation import ValidationError
 from pydantic import ConfigDict, Field, field_validator
 from pydantic.dataclasses import dataclass
-from pydantic_core.core_schema import FieldValidationInfo
+from pydantic_core.core_schema import ValidationInfo
 from pygments.lexers.data import JsonLexer, YamlLexer
 from questionary.prompts.common import Choice
-from prompt_toolkit.styles import Style, merge_styles
 
-from .constants import (
-    DEFAULT_STYLE,
-    DEFAULT_SELECTED_POINTER,
-    DEFAULT_QUESTION_PREFIX,
-)
 from .errors import InvalidTypeError, UserMessageError
-from .tools import cast_str_to_bool, force_str_end
-from .types import (
-    MISSING,
-    AnyByStrDict,
-    MissingType,
-    OptStr,
-    OptStrOrPath,
-    StrOrPath,
-)
+from .tools import cast_to_bool, cast_to_str, force_str_end
+from .types import MISSING, AnyByStrDict, MissingType, OptStr, OptStrOrPath, StrOrPath
 
 
 # TODO Remove these two functions as well as DEFAULT_DATA in a future release
-def _now():
+def _now() -> datetime:
     warnings.warn(
-        "'now' will be removed in a future release of krupy.\n"
+        "'now' will be removed in a future release of Krupy.\n"
         "Please use this instead: {{ '%Y-%m-%d %H:%M:%S' | strftime }}\n"
         "strftime format reference https://strftime.org/",
         FutureWarning,
@@ -50,9 +37,9 @@ def _now():
     return datetime.utcnow()
 
 
-def _make_secret():
+def _make_secret() -> str:
     warnings.warn(
-        "'make_secret' will be removed in a future release of krupy.\n"
+        "'make_secret' will be removed in a future release of Krupy.\n"
         "Please use this instead: {{ 999999999999999999999999999999999|ans_random|hash('sha512') }}\n"
         "random and hash filters documentation: https://docs.ansible.com/ansible/2.3/playbooks_filters.html",
         FutureWarning,
@@ -140,10 +127,6 @@ class Question:
             Selections available for the user if the question requires them.
             Can be templated.
 
-        multiselect:
-            Indicates if the question supports multiple answers.
-            Only supported by choices type.
-
         default:
             Default value presented to the user to make it easier to respond.
             Can be templated.
@@ -184,19 +167,12 @@ class Question:
             If it is a boolean, it is used directly. If it is a str, it is
             converted to boolean using a parser similar to YAML, but only for
             boolean values.
-
-        style:
-            Question formmating
-
-        qmark:
-            Prefix displayed in front of questions
     """
 
     var_name: str
     answers: AnswersMap
     jinja_env: SandboxedEnvironment
     choices: Union[Sequence[Any], Dict[Any, Any]] = field(default_factory=list)
-    multiselect: bool = False
     default: Any = MISSING
     help: str = ""
     multiline: Union[str, bool] = False
@@ -205,8 +181,6 @@ class Question:
     type: str = Field(default="", validate_default=True)
     validator: str = ""
     when: Union[str, bool] = True
-    style: Dict[str, str] = field(default_factory=dict)
-    qmark: str = ""
 
     @field_validator("var_name")
     @classmethod
@@ -217,7 +191,7 @@ class Question:
 
     @field_validator("type")
     @classmethod
-    def _check_type(cls, v: str, info: FieldValidationInfo):
+    def _check_type(cls, v: str, info: ValidationInfo):
         if v == "":
             default_type_name = type(info.data.get("default")).__name__
             v = default_type_name if default_type_name in CAST_STR_TO_NATIVE else "yaml"
@@ -225,7 +199,7 @@ class Question:
 
     @field_validator("secret")
     @classmethod
-    def _check_secret_question_default_value(cls, v: bool, info: FieldValidationInfo):
+    def _check_secret_question_default_value(cls, v: bool, info: ValidationInfo):
         if v and info.data["default"] is MISSING:
             raise ValueError("Secret question requires a default value")
         return v
@@ -334,38 +308,24 @@ class Question:
             result.append(c)
         return result
 
-    def get_qmark(self) -> str:
-        """Get the qmark that will be printed to the user."""
-        if self.qmark:
-            return self.qmark
-        if self.secret:
-            return "🕵️"
-        return DEFAULT_QUESTION_PREFIX
-
     def get_message(self) -> str:
         """Get the message that will be printed to the user."""
-        default_values = self.get_default()
-        if default_values is MISSING:
-            default_values = ""
-        else:
-            default_values = f"[{default_values}]"
-
         if self.help:
             rendered_help = self.render_value(self.help)
             if rendered_help:
-                return force_str_end(f"{rendered_help} {default_values}") + "  "
+                return force_str_end(rendered_help) + "  "
         # Otherwise, there's no help message defined.
         message = self.var_name
         answer_type = self.get_type_name()
         if answer_type != "str":
             message += f" ({answer_type})"
-        return f"{message} {default_values}" + "\n  "
+        return message + "\n  "
 
     def get_placeholder(self) -> str:
         """Render and obtain the placeholder."""
         return self.render_value(self.placeholder)
 
-    def get_questionary_structure(self, questionQMark: Any) -> AnyByStrDict:
+    def get_questionary_structure(self) -> AnyByStrDict:
         """Get the question in a format that the questionary lib understands."""
         lexer = None
         result: AnyByStrDict = {
@@ -373,9 +333,8 @@ class Question:
             "message": self.get_message(),
             "mouse_support": True,
             "name": self.var_name,
-            "qmark": f"{questionQMark} {self.get_qmark()} ",
+            "qmark": "🕵️" if self.secret else "🎤",
             "when": lambda _: self.get_when(),
-            "style": merge_styles([Style(DEFAULT_STYLE), Style.from_dict(self.style)]),
         }
         default = self.get_default_rendered()
         if default is not MISSING:
@@ -388,11 +347,7 @@ class Question:
             if default is MISSING:
                 result["default"] = False
         if self.choices:
-            if self.multiselect:
-                questionary_type = "checkbox"
-            else:
-                questionary_type = "select"
-            result["pointer"] = DEFAULT_SELECTED_POINTER
+            questionary_type = "select"
             result["choices"] = self._formatted_choices
         if questionary_type == "input":
             if self.secret:
@@ -422,7 +377,7 @@ class Question:
 
     def get_multiline(self) -> bool:
         """Get the value for multiline."""
-        return cast_str_to_bool(self.render_value(self.multiline))
+        return cast_to_bool(self.render_value(self.multiline))
 
     def validate_answer(self, answer) -> bool:
         """Validate user answer."""
@@ -441,7 +396,7 @@ class Question:
 
     def get_when(self) -> bool:
         """Get skip condition for question."""
-        return cast_str_to_bool(self.render_value(self.when))
+        return cast_to_bool(self.render_value(self.when))
 
     def render_value(
         self, value: Any, extra_answers: Optional[AnyByStrDict] = None
@@ -505,10 +460,10 @@ def load_answersfile_data(
 
 
 CAST_STR_TO_NATIVE: Mapping[str, Callable] = {
-    "bool": cast_str_to_bool,
+    "bool": cast_to_bool,
     "float": float,
     "int": int,
     "json": json.loads,
-    "str": str,
+    "str": cast_to_str,
     "yaml": parse_yaml_string,
 }

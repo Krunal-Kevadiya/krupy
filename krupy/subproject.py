@@ -1,6 +1,6 @@
 """Objects to interact with subprojects.
 
-A *subproject* is a project that gets rendered and/or updated with krupy.
+A *subproject* is a project that gets rendered and/or updated with Krupy.
 """
 
 from dataclasses import field

@@ -38,7 +38,7 @@ from pydantic_core import to_jsonable_python
 from questionary import unsafe_prompt
 
 from .errors import (
-    krupyAnswersInterrupt,
+    KrupyAnswersInterrupt,
     ExtensionNotFoundError,
     UnsafeTemplateError,
     UserMessageError,
@@ -61,7 +61,7 @@ from .vcs import get_git
 
 @dataclass(config=ConfigDict(extra="forbid"))
 class Worker:
-    """krupy process state manager.
+    """Krupy process state manager.
 
     This class represents the state of a krupy work, and contains methods to
     actually produce the desired work.
@@ -77,7 +77,7 @@ class Worker:
     Example:
         ```python
         with Worker(
-            src_path="https://github.com/krunal-kevadiya/abc.git", "output"
+            src_path="https://github.com/Krunal-Kevadiya/krupytest.git", "output"
         ) as worker:
             worker.run_copy()
         ```
@@ -413,10 +413,8 @@ class Worker:
             last=self.subproject.last_answers,
             metadata=self.template.metadata,
         )
-        index = 0
-        questionSize = self.template.questions_data.items().__len__()
+
         for var_name, details in self.template.questions_data.items():
-            index = index + 1
             question = Question(
                 answers=result,
                 jinja_env=self.jinja_env,
@@ -453,15 +451,11 @@ class Worker:
                         raise ValueError(f'Question "{var_name}" is required')
                 else:
                     new_answer = unsafe_prompt(
-                        [
-                            question.get_questionary_structure(
-                                f"[{index}/{questionSize}]"
-                            )
-                        ],
+                        [question.get_questionary_structure()],
                         answers={question.var_name: question.get_default()},
                     )[question.var_name]
             except KeyboardInterrupt as err:
-                raise krupyAnswersInterrupt(result, question, self.template) from err
+                raise KrupyAnswersInterrupt(result, question, self.template) from err
             result.user[var_name] = new_answer
 
         self.answers = result
@@ -474,7 +468,7 @@ class Worker:
 
         1. User choice.
         2. Template default.
-        3. krupy default.
+        3. Krupy default.
         """
         path = self.answers_file or self.template.answers_relpath
         template = self.jinja_env.from_string(str(path))
@@ -507,8 +501,8 @@ class Worker:
             )
         except ModuleNotFoundError as error:
             raise ExtensionNotFoundError(
-                f"krupy could not load some Jinja extensions:\n{error}\n"
-                "Make sure to install these extensions alongside krupy itself.\n"
+                f"Krupy could not load some Jinja extensions:\n{error}\n"
+                "Make sure to install these extensions alongside Krupy itself.\n"
                 "See the docs at https://krupy.readthedocs.io/en/latest/configuring/#jinja_extensions"
             )
         # patch the `to_json` filter to support Pydantic dataclasses
@@ -945,7 +939,7 @@ class Worker:
         git = get_git()
         git("init", retcode=None)
         git("add", ".")
-        git("config", "user.name", "krupy")
+        git("config", "user.name", "Krupy")
         git("config", "user.email", "krupy@krupy")
         # 1st commit could fail if any pre-commit hook reformats code
         # 2nd commit uses --no-verify to disable pre-commit-like checks
@@ -1008,7 +1002,7 @@ def run_update(
     return worker
 
 
-def _remove_old_files(prefix: Path, cmp: dircmp, rm_common: bool = False):
+def _remove_old_files(prefix: Path, cmp: dircmp, rm_common: bool = False) -> None:
     """Remove files and directories only found in "old" template.
 
     This is an internal helper method used to process a comparison of 2

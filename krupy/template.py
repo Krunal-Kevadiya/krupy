@@ -22,7 +22,7 @@ from .errors import (
     InvalidConfigFileError,
     MultipleConfigFilesError,
     OldTemplateWarning,
-    UnknownkrupyVersionWarning,
+    UnknownKrupyVersionWarning,
     UnsupportedVersionError,
 )
 from .tools import krupy_version, handle_remove_readonly
@@ -108,7 +108,7 @@ def load_template_config(conf_path: Path, quiet: bool = False) -> AnyByStrDict:
 
 
 def verify_krupy_version(version_str: str) -> None:
-    """Raise an error if the current krupy version is less than the given version.
+    """Raise an error if the current Krupy version is less than the given version.
 
     Args:
         version_str:
@@ -119,20 +119,20 @@ def verify_krupy_version(version_str: str) -> None:
     # Disable check when running krupy as editable installation
     if installed_version == Version("0.0.0"):
         warn(
-            "Cannot check krupy version constraint.",
-            UnknownkrupyVersionWarning,
+            "Cannot check Krupy version constraint.",
+            UnknownKrupyVersionWarning,
         )
         return
     parsed_min = Version(version_str)
     if installed_version < parsed_min:
         raise UnsupportedVersionError(
-            f"This template requires krupy version >= {version_str}, "
-            f"while your version of krupy is {installed_version}."
+            f"This template requires Krupy version >= {version_str}, "
+            f"while your version of Krupy is {installed_version}."
         )
     if installed_version.major > parsed_min.major:
         warn(
-            f"This template was designed for krupy {version_str}, "
-            f"but your version of krupy is {installed_version}. "
+            f"This template was designed for Krupy {version_str}, "
+            f"but your version of Krupy is {installed_version}. "
             f"You could find some incompatibilities.",
             OldTemplateWarning,
         )
@@ -284,7 +284,7 @@ class Template:
         if "keep_trailing_newline" not in result:
             # NOTE: we want to keep trailing newlines in templates as this is what a
             #       user will most likely expects as a default.
-            #       See https://github.com/krunal-kevadiya/krupy/issues
+            #       See https://github.com/Krunal-Kevadiya/krupy/issues/464
             result["keep_trailing_newline"] = True
         return result
 
@@ -460,7 +460,7 @@ class Template:
 
     @cached_property
     def preserve_symlinks(self) -> bool:
-        """Know if krupy should preserve symlinks when rendering the template.
+        """Know if Krupy should preserve symlinks when rendering the template.
 
         See [preserve_symlinks][].
         """
@@ -501,9 +501,13 @@ class Template:
             return None
         try:
             with local.cwd(self.local_abspath):
-                # Leverage dunamai by default; usually it gets best results
+                # Leverage dunamai by default; usually it gets best results.
+                # `dunamai.Version.from_git` needs `Pattern.DefaultUnprefixed`
+                # to be PEP440 compliant on version reading
                 return Version(
-                    dunamai.Version.from_git().serialize(style=dunamai.Style.Pep440)
+                    dunamai.Version.from_git(
+                        pattern=dunamai.Pattern.DefaultUnprefixed
+                    ).serialize(style=dunamai.Style.Pep440)
                 )
         except ValueError:
             # A fully descriptive commit can be easily detected converted into a

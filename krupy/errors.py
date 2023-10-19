@@ -1,4 +1,4 @@
-"""Custom exceptions used by krupy."""
+"""Custom exceptions used by Krupy."""
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Sequence
@@ -7,24 +7,24 @@ from .tools import printf_exception
 from .types import PathSeq
 
 if TYPE_CHECKING:  # always false
-    from template import Template
-    from user_data import AnswersMap, Question
+    from .template import Template
+    from .user_data import AnswersMap, Question
 
 
 # Errors
-class krupyError(Exception):
-    """Base class for all other krupy errors."""
+class KrupyError(Exception):
+    """Base class for all other Krupy errors."""
 
 
-class UserMessageError(krupyError):
+class UserMessageError(KrupyError):
     """Exit the program giving a message to the user."""
 
 
 class UnsupportedVersionError(UserMessageError):
-    """krupy version does not support template version."""
+    """Krupy version does not support template version."""
 
 
-class ConfigFileError(ValueError, krupyError):
+class ConfigFileError(ValueError, KrupyError):
     """Parent class defining problems with the config file."""
 
 
@@ -46,11 +46,11 @@ class MultipleConfigFilesError(ConfigFileError):
         super().__init__(msg)
 
 
-class InvalidTypeError(TypeError, krupyError):
+class InvalidTypeError(TypeError, KrupyError):
     """The question type is not among the supported ones."""
 
 
-class PathError(krupyError, ValueError):
+class PathError(KrupyError, ValueError):
     """The path is invalid in the given context."""
 
 
@@ -72,8 +72,8 @@ class ExtensionNotFoundError(UserMessageError):
     """Extensions listed in the configuration could not be loaded."""
 
 
-class krupyAnswersInterrupt(krupyError, KeyboardInterrupt):
-    """krupyAnswersInterrupt is raised during interactive question prompts.
+class KrupyAnswersInterrupt(KrupyError, KeyboardInterrupt):
+    """KrupyAnswersInterrupt is raised during interactive question prompts.
 
     It typically follows a KeyboardInterrupt (i.e. ctrl-c) and provides an
     opportunity for the caller to conduct additional cleanup, such as writing
@@ -100,8 +100,8 @@ class krupyAnswersInterrupt(krupyError, KeyboardInterrupt):
         self.template = template
 
 
-class UnsafeTemplateError(krupyError):
-    """Unsafe krupy template features are used without explicit consent."""
+class UnsafeTemplateError(KrupyError):
+    """Unsafe Krupy template features are used without explicit consent."""
 
     def __init__(self, features: Sequence[str]):
         assert features
@@ -113,21 +113,21 @@ class UnsafeTemplateError(krupyError):
 
 
 # Warnings
-class krupyWarning(Warning):
-    """Base class for all other krupy warnings."""
+class KrupyWarning(Warning):
+    """Base class for all other Krupy warnings."""
 
 
-class UnknownkrupyVersionWarning(UserWarning, krupyWarning):
-    """Cannot determine installed krupy version."""
+class UnknownKrupyVersionWarning(UserWarning, KrupyWarning):
+    """Cannot determine installed Krupy version."""
 
 
-class OldTemplateWarning(UserWarning, krupyWarning):
-    """Template was designed for an older krupy version."""
+class OldTemplateWarning(UserWarning, KrupyWarning):
+    """Template was designed for an older Krupy version."""
 
 
-class DirtyLocalWarning(UserWarning, krupyWarning):
+class DirtyLocalWarning(UserWarning, KrupyWarning):
     """Changes and untracked files present in template."""
 
 
-class ShallowCloneWarning(UserWarning, krupyWarning):
+class ShallowCloneWarning(UserWarning, KrupyWarning):
     """The template repository is a shallow clone."""

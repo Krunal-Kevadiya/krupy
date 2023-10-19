@@ -1,0 +1,553 @@
+from pathlib import Path
+from textwrap import dedent
+from typing import Any, Callable, Dict, Optional, Tuple
+
+import pytest
+from plumbum import local
+from plumbum.cmd import git
+from pydantic import ValidationError
+
+import krupy
+from krupy.errors import InvalidConfigFileError, MultipleConfigFilesError
+from krupy.template import DEFAULT_EXCLUDE, Task, Template, load_template_config
+from krupy.types import AnyByStrDict
+
+from .helpers import BRACKET_ENVOPS_JSON, SUFFIX_TMPL, build_file_tree
+
+GOOD_ENV_OPS = {
+    "autoescape": True,
+    "block_start_string": "<%",
+    "block_end_string": "%>",
+    "variable_start_string": "<<",
+    "variable_end_string": ">>",
+    "keep_trailing_newline": False,
+    "i_am_not_a_member": None,
+    "comment_end_string": "#>",
+    "comment_start_string": "<#",
+}
+
+
+def git_init(message="hello world") -> None:
+    git("init")
+    git("config", "user.name", "Krupy Test")
+    git("config", "user.email", "test@krupy")
+    git("add", ".")
+    git("commit", "-m", message)
+
+
+def test_config_data_is_loaded_from_file() -> None:
+    tpl = Template("tests/demo_data")
+    assert tpl.exclude == ("exclude1", "exclude2")
+    assert tpl.skip_if_exists == ["skip_if_exists1", "skip_if_exists2"]
+    assert tpl.tasks == [
+        Task(cmd="touch 1", extra_env={"STAGE": "task"}),
+        Task(cmd="touch 2", extra_env={"STAGE": "task"}),
+    ]
+
+
+def test_config_data_is_merged_from_files() -> None:
+    tpl = Template("tests/demo_merge_options_from_answerfiles")
+    assert list(tpl.skip_if_exists) == [
+        "skip_if_exists0",
+        "skip_if_exists1",
+        "skip_if_exists2",
+    ]
+    assert list(tpl.exclude) == ["exclude1", "exclude21", "exclude22"]
+    assert list(tpl.jinja_extensions) == ["jinja2.ext.0", "jinja2.ext.2"]
+    assert list(tpl.secret_questions) == ["question1"]
+
+
+@pytest.mark.parametrize("config_suffix", ["yaml", "yml"])
+def test_read_data(
+    tmp_path_factory: pytest.TempPathFactory, config_suffix: str
+) -> None:
+    src, dst = map(tmp_path_factory.mktemp, ("src", "dst"))
+    build_file_tree(
+        {
+            (src / f"krupy.{config_suffix}"): (
+                f"""\
+                # This is a comment
+                _envops: {BRACKET_ENVOPS_JSON}
+                a_string: lorem ipsum
+                a_number: 12345
+                a_boolean: true
+                a_list:
+                    - one
+                    - two
+                    - three
+                """
+            ),
+            (src / "user_data.txt.jinja"): (
+                """\
+                A string: [[ a_string ]]
+                A number: [[ a_number ]]
+                A boolean: [[ a_boolean ]]
+                A list: [[ ", ".join(a_list) ]]
+                """
+            ),
+        }
+    )
+    krupy.run_copy(str(src), dst, defaults=True, overwrite=True)
+    assert (dst / "user_data.txt").read_text() == dedent(
+        """\
+        A string: lorem ipsum
+        A number: 12345
+        A boolean: True
+        A list: one, two, three
+        """
+    )
+
+
+def test_invalid_yaml(capsys: pytest.CaptureFixture[str]) -> None:
+    conf_path = Path("tests", "demo_invalid", "krupy.yml")
+    with pytest.raises(InvalidConfigFileError):
+        load_template_config(conf_path)
+    _, err = capsys.readouterr()
+    assert "INVALID CONFIG FILE" in err
+    assert str(conf_path) in err
+
+
+@pytest.mark.parametrize(
+    "conf_path, check_err",
+    [
+        ("tests/demo_invalid", lambda x: "INVALID" in x),
+        # test key collision between including and included file
+        ("tests/demo_transclude_invalid/demo", None),
+        # test key collision between two included files
+        ("tests/demo_transclude_invalid_multi/demo", None),
+    ],
+)
+def test_invalid_config_data(
+    capsys: pytest.CaptureFixture[str],
+    conf_path: str,
+    check_err: Optional[Callable[[str], bool]],
+) -> None:
+    template = Template(conf_path)
+    with pytest.raises(InvalidConfigFileError):
+        template.config_data
+    if check_err:
+        _, err = capsys.readouterr()
+        assert check_err(err)
+
+
+def test_valid_multi_section(tmp_path: Path) -> None:
+    """Including multiple files works fine merged with multiple sections."""
+    with local.cwd(tmp_path):
+        build_file_tree(
+            {
+                "exclusions.yml": "_exclude: ['*.yml']",
+                "common_jinja.yml": (
+                    f"""\
+                    _templates_suffix: {SUFFIX_TMPL}
+                    _envops:
+                        block_start_string: "[%"
+                        block_end_string: "%]"
+                        comment_start_string: "[#"
+                        comment_end_string: "#]"
+                        variable_start_string: "[["
+                        variable_end_string: "]]"
+                        keep_trailing_newline: true
+                    """
+                ),
+                "common_questions.yml": (
+                    """\
+                    your_age:
+                        type: int
+                    your_name:
+                        type: yaml
+                        help: your name from common questions
+                    """
+                ),
+                "krupy.yml": (
+                    """\
+                    ---
+                    !include 'common_*.yml'
+                    ---
+                    !include exclusions.yml
+                    ---
+                    your_name:
+                        type: str
+                        help: your name from latest section
+                    """
+                ),
+            }
+        )
+    template = Template(str(tmp_path))
+    assert template.exclude == ("*.yml",)
+    assert template.envops == {
+        "block_end_string": "%]",
+        "block_start_string": "[%",
+        "comment_end_string": "#]",
+        "comment_start_string": "[#",
+        "keep_trailing_newline": True,
+        "variable_end_string": "]]",
+        "variable_start_string": "[[",
+    }
+    assert template.questions_data == {
+        "your_age": {"type": "int"},
+        "your_name": {"type": "str", "help": "your name from latest section"},
+    }
+
+
+def test_config_data_empty() -> None:
+    template = Template("tests/demo_config_empty")
+    assert template.config_data == {}
+    assert template.questions_data == {}
+
+
+def test_multiple_config_file_error() -> None:
+    template = Template("tests/demo_multi_config")
+    with pytest.raises(MultipleConfigFilesError):
+        template.config_data
+
+
+# ConfigData
+@pytest.mark.parametrize(
+    "data",
+    (
+        {"pretend": "not_a_bool"},
+        {"quiet": "not_a_bool"},
+        {"overwrite": "not_a_bool"},
+        {"cleanup_on_error": "not_a_bool"},
+        {"overwrite": True, "skip_if_exists": True},
+    ),
+)
+def test_flags_bad_data(data: AnyByStrDict) -> None:
+    with pytest.raises(ValidationError):
+        krupy.Worker(**data)
+
+
+def test_flags_extra_fails() -> None:
+    with pytest.raises(ValidationError):
+        krupy.Worker(  # type: ignore[call-arg]
+            src_path="..",
+            dst_path=Path("."),
+            i_am_not_a_member="and_i_do_not_belong_here",
+        )
+
+
+def test_missing_template(tmp_path: Path) -> None:
+    with pytest.raises(ValueError):
+        krupy.run_copy("./i_do_not_exist", tmp_path)
+
+
+def is_subdict(small: Dict[Any, Any], big: Dict[Any, Any]) -> bool:
+    return {**big, **small} == big
+
+
+def test_worker_good_data(tmp_path: Path) -> None:
+    # This test is probably useless, as it tests the what and not the how
+    conf = krupy.Worker("./tests/demo_data", tmp_path)
+    assert conf._render_context()["_folder_name"] == tmp_path.name
+    assert conf.all_exclusions == ("exclude1", "exclude2")
+    assert conf.template.skip_if_exists == ["skip_if_exists1", "skip_if_exists2"]
+    assert conf.template.tasks == [
+        Task(cmd="touch 1", extra_env={"STAGE": "task"}),
+        Task(cmd="touch 2", extra_env={"STAGE": "task"}),
+    ]
+
+
+@pytest.mark.parametrize(
+    "test_input, expected_exclusions",
+    [
+        # func_args > defaults
+        (
+            {"src_path": ".", "exclude": ["aaa"]},
+            tuple(DEFAULT_EXCLUDE) + ("aaa",),
+        ),
+        # func_args > user_data
+        (
+            {"src_path": "tests/demo_data", "exclude": ["aaa"]},
+            ("exclude1", "exclude2", "aaa"),
+        ),
+    ],
+)
+def test_worker_config_precedence(
+    tmp_path: Path, test_input: AnyByStrDict, expected_exclusions: Tuple[str, ...]
+) -> None:
+    conf = krupy.Worker(dst_path=tmp_path, vcs_ref="HEAD", **test_input)
+    assert expected_exclusions == conf.all_exclusions
+
+
+def test_config_data_transclusion() -> None:
+    config = krupy.Worker("tests/demo_transclude/demo")
+    assert config.all_exclusions == ("exclude1", "exclude2")
+
+
+@pytest.mark.parametrize(
+    "user_defaults, data, expected",
+    [
+        # Nothing overridden.
+        (
+            {},
+            {},
+            dedent(
+                """\
+                A string: lorem ipsum
+                A number: 12345
+                A boolean: True
+                A list: one, two, three
+                """
+            ),
+        ),
+        # User defaults provided.
+        (
+            {
+                "a_string": "foo",
+                "a_number": 42,
+                "a_boolean": False,
+                "a_list": ["four", "five", "six"],
+            },
+            {},
+            dedent(
+                """\
+                A string: foo
+                A number: 42
+                A boolean: False
+                A list: four, five, six
+                """
+            ),
+        ),
+        # User defaults + data provided.
+        (
+            {
+                "a_string": "foo",
+                "a_number": 42,
+                "a_boolean": False,
+                "a_list": ["four", "five", "six"],
+            },
+            {
+                "a_string": "yosemite",
+            },
+            dedent(
+                """\
+                A string: yosemite
+                A number: 42
+                A boolean: False
+                A list: four, five, six
+                """
+            ),
+        ),
+    ],
+)
+def test_user_defaults(
+    tmp_path_factory: pytest.TempPathFactory,
+    user_defaults: AnyByStrDict,
+    data: AnyByStrDict,
+    expected: str,
+) -> None:
+    src, dst = map(tmp_path_factory.mktemp, ("src", "dst"))
+    build_file_tree(
+        {
+            (src / "krupy.yaml"): (
+                """\
+                a_string:
+                    default: lorem ipsum
+                    type: str
+                a_number:
+                    default: 12345
+                    type: int
+                a_boolean:
+                    default: true
+                    type: bool
+                a_list:
+                    default:
+                        - one
+                        - two
+                        - three
+                    type: json
+                """
+            ),
+            (src / "user_data.txt.jinja"): (
+                """\
+                A string: {{ a_string }}
+                A number: {{ a_number }}
+                A boolean: {{ a_boolean }}
+                A list: {{ ", ".join(a_list) }}
+                """
+            ),
+            (src / "{{ _krupy_conf.answers_file }}.jinja"): (
+                """\
+                # Changes here will be overwritten by Krupy
+                {{ _krupy_answers|to_nice_yaml }}
+                """
+            ),
+        }
+    )
+    krupy.run_copy(
+        str(src),
+        dst,
+        defaults=True,
+        overwrite=True,
+        user_defaults=user_defaults,
+        data=data,
+    )
+    assert (dst / "user_data.txt").read_text() == expected
+
+
+@pytest.mark.parametrize(
+    (
+        "user_defaults_initial",
+        "user_defaults_updated",
+        "data_initial",
+        "data_updated",
+        "expected_initial",
+        "expected_updated",
+    ),
+    [
+        # Initial user defaults and updated used defaults. The output
+        # should remain unchanged following the update operation.
+        (
+            {
+                "a_string": "foo",
+            },
+            {
+                "a_string": "foobar",
+            },
+            {},
+            {},
+            dedent(
+                """\
+                A string: foo
+                """
+            ),
+            dedent(
+                """\
+                A string: foo
+                """
+            ),
+        ),
+        # User defaults + data provided. Provided data should take precedence
+        # and the resulting content unchanged post-update.
+        (
+            {
+                "a_string": "foo",
+            },
+            {
+                "a_string": "foobar",
+            },
+            {
+                "a_string": "yosemite",
+            },
+            {},
+            dedent(
+                """\
+                A string: yosemite
+                """
+            ),
+            dedent(
+                """\
+                A string: yosemite
+                """
+            ),
+        ),
+        # User defaults + secondary defaults + data overrides. `data_updated` should
+        # override user and template defaults.
+        (
+            {
+                "a_string": "foo",
+            },
+            {
+                "a_string": "foobar",
+            },
+            {
+                "a_string": "yosemite",
+            },
+            {
+                "a_string": "red rocks",
+            },
+            dedent(
+                """\
+                A string: yosemite
+                """
+            ),
+            dedent(
+                """\
+                A string: red rocks
+                """
+            ),
+        ),
+    ],
+)
+def test_user_defaults_updated(
+    tmp_path_factory: pytest.TempPathFactory,
+    user_defaults_initial: AnyByStrDict,
+    user_defaults_updated: AnyByStrDict,
+    data_initial: AnyByStrDict,
+    data_updated: AnyByStrDict,
+    expected_initial: str,
+    expected_updated: str,
+) -> None:
+    src, dst = map(tmp_path_factory.mktemp, ("src", "dst"))
+    with local.cwd(src):
+        build_file_tree(
+            {
+                (src / "krupy.yaml"): (
+                    """\
+                    a_string:
+                        default: lorem ipsum
+                        type: str
+                    """
+                ),
+                (src / "user_data.txt.jinja"): (
+                    """\
+                    A string: {{ a_string }}
+                    """
+                ),
+                (src / "{{ _krupy_conf.answers_file }}.jinja"): (
+                    """\
+                    # Changes here will be overwritten by Krupy
+                    {{ _krupy_answers|to_nice_yaml }}
+                    """
+                ),
+            }
+        )
+        git_init()
+
+    krupy.run_copy(
+        str(src),
+        dst,
+        defaults=True,
+        overwrite=True,
+        user_defaults=user_defaults_initial,
+        data=data_initial,
+    )
+    assert (dst / "user_data.txt").read_text() == expected_initial
+
+    with local.cwd(dst):
+        git_init()
+
+    krupy.run_update(
+        dst,
+        defaults=True,
+        overwrite=True,
+        user_defaults=user_defaults_updated,
+        data=data_updated,
+    )
+    assert (dst / "user_data.txt").read_text() == expected_updated
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        """\
+        question:
+            type: str
+            secret: true
+        """,
+        """\
+        question:
+            type: str
+
+        _secret_questions:
+            - question
+        """,
+    ],
+)
+def test_secret_question_requires_default_value(
+    tmp_path_factory: pytest.TempPathFactory, config: str
+) -> None:
+    src, dst = map(tmp_path_factory.mktemp, ("src", "dst"))
+    build_file_tree({src / "krupy.yml": config})
+    with pytest.raises(ValueError, match="Secret question requires a default value"):
+        krupy.run_copy(str(src), dst)

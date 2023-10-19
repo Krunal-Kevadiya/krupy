@@ -1,9 +1,9 @@
 """
-Command line entrypoint. This module declares the krupy CLI applications.
+Command line entrypoint. This module declares the Krupy CLI applications.
 
 Basically, there are 3 different commands you can run:
 
--   [`krupy`][krupy.cli.krupyApp], the main app, which is a shortcut for the
+-   [`krupy`][krupy.cli.KrupyApp], the main app, which is a shortcut for the
     `copy` and `update` subapps.
 
     If the destination project is found and has [an answers
@@ -16,22 +16,22 @@ Basically, there are 3 different commands you can run:
 
         ```sh
         # Copy a new project
-        krupy gh:krupy-org/autopretty my-project
+        krupy gh:Krunal-Kevadiya/krupytest my-project
         # Update it
         cd my-project
         krupy
         ```
 
--   [`krupy copy`][krupy.cli.krupyApp], used to bootstrap a new project from
+-   [`krupy copy`][krupy.cli.KrupyApp], used to bootstrap a new project from
     a template.
 
     !!! example
 
         ```sh
-        krupy copy gh:krupy-org/autopretty my-project
+        krupy copy gh:Krunal-Kevadiya/krupytest my-project
         ```
 
--   [`krupy update`][krupy.cli.krupyUpdateSubApp] to update a preexisting
+-   [`krupy update`][krupy.cli.KrupyUpdateSubApp] to update a preexisting
     project to a newer version of its template.
 
     !!! example
@@ -41,13 +41,18 @@ Basically, there are 3 different commands you can run:
         ```
 
 Below are the docs of each one of those.
+
+CLI help generated from `krupy --help-all`:
+
+```sh exec="on" result="text"
+krupy --help-all
+```
 """
 
 import sys
-from io import StringIO
+from os import PathLike
 from pathlib import Path
 from textwrap import dedent
-from unittest.mock import patch
 
 import yaml
 from decorator import decorator
@@ -72,11 +77,12 @@ def handle_exceptions(method, *args, **kwargs):
         return 1
     except UnsafeTemplateError as error:
         print(colors.red | "\n".join(error.args), file=sys.stderr)
-        return 2
+        # DOCS https://github.com/Krunal-Kevadiya/krupy/issues/1328#issuecomment-1723214165
+        return 0b100
 
 
-class krupyApp(cli.Application):
-    """The krupy CLI application."""
+class KrupyApp(cli.Application):
+    """The Krupy CLI application."""
 
     DESCRIPTION = "Create a new project from a template."
     DESCRIPTION_MORE = (
@@ -101,9 +107,11 @@ class krupyApp(cli.Application):
 
 
 class _Subcommand(cli.Application):
-    """Base class for krupy subcommands."""
+    """Base class for Krupy subcommands."""
 
-    data: AnyByStrDict = {}
+    def __init__(self, executable: PathLike) -> None:
+        self.data: AnyByStrDict = {}
+        super().__init__(executable)
 
     answers_file = cli.SwitchAttr(
         ["-a", "--answers-file"],
@@ -157,7 +165,6 @@ class _Subcommand(cli.Application):
         "VARIABLE=VALUE",
         list=True,
         help="Make VARIABLE available as VALUE when rendering the template",
-        excludes=["--data-file"],
     )
     def data_switch(self, values: StrSeq) -> None:
         """Update [data][] with provided values.
@@ -174,7 +181,6 @@ class _Subcommand(cli.Application):
         ["--data-file"],
         cli.ExistingFile,
         help="Load data from a YAML file",
-        excludes=["--data"],
     )
     def data_file_switch(self, path: cli.ExistingFile) -> None:
         """Update [data][] with provided values.
@@ -183,11 +189,16 @@ class _Subcommand(cli.Application):
             path: The path to the YAML file to load.
         """
         with open(path) as f:
-            self.data.update(yaml.safe_load(f))
+            file_updates: AnyByStrDict = yaml.safe_load(f)
+
+        updates_without_cli_overrides = {
+            k: v for k, v in file_updates.items() if k not in self.data
+        }
+        self.data.update(updates_without_cli_overrides)
 
     def _worker(self, src_path: OptStr = None, dst_path: str = ".", **kwargs) -> Worker:
         """
-        Run krupy's internal API using CLI switches.
+        Run Krupy's internal API using CLI switches.
 
         Arguments:
             src_path: The source path of the template to generate the project from.
@@ -210,8 +221,8 @@ class _Subcommand(cli.Application):
         )
 
 
-@krupyApp.subcommand("copy")
-class krupyCopySubApp(_Subcommand):
+@KrupyApp.subcommand("copy")
+class KrupyCopySubApp(_Subcommand):
     """The `krupy copy` subcommand.
 
     Use this subcommand to bootstrap a new subproject from a template, or to override
@@ -223,7 +234,7 @@ class krupyCopySubApp(_Subcommand):
     cleanup_on_error = cli.Flag(
         ["-C", "--no-cleanup"],
         default=True,
-        help="On error, do not delete destination if it was created by krupy.",
+        help="On error, do not delete destination if it was created by Krupy.",
     )
     defaults = cli.Flag(
         ["-l", "--defaults"],
@@ -262,12 +273,12 @@ class krupyCopySubApp(_Subcommand):
         return 0
 
 
-@krupyApp.subcommand("recopy")
-class krupyRecopySubApp(_Subcommand):
+@KrupyApp.subcommand("recopy")
+class KrupyRecopySubApp(_Subcommand):
     """The `krupy recopy` subcommand.
 
     Use this subcommand to update an existing subproject from a template that
-    supports updates, ignoring any subproject evolution since the last krupy
+    supports updates, ignoring any subproject evolution since the last Krupy
     execution.
     """
 
@@ -275,7 +286,7 @@ class krupyRecopySubApp(_Subcommand):
     DESCRIPTION_MORE = dedent(
         """\
         The copy must have a valid answers file which contains info from the
-        last krupy execution, including the source template (it must be a key
+        last Krupy execution, including the source template (it must be a key
         called `_src_path`).
 
         This command will ignore any diff that you have generated since the
@@ -328,20 +339,20 @@ class krupyRecopySubApp(_Subcommand):
         return 0
 
 
-@krupyApp.subcommand("update")
-class krupyUpdateSubApp(_Subcommand):
+@KrupyApp.subcommand("update")
+class KrupyUpdateSubApp(_Subcommand):
     """The `krupy update` subcommand.
 
     Use this subcommand to update an existing subproject from a template
     that supports updates, respecting that subproject evolution since the last
-    krupy execution.
+    Krupy execution.
     """
 
     DESCRIPTION = "Update a subproject from its original template"
     DESCRIPTION_MORE = dedent(
         """\
         The copy must have a valid answers file which contains info
-        from the last krupy execution, including the source template
+        from the last Krupy execution, including the source template
         (it must be a key called `_src_path`).
 
         If that file contains also `_commit`, and `destination_path` is a git
@@ -400,14 +411,3 @@ class krupyUpdateSubApp(_Subcommand):
         ) as worker:
             worker.run_update()
         return 0
-
-
-# Add --help-all results to docs
-if __doc__:
-    help_io = StringIO()
-    with patch("sys.stdout", help_io):
-        krupyApp.run(["krupy", "--help-all"], exit=False)
-    help_io.seek(0)
-    __doc__ += (
-        f"\n\nCLI help generated from `krupy --help-all`:\n\n```\n{help_io.read()}\n```"
-    )
