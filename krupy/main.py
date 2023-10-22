@@ -35,8 +35,8 @@ from plumbum.machines import local
 from pydantic import ConfigDict, PositiveInt
 from pydantic.dataclasses import dataclass
 from pydantic_core import to_jsonable_python
-from questionary import unsafe_prompt
 
+from .questionary import unsafe_prompt
 from .errors import (
     KrupyAnswersInterrupt,
     ExtensionNotFoundError,
