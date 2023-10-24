@@ -1,0 +1,246 @@
+# CONFIGURATION -------------------------
+_min_krupy_version: "8"
+
+_envops:
+  autoescape: false
+  trim_blocks: true
+  keep_trailing_newline: true
+  block_end_string: "%}"
+  block_start_string: "{%"
+  comment_end_string: "#}"
+  comment_start_string: "{#"
+  variable_end_string: "}}"
+  variable_start_string: "{{"
+
+_envquestions:
+  is_visible_count: false,
+  is_visible_mark: false,
+  is_visible_type: false,
+  is_visible_default_value: false,
+  style: { "qmark": "fg:#5F819D", "question": "fg:#FF9D00" },
+
+_subdirectory: project
+
+_templates_suffix: .jinja
+
+_answers_file: .krupy-answers.autopretty.yml
+
+_jinja_extensions:
+- krupy_templates_extensions.TemplateExtensionLoader
+- extensions.py:CurrentYearExtension
+- extensions.py:GitExtension
+- extensions.py:SlugifyExtension
+- jinja2_time.TimeExtension
+
+_skip_if_exists:
+- CHANGELOG.md
+- CREDITS.md
+
+_exclude:
+  - _macros
+  - _traefik*_labels.yml
+  - /.git
+  - /.github
+
+_tasks:
+- python scripts/post_generation.py
+# Initial commit
+- "{% if initial_commit %}git init{% endif %}"
+- "{% if initial_commit %}git add .{% endif %}"
+- "{% if initial_commit %}git commit -m 'chore: initial commit'{% endif %}"
+
+_migrations:
+- version: 0.1.0
+  before:
+  - rm --force docs/changelog.md
+  - rm --force docs/credits.md
+  - rm --force docs/index.md
+- version: v3.0.1
+  before: &update_no_license
+    - - invoke
+      - --search-root={{ _krupy_conf.src_path }}
+      - --collection=migrations
+      - update-no-license
+      - "{{ _krupy_conf.dst_path }}"
+      - "{{ _krupy_conf.answers_file }}"
+  after: *update_no_license
+
+_message_before_copy: |
+  Thanks for generating a project using our template.
+
+  You'll be asked a series of questions whose answers will be used to
+  generate a tailored project for you.
+
+_message_after_copy: |
+  Your project "{{ project_name }}" has been created successfully!
+
+_message_before_update: |
+  Thanks for updating your project using our template.
+
+  You'll be asked a series of questions whose answers are pre-populated
+  with previously entered values. Feel free to change them as needed.
+
+_message_after_update: |
+  Your project "{{ project_name }}" has been updated successfully!
+  In case there are any conflicts, please resolve them. Then,
+  you're done.
+
+# PROMPT --------------------------------
+project_name:
+  type: str
+  help: >-
+    What's your project name?
+
+    Do not use dots or spaces in the name; just "A-Za-z0-9-_" please.
+  default: myproject-odoo
+
+project_description:
+  type: str
+  help:
+    - ["class:text", "Your project"]
+    - ["class:highlighted", "description"]
+  default: "{{ project_name | upper | replace('-', '_') }}"
+
+initial_commit:
+  type: bool
+  help: "Create an initial commit with the generated {{ project_name }}?"
+  default: no
+
+git_relay_user:
+  type: str
+  when: “{{ initial_commit }}”
+  help: >-
+    Indicate the user to connect in the Git server you just defined.
+
+    For Odoo to work fine, this user needs to be able to do commit.
+  default: ""
+
+git_relay_password:
+  secret: true
+  type: str
+  default: example-git-password
+  when: “{{ initial_commit }}”
+  help: >-
+    What is your Git password?
+
+author_name:
+  type: str
+  help: Extension author name
+  placeholder: "My Name"
+  validator: >-
+    {% if not (author_name | regex_search('^[^\s].*$')) %}
+    author_name cannot be empty nor start with a blank character.
+    {% endif %}
+  when: “{{ initial_commit }}”
+
+author_email:
+  type: str
+  help: Extension author email
+  default: ""
+  placeholder:
+    - ["class:text", "me"]
+    - ["class:highlighted", "@"]
+    - ["class:text", "test"]
+    - ["class:highlighted", "."]
+    - ["class:text", "com"]
+  validator: >-
+    {% if author_email and not (author_email | regex_search('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')) %}
+    author_email must be a valid email address.
+    {% endif %}
+  when: “{{ initial_commit }}”
+
+​​repository_provider:
+  type: str
+  help: Your repository provider
+  default: github.com
+  choices:
+  - github.com
+  - gitlab.com
+
+copyright_date:
+  type: str
+  help: The copyright date
+  default: "{{ current_year }}"
+
+open_source_license:
+  type: yaml
+  help: "The open source license to use"
+  multiselect: true
+  choices:
+    - "MIT"
+    - "Apache Software License 2.0"
+    - "GNU General Public License v3"
+    - "Not open source"
+
+project_test_flavor:
+  type: str
+  default: |-
+    {% if project_version < 13.0 -%}
+        OCB
+    {%- else -%}
+        Both
+    {%- endif %}
+  choices:
+    - Odoo
+    - OCB
+    - Both
+  help: Which project flavor should be used for CI tests ?
+
+rebel_module_groups:
+  type: yaml
+  default: []
+  help: >
+    Are there in this repo modules that don't get along with their friends? If so, list
+    them here (YAML format) and they will be tested in separate jobs.
+
+    Beware, if rebel modules should stay separated in groups, you should join them with
+    commas, which could be misinterpreted by YAML.
+
+    Example: ["rebel_module_1,rebel_module_2", even_more_rebel_module]
+
+github_ci_extra_env:
+  type: yaml
+  default: {}
+  help: |
+    Any extra environment variables to inject into the CI tests
+
+    Example: {"KEY": "VALUE"}
+
+custom_install:
+    help: Would you like to use simple (default tooling) or customized installation? 
+    type: bool
+    default: customized
+    choices:
+        customized: true
+        simple: false
+
+min_py:
+  default: '3.8'
+  choices:
+    - '3.8'
+    - '3.9'
+    - '3.10'
+    - '3.11'
+    - '3.12'
+  help: 'Choose the minimal Python version the project should support:'
+  type: str
+
+max_py:
+  default: '3.12'
+  choices:
+    '3.8':
+      validator: '[% from pathjoin("includes", "version_compare.jinja") import version_higher_than_validator %]{{ version_higher_than_validator("3.8", min_py) }}'
+      value: '3.8'
+    '3.9':
+      validator: '[% from pathjoin("includes", "version_compare.jinja") import version_higher_than_validator %]{{ version_higher_than_validator("3.9", min_py) }}'
+      value: '3.9'
+    '3.10':
+      validator: '[% from pathjoin("includes", "version_compare.jinja") import version_higher_than_validator %]{{ version_higher_than_validator("3.10", min_py) }}'
+      value: '3.10'
+    '3.11':
+      validator: '[% from pathjoin("includes", "version_compare.jinja") import version_higher_than_validator %]{{ version_higher_than_validator("3.11", min_py) }}'
+      value: '3.11'
+    '3.12':
+      value: '3.12'
+  help: 'Choose the maximal Python version the project should support:'
+  type: str
