@@ -2,7 +2,6 @@ from typing import Any
 from typing import List
 from typing import Optional
 from typing import Tuple
-from typing import Union
 
 from prompt_toolkit.document import Document
 from prompt_toolkit.lexers import Lexer
@@ -19,15 +18,12 @@ from ..styles import merge_styles_default
 
 
 def text(
-    message: Union[str, None],
+    message: AnyFormattedText,
     default: str = "",
     validate: Any = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     style: Optional[Style] = None,
     qcount: str = "",
-    default_value: Union[str, None] = None,
-    type: Union[str, None] = None,
-    help: AnyFormattedText = None,
     multiline: bool = False,
     instruction: Optional[str] = None,
     lexer: Optional[Lexer] = None,
@@ -97,17 +93,11 @@ def text(
                 tokens.append((x[0], "{} ".format(x[1])))
         else:
             tokens.append(("class:qmark", "{} ".format(qmark)))
-        if help is None and message is not None:
-            tokens.append(("class:question", " {} ".format(message)))
-        if isinstance(help, list):
-            for x in help:
+        if isinstance(message, list):
+            for x in message:
                 tokens.append((x[0], "{} ".format(x[1])))
-        elif help is not None:
-            tokens.append(("class:question", "{} ".format(help)))
-        if type is not None:
-            tokens.append(("class:type", "({}) ".format(type)))
-        if default_value is not None and default_value != "":
-            tokens.append(("class:default", "[{}] ".format(default_value)))
+        else:
+            tokens.append(("class:question", "{} ".format(message)))
         tokens.append(("class:question", "{}".format("\n")))
 
         if instruction:

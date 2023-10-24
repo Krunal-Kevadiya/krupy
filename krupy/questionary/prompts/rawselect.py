@@ -15,16 +15,13 @@ from ..question import Question
 
 
 def rawselect(
-    message: Union[str, None],
+    message: AnyFormattedText,
     choices: Sequence[Union[str, Choice, Dict[str, Any]]],
     default: Optional[str] = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     pointer: Optional[str] = DEFAULT_SELECTED_POINTER,
     style: Optional[Style] = None,
     qcount: str = "",
-    default_value: Union[str, None] = None,
-    type: Union[str, None] = None,
-    help: AnyFormattedText = None,
     **kwargs: Any,
 ) -> Question:
     """Ask the user to select one item from a list of choices using shortcuts.
@@ -79,9 +76,6 @@ def rawselect(
         pointer,
         style,
         qcount,
-        default_value,
-        type,
-        help,
         use_shortcuts=True,
         use_arrow_keys=False,
         **kwargs,

@@ -414,7 +414,10 @@ class Worker:
             metadata=self.template.metadata,
         )
 
+        index = 0
+        questionSize = self.template.questions_data.items().__len__()
         for var_name, details in self.template.questions_data.items():
+            index = index + 1
             question = Question(
                 answers=result,
                 jinja_env=self.jinja_env,
@@ -451,7 +454,7 @@ class Worker:
                         raise ValueError(f'Question "{var_name}" is required')
                 else:
                     new_answer = unsafe_prompt(
-                        [question.get_questionary_structure()],
+                        [question.get_questionary_structure(f"[{index}/{questionSize}]")],
                         answers={question.var_name: question.get_default()},
                     )[question.var_name]
             except KeyboardInterrupt as err:

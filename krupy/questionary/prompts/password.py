@@ -1,6 +1,5 @@
 from typing import Any
 from typing import Optional
-from typing import Union
 
 from .. import Style
 from ..constants import DEFAULT_QUESTION_PREFIX
@@ -10,15 +9,12 @@ from ..prompts.common import AnyFormattedText
 
 
 def password(
-    message: Union[str, None],
+    message: AnyFormattedText,
     default: str = "",
     validate: Any = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     style: Optional[Style] = None,
     qcount: str = "",
-    default_value: Union[str, None] = None,
-    type: Union[str, None] = None,
-    help: AnyFormattedText = None,
     **kwargs: Any,
 ) -> Question:
     """A text input where a user can enter a secret which won't be displayed on the CLI.
@@ -69,9 +65,6 @@ def password(
         qmark,
         style,
         qcount,
-        default_value,
-        type,
-        help,
         is_password=True,
         **kwargs,
     )

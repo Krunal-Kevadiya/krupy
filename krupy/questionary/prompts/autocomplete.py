@@ -101,7 +101,7 @@ class WordCompleter(Completer):
 
 
 def autocomplete(
-    message: Union[str, None],
+    message: AnyFormattedText,
     choices: List[str],
     default: str = "",
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
@@ -113,9 +113,6 @@ def autocomplete(
     validate: Any = None,
     style: Optional[Style] = None,
     qcount: str = "",
-    default_value: Union[str, None] = None,
-    type: Union[str, None] = None,
-    help: AnyFormattedText = None,
     **kwargs: Any,
 ) -> Question:
     """Prompt the user to enter a message with autocomplete help.
@@ -191,17 +188,11 @@ def autocomplete(
                 tokens.append((x[0], "{} ".format(x[1])))
         else:
             tokens.append(("class:qmark", "{} ".format(qmark)))
-        if help is None and message is not None:
-            tokens.append(("class:question", " {} ".format(message)))
-        if isinstance(help, list):
-            for x in help:
+        if isinstance(message, list):
+            for x in message:
                 tokens.append((x[0], "{} ".format(x[1])))
-        elif help is not None:
-            tokens.append(("class:question", "{} ".format(help)))
-        if type is not None:
-            tokens.append(("class:type", "({}) ".format(type)))
-        if default_value is not None and default_value != "":
-            tokens.append(("class:default", "[{}] ".format(default_value)))
+        else:
+            tokens.append(("class:question", "{} ".format(message)))
         tokens.append(("class:question", "{}".format("\n")))
         return tokens
 

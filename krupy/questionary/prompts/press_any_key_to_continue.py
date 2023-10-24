@@ -1,6 +1,5 @@
 from typing import Any
 from typing import Optional
-from typing import Union
 
 from prompt_toolkit import PromptSession
 from prompt_toolkit.formatted_text import to_formatted_text
@@ -15,13 +14,10 @@ from ..prompts.common import AnyFormattedText
 
 
 def press_any_key_to_continue(
-    message: Union[str, None] = None,
+    message: AnyFormattedText,
     style: Optional[Style] = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     qcount: str = "",
-    default_value: Union[str, None] = None,
-    type: Union[str, None] = None,
-    help: AnyFormattedText = None,
     **kwargs: Any,
 ):
     """Wait until user presses any key to continue.
@@ -55,17 +51,11 @@ def press_any_key_to_continue(
                 tokens.append((x[0], "{} ".format(x[1])))
         else:
             tokens.append(("class:qmark", "{} ".format(qmark)))
-        if help is None and message is not None:
-            tokens.append(("class:question", " {} ".format(message)))
-        if isinstance(help, list):
-            for x in help:
+        if isinstance(message, list):
+            for x in message:
                 tokens.append((x[0], "{} ".format(x[1])))
-        elif help is not None:
-            tokens.append(("class:question", "{} ".format(help)))
-        if type is not None:
-            tokens.append(("class:type", "({}) ".format(type)))
-        if default_value is not None and default_value != "":
-            tokens.append(("class:default", "[{}] ".format(default_value)))
+        else:
+            tokens.append(("class:question", "{} ".format(message)))
         tokens.append(("class:question", "{}".format("\n")))
 
         return to_formatted_text(tokens)

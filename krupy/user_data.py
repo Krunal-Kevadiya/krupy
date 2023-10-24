@@ -19,10 +19,15 @@ from pydantic import ConfigDict, Field, field_validator
 from pydantic.dataclasses import dataclass
 from pydantic_core.core_schema import ValidationInfo
 from pygments.lexers.data import JsonLexer, YamlLexer
+from prompt_toolkit.styles import Style, merge_styles
 
-from .questionary.prompts.common import Choice
+from .questionary.prompts.common import Choice, AnyFormattedText
+from .questionary.constants import (
+    DEFAULT_STYLE,
+    DEFAULT_QUESTION_PREFIX,
+)
 from .errors import InvalidTypeError, UserMessageError
-from .tools import cast_to_bool, cast_to_str, force_str_end
+from .tools import cast_to_bool, cast_to_str
 from .types import MISSING, AnyByStrDict, MissingType, OptStr, OptStrOrPath, StrOrPath
 
 
@@ -167,6 +172,16 @@ class Question:
             If it is a boolean, it is used directly. If it is a str, it is
             converted to boolean using a parser similar to YAML, but only for
             boolean values.
+
+        multiselect:
+            Indicates if the question supports multiple answers.
+            Only supported by choices type.
+
+        qmark:
+            Prefix displayed in front of questions
+
+        style:
+            Question formmating style
     """
 
     var_name: str
@@ -174,13 +189,16 @@ class Question:
     jinja_env: SandboxedEnvironment
     choices: Union[Sequence[Any], Dict[Any, Any]] = field(default_factory=list)
     default: Any = MISSING
-    help: str = ""
+    help: AnyFormattedText = None
     multiline: Union[str, bool] = False
-    placeholder: str = ""
+    placeholder: AnyFormattedText = None
     secret: bool = False
     type: str = Field(default="", validate_default=True)
     validator: str = ""
     when: Union[str, bool] = True
+    multiselect: bool = False
+    qmark: AnyFormattedText = None
+    style: Dict[str, str] = field(default_factory=dict)
 
     @field_validator("var_name")
     @classmethod
@@ -308,24 +326,58 @@ class Question:
             result.append(c)
         return result
 
-    def get_message(self) -> str:
-        """Get the message that will be printed to the user."""
-        if self.help:
-            rendered_help = self.render_value(self.help)
-            if rendered_help:
-                return force_str_end(rendered_help) + "  "
-        # Otherwise, there's no help message defined.
-        message = self.var_name
-        answer_type = self.get_type_name()
-        if answer_type != "str":
-            message += f" ({answer_type})"
-        return message + "\n  "
+    def get_mark(self) -> AnyFormattedText:
+        """Get the qmark that will be printed to the user."""
+        if self.qmark:
+            if isinstance(self.qmark, list):
+                for i, x in self.qmark:
+                    temp = x
+                    temp[1] = self.render_value(temp[1])
+                    self.qmark[i] = temp
+                return self.qmark
+            return self.render_value(self.qmark)
+        if self.secret:
+            return "🕵️"
+        return DEFAULT_QUESTION_PREFIX
 
-    def get_placeholder(self) -> str:
+    def get_placeholder(self) -> AnyFormattedText:
         """Render and obtain the placeholder."""
-        return self.render_value(self.placeholder)
+        if self.placeholder:
+            tokens = []
+            if isinstance(self.placeholder, list):
+                for x in self.placeholder:
+                    tokens.append((x[0], "{} ".format(self.render_value(x[1]))))
+            else:
+                tokens.append(("class:placeholder", "{} ".format(self.render_value(self.placeholder))))
+            return tokens
+        return None
 
-    def get_questionary_structure(self) -> AnyByStrDict:
+    def get_message(self) -> AnyFormattedText:
+        """Get the message that will be printed to the user."""
+        answer_type = self.get_type_name()
+        default_value = self.get_default()
+        message = []
+        if self.help:
+            if isinstance(self.help, list):
+                for i, x in self.help:
+                    temp = x
+                    temp[1] = self.render_value(temp[1])
+                    self.help[i] = temp
+                self.help.append(("class:type", f"({answer_type})"))
+                if not default_value and default_value is not MISSING:
+                    self.help.append(("class:default", f"[{default_value}]"))
+                return self.help
+            else:
+                message.append(("class:question", self.render_value(self.help)))
+        else:
+            message.append(("class:question", self.var_name))
+
+        message.append(("class:type", f"({answer_type})"))
+        if default_value != "" and default_value is not MISSING:
+            message.append(("class:default", f"[{default_value}]"))
+        return message
+
+    def get_questionary_structure(self, questionQCount: Any) -> AnyByStrDict:
         """Get the question in a format that the questionary lib understands."""
         lexer = None
         result: AnyByStrDict = {
@@ -333,8 +385,10 @@ class Question:
             "message": self.get_message(),
             "mouse_support": True,
             "name": self.var_name,
-            "qmark": "🕵️" if self.secret else "🎤",
+            "qmark": self.get_mark(),
             "when": lambda _: self.get_when(),
+            "qcount": questionQCount,
+            "style": merge_styles([DEFAULT_STYLE, Style.from_dict(self.style)]),
         }
         default = self.get_default_rendered()
         if default is not MISSING:
@@ -347,7 +401,10 @@ class Question:
             if default is MISSING:
                 result["default"] = False
         if self.choices:
-            questionary_type = "select"
+            if self.multiselect:
+                questionary_type = "checkbox"
+            else:
+                questionary_type = "select"
             result["choices"] = self._formatted_choices
         if questionary_type == "input":
             if self.secret:

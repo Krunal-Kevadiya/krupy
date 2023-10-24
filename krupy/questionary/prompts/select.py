@@ -24,16 +24,13 @@ from ..styles import merge_styles_default
 
 
 def select(
-    message: Union[str, None],
+    message: AnyFormattedText,
     choices: Sequence[Union[str, Choice, Dict[str, Any]]],
     default: Optional[Union[str, Choice, Dict[str, Any]]] = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     pointer: Optional[str] = DEFAULT_SELECTED_POINTER,
     style: Optional[Style] = None,
     qcount: str = "",
-    default_value: Union[str, None] = None,
-    type: Union[str, None] = None,
-    help: AnyFormattedText = None,
     use_shortcuts: bool = False,
     use_arrow_keys: bool = True,
     use_indicator: bool = False,
@@ -169,17 +166,11 @@ def select(
                 tokens.append((x[0], "{} ".format(x[1])))
         else:
             tokens.append(("class:qmark", "{} ".format(qmark)))
-        if help is None and message is not None:
-            tokens.append(("class:question", " {} ".format(message)))
-        if isinstance(help, list):
-            for x in help:
+        if isinstance(message, list):
+            for x in message:
                 tokens.append((x[0], "{} ".format(x[1])))
-        elif help is not None:
-            tokens.append(("class:question", "{} ".format(help)))
-        if type is not None:
-            tokens.append(("class:type", "({}) ".format(type)))
-        if default_value is not None and default_value != "":
-            tokens.append(("class:default", "[{}] ".format(default_value)))
+        else:
+            tokens.append(("class:question", "{} ".format(message)))
         tokens.append(("class:question", "{}".format("\n")))
 
         if ic.is_answered:
