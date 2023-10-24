@@ -19,8 +19,9 @@ from pydantic import ConfigDict, Field, field_validator
 from pydantic.dataclasses import dataclass
 from pydantic_core.core_schema import ValidationInfo
 from pygments.lexers.data import JsonLexer, YamlLexer
-from prompt_toolkit.styles import Style, merge_styles
+from prompt_toolkit.styles import Style
 
+from .questionary.styles import merge_styles_default
 from .questionary.prompts.common import Choice, AnyFormattedText
 from .questionary.constants import (
     DEFAULT_STYLE,
@@ -187,6 +188,7 @@ class Question:
     var_name: str
     answers: AnswersMap
     jinja_env: SandboxedEnvironment
+    envquestions: AnyByStrDict
     choices: Union[Sequence[Any], Dict[Any, Any]] = field(default_factory=list)
     default: Any = MISSING
     help: AnyFormattedText = None
@@ -354,8 +356,8 @@ class Question:
 
     def get_message(self) -> AnyFormattedText:
         """Get the message that will be printed to the user."""
-        answer_type = self.get_type_name()
-        default_value = self.get_default()
+        answer_type = self.get_type_name() if self.envquestions['is_visible_type'] else None
+        default_value = self.get_default() if self.envquestions['is_visible_default_value'] else None
         message = []
         if self.help:
             if isinstance(self.help, list):
@@ -363,8 +365,9 @@ class Question:
                     temp = x
                     temp[1] = self.render_value(temp[1])
                     self.help[i] = temp
-                self.help.append(("class:type", f"({answer_type})"))
-                if not default_value and default_value is not MISSING:
+                if isinstance(answer_type, str) and len(answer_type.strip()) > 0:
+                    self.help.append(("class:type", f"({answer_type})"))
+                if default_value is not None and default_value is not MISSING:
                     self.help.append(("class:default", f"[{default_value}]"))
                 return self.help
             else:
@@ -372,8 +375,9 @@ class Question:
         else:
             message.append(("class:question", self.var_name))
 
-        message.append(("class:type", f"({answer_type})"))
-        if default_value != "" and default_value is not MISSING:
+        if isinstance(answer_type, str) and len(answer_type.strip()) > 0:
+            message.append(("class:type", f"({answer_type})"))
+        if default_value is not None and default_value is not MISSING:
             message.append(("class:default", f"[{default_value}]"))
         return message
 
@@ -385,10 +389,10 @@ class Question:
             "message": self.get_message(),
             "mouse_support": True,
             "name": self.var_name,
-            "qmark": self.get_mark(),
+            "qmark": self.get_mark() if self.envquestions['is_visible_mark'] else None,
             "when": lambda _: self.get_when(),
-            "qcount": questionQCount,
-            "style": merge_styles([DEFAULT_STYLE, Style.from_dict(self.style)]),
+            "qcount": questionQCount if self.envquestions['is_visible_count'] else None,
+            "style": merge_styles_default([DEFAULT_STYLE, Style.from_dict(self.envquestions['style']), Style.from_dict(self.style)]),
         }
         default = self.get_default_rendered()
         if default is not MISSING:

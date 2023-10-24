@@ -14,7 +14,7 @@ def password(
     validate: Any = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     style: Optional[Style] = None,
-    qcount: str = "",
+    qcount: Optional[str] = None,
     **kwargs: Any,
 ) -> Question:
     """A text input where a user can enter a secret which won't be displayed on the CLI.

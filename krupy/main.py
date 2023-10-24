@@ -422,6 +422,7 @@ class Worker:
                 answers=result,
                 jinja_env=self.jinja_env,
                 var_name=var_name,
+                envquestions=self.template.envquestions,
                 **details,
             )
             if self.skip_answered and var_name in result.last:

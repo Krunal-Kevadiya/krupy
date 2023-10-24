@@ -11,7 +11,7 @@ from prompt_toolkit.key_binding import KeyBindings
 from prompt_toolkit.keys import Keys
 from prompt_toolkit.styles import Style
 
-from questionary import utils
+from .. import utils
 from ..constants import DEFAULT_QUESTION_PREFIX
 from ..constants import DEFAULT_SELECTED_POINTER
 from ..prompts import common
@@ -30,7 +30,7 @@ def select(
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
     pointer: Optional[str] = DEFAULT_SELECTED_POINTER,
     style: Optional[Style] = None,
-    qcount: str = "",
+    qcount: Optional[str] = None,
     use_shortcuts: bool = False,
     use_arrow_keys: bool = True,
     use_indicator: bool = False,
@@ -160,18 +160,20 @@ def select(
         # noinspection PyListCreation
         tokens = []
 
-        tokens.append(("class:qcount", "{} ".format(qcount)))
+        if qcount is not None:
+            tokens.append(("class:qcount", "{} ".format(qcount)))
         if isinstance(qmark, list):
             for x in qmark:
-                tokens.append((x[0], "{} ".format(x[1])))
-        else:
+                tokens.append((x[0], "{}".format(x[1])))
+            tokens.append(("class:qmark", " {}".format("")))
+        elif isinstance(qmark, str) and len(qmark.strip()) > 0:
             tokens.append(("class:qmark", "{} ".format(qmark)))
         if isinstance(message, list):
             for x in message:
-                tokens.append((x[0], "{} ".format(x[1])))
-        else:
-            tokens.append(("class:question", "{} ".format(message)))
-        tokens.append(("class:question", "{}".format("\n")))
+                tokens.append((x[0], "{}".format(x[1])))
+        elif isinstance(message, str) and len(message.strip()) > 0:
+            tokens.append(("class:question", "{}".format(message)))
+        tokens.append(("class:question", " {}".format("\n")))
 
         if ic.is_answered:
             if isinstance(ic.get_pointed_at().title, list):

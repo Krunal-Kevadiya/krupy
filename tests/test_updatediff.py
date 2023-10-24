@@ -717,7 +717,7 @@ def test_update_inline_changed_answers_and_questions(
     # Init project
     if interactive:
         tui = spawn(KRUPY_PATH + ("copy", "-r1", str(src), str(dst)), timeout=10)
-        tui.expect_exact("b (bool)")
+        tui.expect_exact("b")
         tui.expect_exact("(y/N)")
         tui.send("y")
         tui.expect_exact(pexpect.EOF)
@@ -743,10 +743,10 @@ def test_update_inline_changed_answers_and_questions(
         # Update from template, inline, with answer changes
         if interactive:
             tui = spawn(KRUPY_PATH + ("update", "--conflict=inline"), timeout=10)
-            tui.expect_exact("b (bool)")
+            tui.expect_exact("b")
             tui.expect_exact("(Y/n)")
             tui.sendline()
-            tui.expect_exact("c (bool)")
+            tui.expect_exact("c")
             tui.expect_exact("(y/N)")
             tui.send("y")
             tui.expect_exact(pexpect.EOF)
