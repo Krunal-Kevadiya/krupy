@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "krupy"
 # This version is a placeholder autoupdated by poetry-dynamic-versioning
-version = "0.0.0"
+version = "0.0.1"
 description = "A library for rendering project templates."
 license = "MIT"
 classifiers = [
