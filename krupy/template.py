@@ -289,6 +289,25 @@ class Template:
         return result
 
     @cached_property
+    def envquestions(self) -> Mapping:
+        """Get the Jinja configuration specified in the template, or default values.
+
+        See [envquestions][].
+        """
+        result = self.config_data.get("envquestions", {})
+        if "is_visible_count" not in result:
+            result["is_visible_count"] = True
+        if "is_visible_mark" not in result:
+            result["is_visible_mark"] = True
+        if "is_visible_type" not in result:
+            result["is_visible_type"] = True
+        if "is_visible_default_value" not in result:
+            result["is_visible_default_value"] = True
+        if "style" not in result:
+            result["style"] = {}
+        return result
+
+    @cached_property
     def exclude(self) -> Tuple[str, ...]:
         """Get exclusions specified in the template, or default ones.
 

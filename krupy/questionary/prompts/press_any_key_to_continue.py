@@ -17,7 +17,7 @@ def press_any_key_to_continue(
     message: AnyFormattedText,
     style: Optional[Style] = None,
     qmark: AnyFormattedText = DEFAULT_QUESTION_PREFIX,
-    qcount: str = "",
+    qcount: Optional[str] = None,
     **kwargs: Any,
 ):
     """Wait until user presses any key to continue.
@@ -45,18 +45,20 @@ def press_any_key_to_continue(
     def get_prompt_tokens():
         tokens = []
 
-        tokens.append(("class:qcount", "{} ".format(qcount)))
+        if qcount is not None:
+            tokens.append(("class:qcount", "{} ".format(qcount)))
         if isinstance(qmark, list):
             for x in qmark:
-                tokens.append((x[0], "{} ".format(x[1])))
-        else:
+                tokens.append((x[0], "{}".format(x[1])))
+            tokens.append(("class:qmark", " {}".format("")))
+        elif isinstance(qmark, str) and len(qmark.strip()) > 0:
             tokens.append(("class:qmark", "{} ".format(qmark)))
         if isinstance(message, list):
             for x in message:
-                tokens.append((x[0], "{} ".format(x[1])))
-        else:
-            tokens.append(("class:question", "{} ".format(message)))
-        tokens.append(("class:question", "{}".format("\n")))
+                tokens.append((x[0], "{}".format(x[1])))
+        elif isinstance(message, str) and len(message.strip()) > 0:
+            tokens.append(("class:question", "{}".format(message)))
+        tokens.append(("class:question", " {}".format("\n")))
 
         return to_formatted_text(tokens)
 

@@ -112,7 +112,7 @@ def autocomplete(
     complete_style: CompleteStyle = CompleteStyle.COLUMN,
     validate: Any = None,
     style: Optional[Style] = None,
-    qcount: str = "",
+    qcount: Optional[str] = None,
     **kwargs: Any,
 ) -> Question:
     """Prompt the user to enter a message with autocomplete help.
@@ -182,18 +182,20 @@ def autocomplete(
     def get_prompt_tokens() -> List[Tuple[str, str]]:
         tokens = []
 
-        tokens.append(("class:qcount", "{} ".format(qcount)))
+        if qcount is not None:
+            tokens.append(("class:qcount", "{} ".format(qcount)))
         if isinstance(qmark, list):
             for x in qmark:
-                tokens.append((x[0], "{} ".format(x[1])))
-        else:
+                tokens.append((x[0], "{}".format(x[1])))
+            tokens.append(("class:qmark", " {}".format("")))
+        elif isinstance(qmark, str) and len(qmark.strip()) > 0:
             tokens.append(("class:qmark", "{} ".format(qmark)))
         if isinstance(message, list):
             for x in message:
-                tokens.append((x[0], "{} ".format(x[1])))
-        else:
-            tokens.append(("class:question", "{} ".format(message)))
-        tokens.append(("class:question", "{}".format("\n")))
+                tokens.append((x[0], "{}".format(x[1])))
+        elif isinstance(message, str) and len(message.strip()) > 0:
+            tokens.append(("class:question", "{}".format(message)))
+        tokens.append(("class:question", " {}".format("\n")))
         return tokens
 
     def get_meta_style(meta: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
