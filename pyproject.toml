@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "krupy"
 # This version is a placeholder autoupdated by poetry-dynamic-versioning
-version = "0.0.0"
+version = "0.0.2"
 description = "A library for rendering project templates."
 license = "MIT"
 classifiers = [
@@ -18,6 +18,7 @@ authors = ["Krunal Kevadiya <kevadiyakrunal22@gmail.com>"]
 homepage = "https://github.com/Krunal-Kevadiya/krupy"
 repository = "https://github.com/Krunal-Kevadiya/krupy.git"
 readme = "README.md"
+packages = [{include = "krupy"}]
 
 [tool.poetry.scripts]
 krupy = "krupy.__main__:krupy_app_run"
