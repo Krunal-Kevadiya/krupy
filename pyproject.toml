@@ -1,7 +1,6 @@
 [tool.poetry]
 name = "krupy"
-# This version is a placeholder autoupdated by poetry-dynamic-versioning
-version = "0.0.2"
+version = "0.0.3"
 description = "A library for rendering project templates."
 license = "MIT"
 classifiers = [
@@ -75,13 +74,6 @@ sphinx-autobuild = ">=2020.9.1,<2022.0.0"
 sphinx-copybutton = ">=0.3.1,<0.6.0"
 sphinx-autodoc-typehints = "^1.11.1"
 
-[tool.poetry.group.build]
-# Helper group just for helping nix to build properly
-optional = true
-
-[tool.poetry.group.build.dependencies]
-poetry-dynamic-versioning = ">=1.1.0"
-
 [tool.poe.tasks.clean]
 script = "devtasks:clean"
 help = "remove build/python artifacts"
@@ -109,11 +101,6 @@ help = "run tests"
 [tool.poe.tasks.types]
 cmd = "mypy ."
 help = "run the type (mypy) checker on the codebase"
-
-[tool.poetry-dynamic-versioning]
-enable = true
-style = "pep440"
-vcs = "git"
 
 [tool.black]
 target-version = ["py38"]
@@ -146,5 +133,5 @@ update_changelog_on_bump = true
 version = "8.3.0"
 
 [build-system]
-requires = ["poetry-core>=1.7.0", "poetry-dynamic-versioning>=1.1.0"]
-build-backend = "poetry_dynamic_versioning.backend"
+requires = ["poetry-core>=1.7.0"]
+build-backend = "poetry.core.masonry.api"
