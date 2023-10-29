@@ -96,7 +96,7 @@ class Question:
             default: The default value to return.
 
         Returns:
-            :class:`Question`: `self`.
+            Question: self
         """
 
         self.should_skip_question = condition

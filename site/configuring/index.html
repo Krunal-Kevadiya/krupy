@@ -1,0 +1,3504 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Library and command-line utility for rendering projects templates.">
+      
+      
+      
+        <link rel="canonical" href="https://krunal-kevadiya.github.io/krupy/configuring/">
+      
+      
+        <link rel="prev" href="../creating/">
+      
+      
+        <link rel="next" href="../generating/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
+    
+    
+      
+        <title>Configuring a template - krupy</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fad675c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_markdown_exec_ansi.css">
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../css/mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuring-a-template" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="krupy" class="md-header__button md-logo" aria-label="krupy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            krupy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuring a template
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Krunal-Kevadiya/krupy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Krunal-Kevadiya/krupy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="krupy" class="md-nav__button md-logo" aria-label="krupy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    krupy
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Krunal-Kevadiya/krupy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Krunal-Kevadiya/krupy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuring a template
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuring a template
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration sources
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-krupyyml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      The krupy.yml file
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The krupy.yml file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advanced-prompt-formatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced prompt formatting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-templating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt templating
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-other-yaml-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include other YAML files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-files-and-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional files and directories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-a-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generating a directory structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-jinja-templates-and-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Jinja templates and macros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#answers_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      answers_file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleanup_on_error" class="md-nav__link">
+    <span class="md-ellipsis">
+      cleanup_on_error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conflict" class="md-nav__link">
+    <span class="md-ellipsis">
+      conflict
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context_lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      context_lines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      data_file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envops" class="md-nav__link">
+    <span class="md-ellipsis">
+      envops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      exclude
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force" class="md-nav__link">
+    <span class="md-ellipsis">
+      force
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      defaults
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overwrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      overwrite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jinja_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      jinja_extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_after_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_after_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_before_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_before_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      migrations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min_krupy_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      min_krupy_version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pretend" class="md-nav__link">
+    <span class="md-ellipsis">
+      pretend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preserve_symlinks" class="md-nav__link">
+    <span class="md-ellipsis">
+      preserve_symlinks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quiet" class="md-nav__link">
+    <span class="md-ellipsis">
+      quiet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret_questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      secret_questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip_if_exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      skip_if_exists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subdirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      subdirectory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templates_suffix" class="md-nav__link">
+    <span class="md-ellipsis">
+      templates_suffix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsafe" class="md-nav__link">
+    <span class="md-ellipsis">
+      unsafe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use_prereleases" class="md-nav__link">
+    <span class="md-ellipsis">
+      use_prereleases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vcs_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      vcs_ref
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_envquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      _envquestions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterns-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patterns syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-krupy-answersyml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      The .krupy-answers.yml file
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The .krupy-answers.yml file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#applying-multiple-templates-to-the-same-subproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying multiple templates to the same subproject
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generating a project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../updating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Updating a project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Krupy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Krupy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/cli/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cli.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    errors.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/main/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    main.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/subproject/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    subproject.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    template.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tools.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    types.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/user_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    user_data.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/krupy/vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vcs.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Questionary
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Questionary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/quickstart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Start
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/form/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    form.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    prompt.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/question/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    question.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2_5" id="__nav_6_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Prompts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Prompts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/autocomplete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    autocomplete.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/checkbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    checkbox.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    common.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/confirm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    confirm.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/password/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    password.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    path.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/press_any_key_to_continue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    press_any_key_to_continue.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/rawselect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    rawselect.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/select/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    select.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/questionary/prompts/text/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    text.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../comparisons/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Comparisons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration sources
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-krupyyml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      The krupy.yml file
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The krupy.yml file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advanced-prompt-formatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced prompt formatting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prompt-templating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt templating
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-other-yaml-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include other YAML files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditional-files-and-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional files and directories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-a-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generating a directory structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-jinja-templates-and-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Jinja templates and macros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Available settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#answers_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      answers_file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cleanup_on_error" class="md-nav__link">
+    <span class="md-ellipsis">
+      cleanup_on_error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conflict" class="md-nav__link">
+    <span class="md-ellipsis">
+      conflict
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context_lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      context_lines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      data_file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envops" class="md-nav__link">
+    <span class="md-ellipsis">
+      envops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      exclude
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#force" class="md-nav__link">
+    <span class="md-ellipsis">
+      force
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      defaults
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overwrite" class="md-nav__link">
+    <span class="md-ellipsis">
+      overwrite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jinja_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      jinja_extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_after_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_after_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_before_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message_before_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      migrations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min_krupy_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      min_krupy_version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pretend" class="md-nav__link">
+    <span class="md-ellipsis">
+      pretend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preserve_symlinks" class="md-nav__link">
+    <span class="md-ellipsis">
+      preserve_symlinks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quiet" class="md-nav__link">
+    <span class="md-ellipsis">
+      quiet
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret_questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      secret_questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip_if_exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      skip_if_exists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subdirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      subdirectory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templates_suffix" class="md-nav__link">
+    <span class="md-ellipsis">
+      templates_suffix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unsafe" class="md-nav__link">
+    <span class="md-ellipsis">
+      unsafe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use_prereleases" class="md-nav__link">
+    <span class="md-ellipsis">
+      use_prereleases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vcs_ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      vcs_ref
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_envquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      _envquestions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterns-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patterns syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-krupy-answersyml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      The .krupy-answers.yml file
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The .krupy-answers.yml file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#applying-multiple-templates-to-the-same-subproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying multiple templates to the same subproject
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="configuring-a-template">Configuring a template<a class="headerlink" href="#configuring-a-template" title="Permanent link">&para;</a></h1>
+<h2 id="configuration-sources">Configuration sources<a class="headerlink" href="#configuration-sources" title="Permanent link">&para;</a></h2>
+<p>It is important that you understand how Krupy works. It has 2 kinds of configurations:</p>
+<ol>
+<li><strong>Settings</strong> for Krupy itself. This includes things as minimal Krupy version
+   required, which subdirectory to render, tasks to run, etc.</li>
+<li><strong>Answers</strong>. This is customized per template. The user answers template questions,
+   and those answers are stored as variables available for the template at rendering
+   time.</li>
+</ol>
+<p>Krupy reads <strong>settings</strong> from these sources, in this order of priority:</p>
+<ol>
+<li>Command line or API arguments.</li>
+<li><a class="autorefs autorefs-internal" href="#the-krupyyml-file">The krupy.yml file</a>. Settings here always start with an
+   underscore (e.g. <code>_min_krupy_version</code>).</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Some settings are <em>only</em> available as CLI arguments, and some others <em>only</em> as
+template configurations. Some behave differently depending on where they are
+defined. <a class="autorefs autorefs-internal" href="#available-settings">Check the docs for each specific setting</a>.</p>
+</div>
+<p>Krupy obtains <strong>answers</strong> from these sources, in this order of priority:</p>
+<ol>
+<li>Command line or API arguments.</li>
+<li>Asking the user. Notice that Krupy will not ask any questions answered in the
+   previous source.</li>
+<li><a class="autorefs autorefs-internal" href="#the-krupy-answersyml-file">Answer from last execution</a>.</li>
+<li>Default values defined in <a class="autorefs autorefs-internal" href="#the-krupyyml-file">the krupy.yml file</a>.</li>
+</ol>
+<h2 id="the-krupyyml-file">The krupy.yml file<a class="headerlink" href="#the-krupyyml-file" title="Permanent link">&para;</a></h2>
+<p>The <code>krupy.yml</code> (or <code>krupy.yaml</code>) file is found in the root of the template, and it is
+the main entrypoint for managing your template configuration. It will be read and used
+for two purposes:</p>
+<ul>
+<li><a class="autorefs autorefs-internal" href="#questions">Prompting the user for information</a>.</li>
+<li><a class="autorefs autorefs-internal" href="#available-settings">Applying template settings</a> (excluding files, setting arguments
+    defaults, etc.).</li>
+</ul>
+<h3 id="questions">Questions<a class="headerlink" href="#questions" title="Permanent link">&para;</a></h3>
+<p>For each key found, Krupy will prompt the user to fill or confirm the values before
+they become available to the project template.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>This <code>krupy.yml</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name_of_the_project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">My awesome project</span>
+<span class="nt">number_of_eels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1234</span>
+<span class="nt">your_email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</code></pre></div>
+<p>Will result in a questionary similar to:</p>
+<p><pre style="font-weight: bold">
+🎤 name_of_the_project
+  <span style="color:orangeRed">My awesome project</span>
+🎤 number_of_eels (int)
+  <span style="color:orangeRed">1234</span>
+🎤 your_email
+</pre></p>
+</div>
+<h4 id="advanced-prompt-formatting">Advanced prompt formatting<a class="headerlink" href="#advanced-prompt-formatting" title="Permanent link">&para;</a></h4>
+<p>Apart from the simplified format, as seen above, Krupy supports a more advanced format
+to ask users for data. To use it, the value must be a dict.</p>
+<p>Supported keys:</p>
+<ul>
+<li><strong>type</strong>: User input must match this type. Options are: <code>bool</code>, <code>float</code>, <code>int</code>,
+    <code>json</code>, <code>str</code>, <code>yaml</code> (default).</li>
+<li><strong>help</strong>: Additional text to help the user know what's this question for.</li>
+<li>
+<p><strong>choices</strong>: To restrict possible values.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A choice value of <code>null</code> makes it become the same as its key.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Validation and conditional choices</p>
+<p>A choice can be validated by using the extended syntax with dict-style and
+tuple-style choices. For example:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">cloud</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Which cloud provider do you use?</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Any</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AWS</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Azure</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GCP</span>
+
+<span class="nt">iac</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Which IaC tool do you use?</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">Terraform</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tf</span>
+<span class="w">        </span><span class="nt">Cloud Formation</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cf</span>
+<span class="w">            </span><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">cloud</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;AWS&#39;</span><span class="nv"> </span><span class="s">%}Requires</span><span class="nv"> </span><span class="s">AWS{%</span><span class="nv"> </span><span class="s">endif</span><span class="nv"> </span><span class="s">%}&quot;</span>
+<span class="w">        </span><span class="nt">Azure Resource Manager</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">arm</span>
+<span class="w">            </span><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">cloud</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;Azure&#39;</span><span class="nv"> </span><span class="s">%}Requires</span><span class="nv"> </span><span class="s">Azure{%</span><span class="nv"> </span><span class="s">endif</span><span class="nv"> </span><span class="s">%}&quot;</span>
+<span class="w">        </span><span class="nt">Deployment Manager</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dm</span>
+<span class="w">            </span><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">cloud</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;GCP&#39;</span><span class="nv"> </span><span class="s">%}Requires</span><span class="nv"> </span><span class="s">GCP{%</span><span class="nv"> </span><span class="s">endif</span><span class="nv"> </span><span class="s">%}&quot;</span>
+</code></pre></div>
+<p>When the rendered validator is a non-empty string, the choice is disabled and
+the message is shown. Choice validation is useful when the validity of a choice
+depends on the answer to a previous question.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You are able to use different types for each choice value, but it is not
+recommended because you can get to some weird scenarios.</p>
+<p>For example, try to understand this 🥴</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">pick_one</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yaml</span><span class="w"> </span><span class="c1"># If you are mixing types, better be explicit</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">Nothing, thanks</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;null&quot;</span><span class="w"> </span><span class="c1"># Will be YAML-parsed and converted to null</span>
+<span class="w">        </span><span class="nt">Value is key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"> </span><span class="c1"># Value will be converted to &quot;Value is key&quot;</span>
+<span class="w">        </span><span class="nt">One and a half</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.5</span>
+<span class="w">        </span><span class="s">&quot;Yes&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">Nope</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span>
+<span class="w">        </span><span class="nt">Some array</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[yaml,</span><span class="nv"> </span><span class="s">converts,</span><span class="nv"> </span><span class="s">this]&quot;</span>
+</code></pre></div>
+<p>It's better to stick with a simple type and reason about it later in
+template code:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">pick_one</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">Nothing, thanks</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">        </span><span class="nt">Value is key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w"> </span><span class="c1"># Becomes &quot;Value is key&quot;, which is a str</span>
+<span class="w">        </span><span class="nt">One and a half</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.5&quot;</span>
+<span class="w">        </span><span class="s">&quot;Yes&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">        </span><span class="nt">Nope</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no&quot;</span>
+<span class="w">        </span><span class="nt">Some array</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[str,</span><span class="nv"> </span><span class="s">keeps,</span><span class="nv"> </span><span class="s">this,</span><span class="nv"> </span><span class="s">as,</span><span class="nv"> </span><span class="s">a,</span><span class="nv"> </span><span class="s">str]&quot;</span>
+</code></pre></div>
+</div>
+</li>
+<li>
+<p><strong>multiselect</strong>: When set to <code>true</code>, allows multiple choices. The answer will be a
+    <code>list[T]</code> instead of a <code>T</code> where <code>T</code> is of type <code>type</code>.</p>
+</li>
+<li><strong>default</strong>: Leave empty to force the user to answer. Provide a default to save them
+    from typing it if it's quite common. When using <code>choices</code>, the default must be the
+    choice <em>value</em>, not its <em>key</em>, and it must match its <em>type</em>. If values are quite
+    long, you can use
+    <a href="https://confluence.atlassian.com/bitbucket/yaml-anchors-960154027.html">YAML anchors</a>.</li>
+<li><strong>secret</strong>: When <code>true</code>, it hides the prompt displaying asterisks (<code>*****</code>) and
+    doesn't save the answer in <a class="autorefs autorefs-internal" href="#the-krupy-answersyml-file">the answers file</a>. When
+    <code>true</code>, a default value is required.</li>
+<li>
+<p><strong>placeholder</strong>: To provide a visual example for what would be a good value. It is
+    only shown while the answer is empty, so maybe it doesn't make much sense to provide
+    both <code>default</code> and <code>placeholder</code>. It must be a string.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Multiline placeholders are not supported currently, due to
+<a href="https://github.com/prompt-toolkit/python-prompt-toolkit/issues/1267">this upstream bug</a>.</p>
+</div>
+</li>
+<li>
+<p><strong>multiline</strong>: When set to <code>true</code>, it allows multiline input. This is especially
+    useful when <code>type</code> is <code>json</code> or <code>yaml</code>.</p>
+</li>
+<li>
+<p><strong>validator</strong>: Jinja template with which to validate the user input. This template
+    will be rendered with the combined answers as variables; it should render <em>nothing</em>
+    if the value is valid, and an error message to show to the user otherwise.</p>
+</li>
+<li>
+<p><strong>when</strong>: Condition that, if <code>false</code>, skips the question.</p>
+<p>If it is a boolean, it is used directly. Setting it to <code>false</code> is useful for
+creating a computed value.</p>
+<p>If it is a string, it is converted to boolean using a parser similar to YAML, but
+only for boolean values. The string can be <a class="autorefs autorefs-internal" href="#prompt-templating">templated</a>.</p>
+<p>If a question is skipped, its answer is not recorded, but its default value is
+available in the render context.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yaml</span><pre><span></span><code><span class="nt">project_creator</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+
+<span class="nt">project_license</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GPLv3</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Public domain</span>
+
+<span class="nt">copyright_holder</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|-</span>
+<span class="w">        </span><span class="no">{% if project_license == &#39;Public domain&#39; -%}</span>
+<span class="w">            </span><span class="no">{#- Nobody owns public projects -#}</span>
+<span class="w">            </span><span class="no">nobody</span>
+<span class="w">        </span><span class="no">{%- else -%}</span>
+<span class="w">            </span><span class="no">{#- By default, project creator is the owner -#}</span>
+<span class="w">            </span><span class="no">{{ project_creator }}</span>
+<span class="w">        </span><span class="no">{%- endif %}</span>
+<span class="w">    </span><span class="c1"># Only ask for copyright if project is not in the public domain</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">project_license</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;Public</span><span class="nv"> </span><span class="s">domain&#39;</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">love_krupy</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span><span class="w"> </span><span class="c1"># This makes Krupy ask for y/n</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Do you love Krupy?</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span><span class="w"> </span><span class="c1"># Without a default, you force the user to answer</span>
+
+<span class="nt">project_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span><span class="w"> </span><span class="c1"># Any value will be treated raw as a string</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An awesome project needs an awesome name. Tell me yours.</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">paradox-specifier</span>
+<span class="w">    </span><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">        </span><span class="no">{% if not (project_name | regex_search(&#39;^[a-z][a-z0-9\-]+$&#39;)) %}</span>
+<span class="w">        </span><span class="no">project_name must start with a letter, followed one or more letters, digits or dashes all lowercase.</span>
+<span class="w">        </span><span class="no">{% endif %}</span>
+
+<span class="nt">rocket_launch_password</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># This value will not be logged into .krupy-answers.yml</span>
+<span class="w">    </span><span class="nt">placeholder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my top secret password</span>
+
+<span class="c1"># I&#39;ll avoid default and help here, but you can use them too</span>
+<span class="nt">age</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<span class="w">    </span><span class="nt">validator</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">age</span><span class="nv"> </span><span class="s">&lt;=</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">%}Must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">positive{%</span><span class="nv"> </span><span class="s">endif</span><span class="nv"> </span><span class="s">%}&quot;</span>
+
+<span class="nt">height</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+
+<span class="nt">any_json</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tell me anything, but format it as a one-line JSON string</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">json</span>
+<span class="w">    </span><span class="nt">multiline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">any_yaml</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tell me anything, but format it as a one-line YAML string</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yaml</span><span class="w"> </span><span class="c1"># This is the default type, also for short syntax questions</span>
+<span class="w">    </span><span class="nt">multiline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">your_favorite_book</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># User will choose one of these and your template will get the value</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The Bible</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The Hitchhiker&#39;s Guide to the Galaxy</span>
+
+<span class="nt">project_license</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># User will see only the dict key and choose one, but you will</span>
+<span class="w">    </span><span class="c1"># get the dict value in your template</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">MIT</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;mit_text</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">Here I can write the full text of the MIT license.</span>
+<span class="w">            </span><span class="no">This will be a long text, shortened here for example purposes.</span>
+<span class="w">        </span><span class="nt">Apache2</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">            </span><span class="no">Full text of Apache2 license.</span>
+<span class="w">    </span><span class="c1"># When using choices, the default value is the value, **not** the key;</span>
+<span class="w">    </span><span class="c1"># that&#39;s why I&#39;m using the YAML anchor declared above to avoid retyping the</span>
+<span class="w">    </span><span class="c1"># whole license</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="nv">*mit_text</span>
+<span class="w">    </span><span class="c1"># You can still define the type, to make sure answers that come from --data</span>
+<span class="w">    </span><span class="c1"># CLI argument match the type that your template expects</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+
+<span class="nt">close_to_work</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Do you live close to your work?</span>
+<span class="w">    </span><span class="c1"># This format works just like the dict one</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">at home</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">I work at home</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">less than 10km</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quite close</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">more than 10km</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">not so close</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">more than 100km</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quite far away</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+</div>
+</li>
+</ul>
+<h4 id="prompt-templating">Prompt templating<a class="headerlink" href="#prompt-templating" title="Permanent link">&para;</a></h4>
+<p>Most of those options can be templated using Jinja.</p>
+<p>Keep in mind that the configuration is loaded as <strong>YAML</strong>, so the contents must be
+<strong>valid YAML</strong> and respect <strong>Krupy's structure</strong>. That is why we explicitly wrap some
+strings in double-quotes in the following examples.</p>
+<p>Answers provided through interactive prompting will not be rendered with Jinja, so you
+cannot use Jinja templating in your answers.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="c1"># default</span>
+<span class="nt">username</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+
+<span class="nt">organization</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+
+<span class="nt">email</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="c1"># Notice that both `username` and `organization` have been already asked</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">username</span><span class="nv"> </span><span class="s">}}@{{</span><span class="nv"> </span><span class="s">organization</span><span class="nv"> </span><span class="s">}}.com&quot;</span>
+
+<span class="c1"># help</span>
+<span class="nt">copyright_holder</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">organization</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;Public</span><span class="nv"> </span><span class="s">domain&#39;</span><span class="nv"> </span><span class="s">%}true{%</span><span class="nv"> </span><span class="s">endif</span><span class="nv"> </span><span class="s">%}&quot;</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The person or entity within {{ organization }} that holds copyrights.</span>
+
+<span class="c1"># type</span>
+<span class="nt">target</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">humans</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">machines</span>
+
+<span class="nt">user_config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">target</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&#39;humans&#39;</span><span class="nv"> </span><span class="s">%}yaml{%</span><span class="nv"> </span><span class="s">else</span><span class="nv"> </span><span class="s">%}json{%</span><span class="nv"> </span><span class="s">endif</span><span class="nv"> </span><span class="s">%}&quot;</span>
+
+<span class="c1"># choices</span>
+<span class="nt">title</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Your title within {{ organization }}</span>
+
+<span class="nt">contact</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">Copyright holder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">copyright_holder</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">CEO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alice Bob</span>
+<span class="w">        </span><span class="nt">CTO</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Carl Dave</span>
+<span class="w">        </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">title</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">username</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</code></pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep in mind that:</p>
+<ol>
+<li>You can only template inside the value...</li>
+<li>... which must be a string to be templated.</li>
+<li>Also you won't be able to use variables that aren't yet declared.</li>
+</ol>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">your_age</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+
+<span class="c1"># Valid</span>
+<span class="nt">double_it</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">your_age</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">2}}&quot;</span>
+
+<span class="c1"># Invalid, the templating occurs outside of the parameter value</span>
+<span class="nt">did_you_ask</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="p p-Indicator">{</span><span class="err">%</span><span class="w"> </span><span class="nv">if your_age %</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yes&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">{</span><span class="err">%</span><span class="w"> </span><span class="nv">else %</span><span class="p p-Indicator">}</span>
+<span class="w">    </span><span class="nt">placeholder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nope&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">{</span><span class="err">%</span><span class="w"> </span><span class="nv">endif %</span><span class="p p-Indicator">}</span>
+
+<span class="c1"># Invalid, `a_random_word` wasn&#39;t answered yet</span>
+<span class="nt">other_random_word</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">placeholder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Something</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">a_random_word</span><span class="nv"> </span><span class="s">}}&quot;</span>
+
+<span class="c1"># Invalid, YAML interprets curly braces</span>
+<span class="nt">a_random_word</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="s">&#39;hello&#39;</span><span class="w"> </span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+</div>
+<h3 id="include-other-yaml-files">Include other YAML files<a class="headerlink" href="#include-other-yaml-files" title="Permanent link">&para;</a></h3>
+<p>The <code>krupy.yml</code> file supports multiple documents as well as using the <code>!include</code> tag to
+include settings and questions from other YAML files. This allows you to split up a
+larger <code>krupy.yml</code> and enables you to reuse common partial sections from your
+templates. When multiple documents are used, care has to be taken with questions and
+settings that are defined in more than one document:</p>
+<ul>
+<li>A question with the same name overwrites definitions from an earlier document.</li>
+<li>Settings given in multiple documents for <code>exclude</code>, <code>skip_if_exists</code>,
+    <code>jinja_extensions</code> and <code>secret_questions</code> are concatenated.</li>
+<li>Other settings (such as <code>tasks</code> or <code>migrations</code>) overwrite previous definitions for
+    these settings.</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can use <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">Git submodules</a>
+to sanely include shared code into templates.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>This would be a valid <code>krupy.yml</code> file:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nn">---</span>
+<span class="c1"># Krupy will load all these files</span>
+<span class="kt">!include</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">shared-conf/common.*.yml</span>
+
+<span class="l l-Scalar l-Scalar-Plain"># These 3 lines split the several YAML documents</span>
+<span class="nn">---</span>
+<span class="c1"># These two documents include common questions for these kind of projects</span>
+<span class="kt">!include</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">common-questions/web-app.yml</span>
+<span class="nn">---</span>
+<span class="kt">!include</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">common-questions/python-project.yml</span>
+<span class="nn">---</span>
+
+<span class="c1"># Here you can specify any settings or questions specific for your template</span>
+<span class="nt">_skip_if_exists</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.password.txt</span>
+<span class="nt">custom_question</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default answer</span>
+</code></pre></div>
+<p>that includes questions and settings from:</p>
+<div class="highlight"><span class="filename">common-questions/python-project.yml</span><pre><span></span><code><span class="nt">version</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What is the version of your Python project?</span>
+
+<span class="c1"># Settings like `_skip_if_exists` are merged</span>
+<span class="nt">_skip_if_exists</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;pyproject.toml&quot;</span>
+</code></pre></div>
+</div>
+<h2 id="conditional-files-and-directories">Conditional files and directories<a class="headerlink" href="#conditional-files-and-directories" title="Permanent link">&para;</a></h2>
+<p>You can take advantage of the ability to template file and directory names to make them
+"conditional", i.e. to only generate them based on the answers given by a user.</p>
+<p>For example, you can ask users if they want to use
+<a href="https://pre-commit.com/">pre-commit</a>:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">use_precommit</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bool</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Do you want to use pre-commit?</span>
+</code></pre></div>
+<p>And then, you can generate a <code>.pre-commit-config.yaml</code> file only if they answered "yes":</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+└──<span class="w"> </span>📄<span class="w"> </span><span class="o">{</span>%<span class="w"> </span><span class="k">if</span><span class="w"> </span>use_precommit<span class="w"> </span>%<span class="o">}</span>.pre-commit-config.yaml<span class="o">{</span>%<span class="w"> </span>endif<span class="w"> </span>%<span class="o">}</span>.jinja
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Note that the chosen <a class="autorefs autorefs-internal" href="#templates_suffix">template suffix</a>
+<strong>must</strong> appear outside of the Jinja condition,
+otherwise the whole file won't be considered a template and will
+be copied as such in generated projects.</p>
+</div>
+<p>You can even use the answers of questions with <a class="autorefs autorefs-internal" href="#advanced-prompt-formatting">choices</a>:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">ci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What Continuous Integration service do you want to use?</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">GitHub CI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github</span>
+<span class="w">        </span><span class="nt">GitLab CI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+├──<span class="w"> </span>📁<span class="w"> </span><span class="o">{</span>%<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">ci</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;github&#39;</span><span class="w"> </span>%<span class="o">}</span>.github<span class="o">{</span>%<span class="w"> </span>endif<span class="w"> </span>%<span class="o">}</span>
+│<span class="w">   </span>└──<span class="w"> </span>📁<span class="w"> </span>workflows
+│<span class="w">       </span>└──<span class="w"> </span>📄<span class="w"> </span>ci.yml
+└──<span class="w"> </span>📄<span class="w"> </span><span class="o">{</span>%<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">ci</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;gitlab&#39;</span><span class="w"> </span>%<span class="o">}</span>.gitlab-ci.yml<span class="o">{</span>%<span class="w"> </span>endif<span class="w"> </span>%<span class="o">}</span>.jinja
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Contrary to files, directories <strong>must not</strong> end with the <a class="autorefs autorefs-internal" href="#templates_suffix">template suffix</a>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On Windows, double-quotes are not valid characters in file and directory paths.
+This is why we used <strong>single-quotes</strong> in the example above.</p>
+</div>
+<h2 id="generating-a-directory-structure">Generating a directory structure<a class="headerlink" href="#generating-a-directory-structure" title="Permanent link">&para;</a></h2>
+<p>You can use answers to generate file names as well as whole directory structures.</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">package</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Package name</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+└──<span class="w"> </span>📄<span class="w"> </span><span class="o">{{</span><span class="w"> </span>package.replace<span class="o">(</span><span class="s1">&#39;.&#39;</span>,<span class="w"> </span>_krupy_conf.sep<span class="o">)</span><span class="w"> </span><span class="o">}}{{</span><span class="w"> </span>_krupy_conf.sep<span class="w"> </span><span class="o">}}</span>__main__.py.jinja
+</code></pre></div>
+<p>If you answer</p>
+<blockquote>
+<p>your_package.cli.main</p>
+</blockquote>
+<p>Krupy will generate this structure:</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_project
+└──<span class="w"> </span>📁<span class="w"> </span>your_package
+<span class="w">    </span>└──<span class="w"> </span>📁<span class="w"> </span>cli
+<span class="w">        </span>└──<span class="w"> </span>📁<span class="w"> </span>main
+<span class="w">            </span>└──<span class="w"> </span>📄<span class="w"> </span>__main__.py
+</code></pre></div>
+<p>You can either use any separator, like <code>.</code>, and replace it with <code>_krupy_conf.sep</code>, like
+in the example above, or just use <code>/</code> in the answer (works on Windows too).</p>
+<h2 id="importing-jinja-templates-and-macros">Importing Jinja templates and macros<a class="headerlink" href="#importing-jinja-templates-and-macros" title="Permanent link">&para;</a></h2>
+<p>You can
+<a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#include">include templates</a> and
+<a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#import">import macros</a> to reduce
+code duplication. A common scenario is the derivation of new values from answers, e.g.
+computing the slug of a human-readable name:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name-slug</span>
+
+<span class="nt">name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A nice human-readable name</span>
+
+<span class="nt">slug</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A slug of the name</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">include</span><span class="nv"> </span><span class="s">&#39;name-slug.jinja&#39;</span><span class="nv"> </span><span class="s">%}&quot;</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">name-slug.jinja</span><pre><span></span><code><span class="c">{# For simplicity ... -#}</span>
+<span class="cp">{{</span> <span class="nv">name</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">replace</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">,</span> <span class="s1">&#39;-&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+└──<span class="w"> </span>📄<span class="w"> </span>name-slug.jinja
+</code></pre></div>
+<p>It is also possible to include a template in a templated folder name</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+├──<span class="w"> </span>📄<span class="w"> </span>name-slug.jinja
+└──<span class="w"> </span>📁<span class="w"> </span><span class="o">{</span>%<span class="w"> </span>include<span class="w"> </span><span class="s1">&#39;name-slug.jinja&#39;</span><span class="w"> </span>%<span class="o">}</span>
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>__init__.py
+</code></pre></div>
+<p>or in a templated file name</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+├──<span class="w"> </span>📄<span class="w"> </span>name-slug.jinja
+└──<span class="w"> </span>📄<span class="w"> </span><span class="o">{</span>%<span class="w"> </span>include<span class="w"> </span><span class="s1">&#39;name-slug.jinja&#39;</span><span class="w"> </span>%<span class="o">}</span>.py
+</code></pre></div>
+<p>or in the templated content of a text file:</p>
+<div class="highlight"><span class="filename">pyproject.toml.jinja</span><pre><span></span><code><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;{% include &#39;name-slug.jinja&#39; %}&quot;</span>
+<span class="c1"># ...</span>
+</code></pre></div>
+<p>Similarly, a Jinja macro can be defined</p>
+<div class="highlight"><span class="filename">slugify.jinja</span><pre><span></span><code><span class="c">{# For simplicity ... -#}</span>
+<span class="cp">{%</span> <span class="k">macro</span> <span class="nv">slugify</span><span class="o">(</span><span class="nv">value</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">replace</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">,</span> <span class="s1">&#39;-&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
+</code></pre></div>
+<p>and imported, e.g. in <code>krupy.yml</code></p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slugify</span>
+
+<span class="nt">name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A nice human-readable name</span>
+
+<span class="nt">slug</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A slug of the name</span>
+<span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{%</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">&#39;slugify.jinja&#39;</span><span class="nv"> </span><span class="s">import</span><span class="nv"> </span><span class="s">slugify</span><span class="nv"> </span><span class="s">%}{{</span><span class="nv"> </span><span class="s">slugify(name)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</code></pre></div>
+<p>or in a templated folder name, in a templated file name, or in the templated content of
+a text file.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Import/Include paths are relative to the template root.</p>
+</div>
+<p>As the number of imported templates and macros grows, you may want to place them in a
+dedicated folder such as <code>includes</code>:</p>
+<div class="highlight"><pre><span></span><code>📁<span class="w"> </span>your_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml
+└──<span class="w"> </span>📁<span class="w"> </span>includes
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>name-slug.jinja
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span>slugify.jinja
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>...
+</code></pre></div>
+<p>Then, make sure to <a class="autorefs autorefs-internal" href="#exclude">exclude</a> this folder</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">includes</span>
+</code></pre></div>
+<p>or use a <a class="autorefs autorefs-internal" href="#subdirectory">subdirectory</a>, e.g.:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_subdirectory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template</span>
+</code></pre></div>
+<p>In addition, Jinja include and import statements will need to use a POSIX path separator
+(also on Windows) which is not supported in templated folder and file names. For this
+reason, Krupy provides a function
+<code>pathjoin(*paths: str, mode: Literal["posix", "windows", "native"] = "posix")</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">include</span> <span class="nv">pathjoin</span><span class="o">(</span><span class="s1">&#39;includes&#39;</span><span class="o">,</span> <span class="s1">&#39;name-slug.jinja&#39;</span><span class="o">)</span> <span class="cp">%}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">from</span> <span class="nv">pathjoin</span><span class="o">(</span><span class="s1">&#39;includes&#39;</span><span class="o">,</span> <span class="s1">&#39;slugify.jinja&#39;</span><span class="o">)</span> <span class="k">import</span> <span class="nv">slugify</span> <span class="cp">%}</span>
+</code></pre></div>
+<h2 id="available-settings">Available settings<a class="headerlink" href="#available-settings" title="Permanent link">&para;</a></h2>
+<p>Template settings alter how the template is rendered. <span data-autorefs-identifier="configuration-sources">They come from several
+sources</span>.</p>
+<p>Remember that <strong>the key must be prefixed with an underscore if you use it in <span data-autorefs-identifier="the-krupyyml-file">the
+<code>krupy.yml</code> file</span></strong>.</p>
+<h3 id="answers_file"><code>answers_file</code><a class="headerlink" href="#answers_file" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: <code>-a</code>, <code>--answers-file</code></li>
+<li>Default value: <code>.krupy-answers.yml</code></li>
+</ul>
+<p>Path to a file where answers will be recorded by default. The path must be relative to
+the project root.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember to add that file to your Git template if you want to support
+<a href="../updating/">updates</a>.</p>
+</div>
+<p>Don't forget to read <a class="autorefs autorefs-internal" href="#the-krupy-answersyml-file">the docs about the answers file</a>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_answers_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.my-custom-answers.yml</span>
+</code></pre></div>
+</div>
+<h3 id="cleanup_on_error"><code>cleanup_on_error</code><a class="headerlink" href="#cleanup_on_error" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>-C</code>, <code>--no-cleanup</code> (used to disable this setting; only available in
+    <code>krupy copy</code> subcommand)</li>
+<li>Default value: <code>True</code></li>
+</ul>
+<p>When Krupy creates the destination path, if there's any failure when rendering the
+template (either in the rendering process or when running the <a class="autorefs autorefs-internal" href="#tasks">tasks</a>), Krupy
+will delete that folder.</p>
+<p>Krupy will never delete the folder if it didn't create it. For this reason, when
+running <code>krupy update</code>, this setting has no effect.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="conflict"><code>conflict</code><a class="headerlink" href="#conflict" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>Literal["rej", "inline"]</code></li>
+<li>CLI flags: <code>-o</code>, <code>--conflict</code> (only available in <code>krupy update</code> subcommand)</li>
+<li>Default value: <code>inline</code></li>
+</ul>
+<p>When updating a project, sometimes Krupy doesn't know what to do with a diff code hunk.
+This option controls the output format if this happens. Using <code>rej</code>, creates <code>*.rej</code>
+files that contain the unresolved diffs. The <code>inline</code> option (default) includes the diff
+code hunk in the file itself, similar to the behavior of <code>git merge</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="context_lines"><code>context_lines</code><a class="headerlink" href="#context_lines" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>Int</code></li>
+<li>CLI flags: <code>-c</code>, <code>--context-lines</code> (only available in <code>krupy update</code> subcommand)</li>
+<li>Default value: <code>1</code></li>
+</ul>
+<p>During a project update, Krupy needs to compare the template evolution with the
+subproject evolution. This way, it can detect what changed, where and how to merge those
+changes. <a href="../updating/">Refer here for more details on this process</a>.</p>
+<p>The more lines you use, the more accurate Krupy will be when detecting conflicts. But
+you will also have more conflicts to solve by yourself. FWIW, Git uses 3 lines by
+default.</p>
+<p>The less lines you use, the less conflicts you will have. However, Krupy will not be so
+accurate and could even move lines around if the file it's comparing has several similar
+code chunks.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>dict|List[str=str]</code></li>
+<li>CLI flags: <code>-d</code>, <code>--data</code></li>
+<li>Default value: N/A</li>
+</ul>
+<p>Give answers to questions through CLI/API.</p>
+<p>This cannot be defined in <code>krupy.yml</code>, where its equivalent would be just normal
+questions with default answers.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Example CLI usage to take all default answers from template, except the user name,
+which is overridden, and don't ask user anything else:</p>
+<div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>copy<span class="w"> </span>-fd<span class="w"> </span><span class="s1">&#39;user_name=Manuel Calavera&#39;</span><span class="w"> </span>template<span class="w"> </span>destination
+</code></pre></div>
+</div>
+<h3 id="data_file"><code>data_file</code><a class="headerlink" href="#data_file" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: <code>--data-file</code></li>
+<li>Default value: N/A</li>
+</ul>
+<p>As an alternative to <a class="autorefs autorefs-internal" href="#data"><code>-d, --data</code></a> you can also pass the path to a YAML file that
+contains your data.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code> or API calls. Only supported through the CLI.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Example CLI usage with a YAML file containing data:</p>
+<div class="highlight"><span class="filename">input.yml</span><pre><span></span><code><span class="nt">user_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Manuel Calavera</span>
+<span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="nt">height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.83</span>
+</code></pre></div>
+<p>Passing a data file</p>
+<div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>copy<span class="w"> </span>--data-file<span class="w"> </span>input.yml<span class="w"> </span>template<span class="w"> </span>destination
+</code></pre></div>
+<p>is equivalent to passing its content as key-value pairs:</p>
+<div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>copy<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;user_name=Manuel Calavera&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;age=7&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;height=1.83&#39;</span><span class="w"> </span>template<span class="w"> </span>destination
+</code></pre></div>
+<p>If you'd like to override some of the answers in the file, <code>--data</code> flags always take
+precedence:</p>
+<div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>copy<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;user_name=Bilbo Baggins&#39;</span><span class="w"> </span>--data-file<span class="w"> </span>input.yml<span class="w"> </span>template<span class="w"> </span>destination
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Command line arguments passed via <code>--data</code> always take precedence over the data file.</p>
+</div>
+<h3 id="envops"><code>envops</code><a class="headerlink" href="#envops" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>dict</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>{"keep_trailing_newline": true}</code></li>
+</ul>
+<p>Configurations for the Jinja environment. Krupy uses the Jinja defaults whenever
+possible. The only exception at the moment is that Krupy keeps trailing newlines at the
+end of a template file. If you want to remove those, either remove them from the
+template or set <code>keep_trailing_newline</code> to <code>false</code>.</p>
+<p>See <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.Environment">upstream docs</a>
+to know available options.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Krupy and older had different, bracket-based defaults.</p>
+<p>If your template was created for Krupy, you need to add this configuration to
+your <code>krupy.yaml</code> to keep it working just like before:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">_envops</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">autoescape</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">block_end_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%]&quot;</span>
+<span class="w">    </span><span class="nt">block_start_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[%&quot;</span>
+<span class="w">    </span><span class="nt">comment_end_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#]&quot;</span>
+<span class="w">    </span><span class="nt">comment_start_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[#&quot;</span>
+<span class="w">    </span><span class="nt">keep_trailing_newline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">variable_end_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;]]&quot;</span>
+<span class="w">    </span><span class="nt">variable_start_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[[&quot;</span>
+</code></pre></div>
+<p>By specifying this, your template will be compatible with Krupy.</p>
+<p>Krupy will apply these older defaults if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
+than 0.</p>
+<p>Krupy no longer uses the old defaults independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
+</div>
+<h3 id="exclude"><code>exclude</code><a class="headerlink" href="#exclude" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>List[str]</code></li>
+<li>CLI flags: <code>-x</code>, <code>--exclude</code></li>
+<li>Default value:
+    <code>["krupy.yaml", "krupy.yml", "~*", "*.py[co]", "__pycache__", ".git", ".DS_Store", ".svn"]</code></li>
+</ul>
+<p><a class="autorefs autorefs-internal" href="#patterns-syntax">Patterns</a> for files/folders that must not be copied.</p>
+<p>The CLI option can be passed several times to add several patterns.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When you define this parameter in <code>krupy.yml</code>, it will <strong>replace</strong> the default
+value.</p>
+<p>In this example, for instance, <code>"krupy.yml"</code> will <strong>not</strong> be excluded:</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="nt">_exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;*.bar&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;.git&quot;</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When the <a class="autorefs autorefs-internal" href="#subdirectory">subdirectory</a> parameter is defined and its value is the
+path of an actual subdirectory (i.e. not <code>""</code> or <code>"."</code> or <code>"./"</code>), then the default
+value of the <code>exclude</code> parameter is <code>[]</code>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When you add this parameter from CLI or API, it will <strong>not replace</strong> the values
+defined in <code>krupy.yml</code> (or the defaults, if missing).</p>
+<p>Instead, CLI/API definitions <strong>will extend</strong> those from <code>krupy.yml</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example CLI usage to copy only a single file from the template</p>
+<div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>copy<span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;!file-i-want&#39;</span><span class="w"> </span>./template<span class="w"> </span>./destination
+</code></pre></div>
+</div>
+</div>
+<h3 id="force"><code>force</code><a class="headerlink" href="#force" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>-f</code>, <code>--force</code> (N/A in <code>krupy update</code>)</li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Overwrite files that already exist, without asking.</p>
+<p>Also don't ask questions to the user; just use default values <span data-autorefs-identifier="configuration-sources">obtained from other
+sources</span>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="defaults"><code>defaults</code><a class="headerlink" href="#defaults" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>--defaults</code></li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Use default answers to questions.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Any question that does not have a default value must be answered
+<a class="autorefs autorefs-internal" href="#data">via CLI/API</a>. Otherwise, an error is raised.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="overwrite"><code>overwrite</code><a class="headerlink" href="#overwrite" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>--overwrite</code> (N/A in <code>krupy update</code> because it's implicit)</li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Overwrite files that already exist, without asking.</p>
+<p><a class="autorefs autorefs-internal" href="#configuration-sources">obtained from other sources</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+<p>Required when updating from API.</p>
+</div>
+<h3 id="jinja_extensions"><code>jinja_extensions</code><a class="headerlink" href="#jinja_extensions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>List[str]</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>[]</code></li>
+</ul>
+<p>Additional Jinja2 extensions to load in the Jinja2 environment. Extensions can add
+filters, global variables and functions, or tags to the environment.</p>
+<p>The following extensions are <em>always</em> loaded:</p>
+<ul>
+<li><a href="https://gitlab.com/dreamer-labs/libraries/jinja2-ansible-filters/">jinja2_ansible_filters.AnsibleCoreFiltersExtension</a>:
+    this extension adds most of the
+    <a href="https://docs.ansible.com/ansible/2.3/playbooks_filters.html">Ansible filters</a> to
+    the environment.</li>
+</ul>
+<p>You don't need to tell your template users to install these extensions: Krupy depends
+on them, so they are always installed when Krupy is installed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Including an extension allows Krupy to execute uncontrolled code, thus making the
+template potentially more dangerous. Be careful about what extensions you install.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Note to template writers</p>
+<p>You must inform your users that they need to install the extensions alongside Krupy,
+i.e. in the same virtualenv where Krupy is installed.
+For example, if your template uses <code>jinja2_time.TimeExtension</code>,
+your users must install the <code>jinja2-time</code> Python package.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># with pip, in the same virtualenv where Krupy is installed</span>
+pip<span class="w"> </span>install<span class="w"> </span>jinja2-time
+
+<span class="c1"># if Krupy was installed with pipx</span>
+pipx<span class="w"> </span>inject<span class="w"> </span>krupy<span class="w"> </span>jinja2-time
+</code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_jinja_extensions</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jinja_markdown.MarkdownExtension</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jinja2_slug.SlugExtension</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jinja2_time.TimeExtension</span>
+</code></pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Examples of extensions you can use:</p>
+<ul>
+<li>
+<p><a href="https://jinja.palletsprojects.com/en/3.1.x/extensions/">Native Jinja2 extensions</a>:</p>
+<ul>
+<li><a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#expression-statement">expression statement</a>,
+    which can be used to alter the Jinja context (answers, filters, etc.) or execute other operations, without outputting anything.</li>
+<li><a href="https://jinja.palletsprojects.com/en/3.1.x/extensions/#loop-controls">loop controls</a>, which adds the <code>break</code> and <code>continue</code>
+    keywords for Jinja loops.</li>
+<li><a href="https://jinja.palletsprojects.com/en/3.1.x/extensions/#debug-extension">debug extension</a>, which can dump the current context
+    thanks to the added <code>{% debug %}</code> tag.</li>
+</ul>
+</li>
+<li>
+<p>From <a href="https://cookiecutter.readthedocs.io/en/1.7.2/">cookiecutter</a>:</p>
+<ul>
+<li><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#jsonify-extension">cookiecutter.extensions.JsonifyExtension</a>:
+    provides a <code>jsonify</code> filter, to format a dictionary as JSON. Note that Krupy
+    natively provides a <code>to_nice_json</code> filter that can achieve the same thing.</li>
+<li>
+<p><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#random-string-extension">cookiecutter.extensions.RandomStringExtension</a>:
+    provides a <code>random_ascii_string(length, punctuation=False)</code> global function.
+    Note that Krupy natively provides the <code>ans_random</code> and <code>hash</code> filters that can
+    be used to achieve the same thing:</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="m">999999999999999999999999999999999</span><span class="o">|</span><span class="nf">ans_random</span><span class="o">|</span><span class="nf">hash</span><span class="o">(</span><span class="s1">&#39;sha512&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div>
+</div>
+</li>
+<li>
+<p><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#slugify-extension">cookiecutter.extensions.SlugifyExtension</a>:
+    provides a <code>slugify</code> filter using
+    <a href="https://github.com/un33k/python-slugify">python-slugify</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/Krunal-Kevadiya/krupy-templates-extensions">krupy_templates_extensions.TemplateExtensionLoader</a>:
+    enhances the extension loading mechanism to allow templates writers to put their
+    extensions directly in their templates. It also allows to modify the rendering context
+    (the Jinja variables that you can use in your templates) before
+    rendering templates, see <a class="autorefs autorefs-internal" href="../faq/#how-can-i-alter-the-context-before-rendering-the-project">using a context hook</a>.</p>
+</li>
+<li><a href="https://github.com/jpsca/jinja-markdown">jinja_markdown.MarkdownExtension</a>:
+    provides a <code>markdown</code> tag that will render Markdown to HTML using
+    <a href="https://facelessuser.github.io/pymdown-extensions/">PyMdown extensions</a>.</li>
+<li><a href="https://pypi.org/project/jinja2-slug/#files">jinja2_slug.SlugExtension</a>: provides
+    a <code>slug</code> filter using <a href="https://github.com/mozilla/unicode-slugify">unicode-slugify</a>.</li>
+<li><a href="https://github.com/hackebrot/jinja2-time">jinja2_time.TimeExtension</a>: adds a
+    <code>now</code> tag that provides convenient access to the
+    <a href="http://crsmithdev.com/arrow/#arrow.factory.ArrowFactory.now">arrow.now()</a> API.</li>
+<li><a href="https://github.com/Krunal-Kevadiya/jinja2-jsonschema">jinja2_jsonschema.JsonSchemaExtension</a>:
+    adds a <code>jsonschema</code> filter for validating data against a JSON/YAML schema.</li>
+</ul>
+<p>Search for more extensions on GitHub using the
+<a href="https://github.com/topics/jinja2-extension">jinja2-extension topic</a>, or
+<a href="https://github.com/search?q=jinja&amp;type=topics">other Jinja2 topics</a>, or
+<a href="https://pypi.org/search/?q=jinja+extension">on PyPI using the jinja + extension keywords</a>.</p>
+</div>
+<h3 id="message_after_copy"><code>message_after_copy</code><a class="headerlink" href="#message_after_copy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>""</code></li>
+</ul>
+<p>A message to be printed after <a href="../generating/">generating</a> or
+<a class="autorefs autorefs-internal" href="../generating/#regenerating-a-project">regenerating</a> a project <em>successfully</em>.</p>
+<p>If the message contains Jinja code, it will be rendered with the same context as the
+rest of the template. A <a class="autorefs autorefs-internal" href="#importing-jinja-templates-and-macros">Jinja include</a> expression
+may be used to import a message from a file.</p>
+<p>The message is suppressed when Krupy is run in <a class="autorefs autorefs-internal" href="#quiet">quiet mode</a>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">project_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An awesome project needs an awesome name. Tell me yours.</span>
+
+<span class="nt">_message_after_copy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">Your project &quot;{{ project_name }}&quot; has been created successfully!</span>
+
+<span class="w">    </span><span class="no">Next steps:</span>
+
+<span class="w">    </span><span class="no">1. Change directory to the project root:</span>
+
+<span class="w">       </span><span class="no">$ cd {{ _krupy_conf.dst_path }}</span>
+
+<span class="w">    </span><span class="no">2. Read &quot;CONTRIBUING.md&quot; and start coding.</span>
+</code></pre></div>
+</div>
+<h3 id="message_after_update"><code>message_after_update</code><a class="headerlink" href="#message_after_update" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>""</code></li>
+</ul>
+<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy">message_after_copy</a> but printed after
+<a href="../updating/"><em>updating</em></a> a project.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">project_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An awesome project needs an awesome name. Tell me yours.</span>
+
+<span class="nt">_message_after_update</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">Your project &quot;{{ project_name }}&quot; has been updated successfully!</span>
+<span class="w">    </span><span class="no">In case there are any conflicts, please resolve them. Then,</span>
+<span class="w">    </span><span class="no">you&#39;re done.</span>
+</code></pre></div>
+</div>
+<h3 id="message_before_copy"><code>message_before_copy</code><a class="headerlink" href="#message_before_copy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>""</code></li>
+</ul>
+<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy">message_after_copy</a> but printed <em>before</em>
+<a href="../generating/">generating</a> or <a class="autorefs autorefs-internal" href="../generating/#regenerating-a-project">regenerating</a> a project.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">project_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An awesome project needs an awesome name. Tell me yours.</span>
+
+<span class="nt">_message_before_copy</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">Thanks for generating a project using our template.</span>
+
+<span class="w">    </span><span class="no">You&#39;ll be asked a series of questions whose answers will be used to</span>
+<span class="w">    </span><span class="no">generate a tailored project for you.</span>
+</code></pre></div>
+</div>
+<h3 id="message_before_update"><code>message_before_update</code><a class="headerlink" href="#message_before_update" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>""</code></li>
+</ul>
+<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy">message_before_copy</a> but printed before
+<a href="../updating/"><em>updating</em></a> a project.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">project_name</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An awesome project needs an awesome name. Tell me yours.</span>
+
+<span class="nt">_message_before_update</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">Thanks for updating your project using our template.</span>
+
+<span class="w">    </span><span class="no">You&#39;ll be asked a series of questions whose answers are pre-populated</span>
+<span class="w">    </span><span class="no">with previously entered values. Feel free to change them as needed.</span>
+</code></pre></div>
+</div>
+<h3 id="migrations"><code>migrations</code><a class="headerlink" href="#migrations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>List[dict]</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>[]</code></li>
+</ul>
+<p>Migrations are like <a class="autorefs autorefs-internal" href="#tasks">tasks</a>, but each item in the list is a <code>dict</code> with these
+keys:</p>
+<ul>
+<li><strong>version</strong>: Indicates the version that the template update has to go through to
+    trigger this migration. It is evaluated using <a href="https://www.python.org/dev/peps/pep-0440/">PEP 440</a>.</li>
+<li><strong>before</strong> (optional): Commands to execute before performing the update. The answers
+    file is reloaded after running migrations in this stage, to let you migrate answer
+    values.</li>
+<li><strong>after</strong> (optional): Commands to execute after performing the update.</li>
+</ul>
+<p>Migrations will run in the same order as declared here (so you could even run a
+migration for a higher version before running a migration for a lower version if the
+higher one is declared before and the update passes through both).</p>
+<p>They will only run when <em>new version &gt;= declared version &gt; old version</em>. And only when
+updating (not when copying for the 1st time).</p>
+<p>If the migrations definition contains Jinja code, it will be rendered with the same
+context as the rest of the template.</p>
+<p>Migration processes will receive these environment variables:</p>
+<ul>
+<li><code>$STAGE</code>: Either <code>before</code> or <code>after</code>.</li>
+<li><code>$VERSION_FROM</code>: <a href="https://git-scm.com/docs/git-describe">Git commit description</a> of the template as it was
+    before updating.</li>
+<li><code>$VERSION_TO</code>: <a href="https://git-scm.com/docs/git-describe">Git commit description</a> of the template as it will be
+    after updating.</li>
+<li><code>$VERSION_CURRENT</code>: The <code>version</code> detector as you indicated it when describing
+    migration tasks.</li>
+<li><code>$VERSION_PEP440_FROM</code>, <code>$VERSION_PEP440_TO</code>, <code>$VERSION_PEP440_CURRENT</code>: Same as the
+    above, but normalized into a standard <a href="https://www.python.org/dev/peps/pep-0440/">PEP 440</a> version string indicator. If your
+    scripts use these environment variables to perform migrations, you probably will
+    prefer to use these variables.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_migrations</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.0.0</span>
+<span class="w">      </span><span class="nt">before</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rm ./old-folder</span>
+<span class="w">      </span><span class="nt">after</span><span class="p">:</span>
+<span class="w">          </span><span class="c1"># {{ _krupy_conf.src_path }} points to the path where the template was</span>
+<span class="w">          </span><span class="c1"># cloned, so it can be helpful to run migration scripts stored there.</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">invoke -r {{ _krupy_conf.src_path }} -c migrations migrate $VERSION_CURRENT</span>
+</code></pre></div>
+</div>
+<h3 id="min_krupy_version"><code>min_krupy_version</code><a class="headerlink" href="#min_krupy_version" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: N/A</li>
+</ul>
+<p>Specifies the minimum required version of Krupy to generate a project from this
+template. The version must be follow the <a href="https://www.python.org/dev/peps/pep-0440/">PEP 440</a> syntax. Upon generating or updating
+a project, if the installed version of Krupy is less than the required one, the
+generation will be aborted and an error will be shown to the user.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If Krupy detects that there is a major version difference, it will warn you about
+possible incompatibilities. Remember that a new major release means that some
+features can be dropped or changed, so it's probably a good idea to ask the
+template maintainer to update it.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_min_krupy_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4.1.0&quot;</span>
+</code></pre></div>
+</div>
+<h3 id="pretend"><code>pretend</code><a class="headerlink" href="#pretend" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>-n</code>, <code>--pretend</code></li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Run but do not make any changes.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="preserve_symlinks"><code>preserve_symlinks</code><a class="headerlink" href="#preserve_symlinks" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Keep symlinks as symlinks. If this is set to <code>False</code> symlinks will be replaced with the
+file they point to.</p>
+<p>When set to <code>True</code> and the symlink ends with the template suffix (<code>.jinja</code> by default)
+the target path of the symlink will be rendered as a jinja template.</p>
+<h3 id="quiet"><code>quiet</code><a class="headerlink" href="#quiet" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>-q</code>, <code>--quiet</code></li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Suppress status output.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="secret_questions"><code>secret_questions</code><a class="headerlink" href="#secret_questions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>List[str]</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>[]</code></li>
+</ul>
+<p>Question variables to mark as secret questions. This is especially useful when questions
+are provided in the <a class="autorefs autorefs-internal" href="#questions">simplified prompt format</a>. It's equivalent to
+configuring <code>secret: true</code> in the <a class="autorefs autorefs-internal" href="#advanced-prompt-formatting">advanced prompt format</a>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_secret_questions</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
+
+<span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">johndoe</span>
+<span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3cr3t</span>
+</code></pre></div>
+</div>
+<h3 id="skip_if_exists"><code>skip_if_exists</code><a class="headerlink" href="#skip_if_exists" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>List[str]</code></li>
+<li>CLI flags: <code>-s</code>, <code>--skip</code></li>
+<li>Default value: <code>[]</code></li>
+</ul>
+<p><a class="autorefs autorefs-internal" href="#patterns-syntax">Patterns</a> for files/folders that must be skipped if they already
+exist.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>For example, it can be used if your project generates a password the 1st time and
+you don't want to override it next times:</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_skip_if_exists</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.secret_password.yml</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">.secret_password.yml.jinja</span><pre><span></span><code><span class="p p-Indicator">{{</span><span class="nv">999999999999999999999999999999999|ans_random|hash(&#39;sha512&#39;)</span><span class="p p-Indicator">}}</span>
+</code></pre></div>
+</div>
+<h3 id="subdirectory"><code>subdirectory</code><a class="headerlink" href="#subdirectory" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: N/A</li>
+</ul>
+<p>Subdirectory to use as the template root when generating a project. If not specified,
+the root of the template is used.</p>
+<p>This allows you to keep separate the template metadata and the template code.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your template is meant to be applied to other templates (a.k.a. recursive
+templates), use this option to be able to use <a href="../updating/">updates</a>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_subdirectory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">template</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Can I have multiple templates in a single repo using this option?</p>
+<p>The Krupy recommendation is: <strong>1 template = 1 Git repository</strong>.</p>
+<p>Why? Unlike almost all other templating engines, Krupy supports
+<a href="../updating/">smart project updates</a>. For that, Krupy needs to know in which version it
+was copied last time, and to which version you are evolving. Krupy gets that
+information from Git tags. Git tags are shared across the whole Git repository. Using a
+repository to host multiple templates would lead to many corner case situations that we
+don't want to support.</p>
+<p>So, in Krupy, the subdirectory option is just there to let template owners separate
+templates metadata from template source code. This way, for example, you can have
+different dotfiles for you template and for the projects it generates.</p>
+<div class="admonition example">
+<p class="admonition-title">Example project with different <code>.gitignore</code> files</p>
+<p><div class="highlight"><span class="filename">Project layout</span><pre><span></span><code>📁<span class="w"> </span>my_krupy_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yml<span class="w">       </span><span class="c1"># (1)</span>
+├──<span class="w"> </span>📄<span class="w"> </span>.gitignore<span class="w">       </span><span class="c1"># (2)</span>
+└──<span class="w"> </span>📁<span class="w"> </span>template<span class="w">         </span><span class="c1"># (3)</span>
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>.gitignore<span class="w">   </span><span class="c1"># (4)</span>
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+<ol>
+<li>Same contents as the example above.</li>
+<li>Ignore instructions for the template repo.</li>
+<li>The configured template subdirectory.</li>
+<li>Ignore instructions for projects generated with the template.</li>
+</ol>
+</div>
+<p>However, it is true that the value of this option can itself be templated. This would
+let you have different templates that all use the same questionary, and the used
+template would be saved as an answer. It would let the user update safely and change
+that option in the future.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>With this questions file and this directory structure, the user will be prompted which
+Python engine to use, and the project will be generated using the subdirectory whose
+name matches the answer from the user:</p>
+<div class="highlight"><span class="filename">krupy.yaml</span><pre><span></span><code><span class="nt">_subdirectory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">python_engine</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="nt">python_engine</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">    </span><span class="nt">choices</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">poetry</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipenv</span>
+</code></pre></div>
+<p><div class="highlight"><span class="filename">Project layout</span><pre><span></span><code>📁<span class="w"> </span>my_krupy_template
+├──<span class="w"> </span>📄<span class="w"> </span>krupy.yaml<span class="w"> </span><span class="c1"># (1)</span>
+├──<span class="w"> </span>📁<span class="w"> </span>poetry
+│<span class="w">   </span>├──<span class="w"> </span>📄<span class="w"> </span><span class="o">{{</span><span class="w"> </span>_krupy_conf.answers_file<span class="w"> </span><span class="o">}}</span>.jinja<span class="w"> </span><span class="c1"># (2)</span>
+│<span class="w">   </span>└──<span class="w"> </span>📄<span class="w"> </span>pyproject.toml.jinja
+└──<span class="w"> </span>📁<span class="w"> </span>pipenv
+<span class="w">    </span>├──<span class="w"> </span>📄<span class="w"> </span><span class="o">{{</span><span class="w"> </span>_krupy_conf.answers_file<span class="w"> </span><span class="o">}}</span>.jinja
+<span class="w">    </span>└──<span class="w"> </span>📄<span class="w"> </span>Pipfile.jinja
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+<ol>
+<li>The configuration from the previous example snippet.</li>
+<li>See <a class="autorefs autorefs-internal" href="#the-krupy-answersyml-file">the answers file docs</a> to understand.</li>
+</ol>
+</div>
+</div>
+<h3 id="tasks"><code>tasks</code><a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>List[str|List[str]]</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>[]</code></li>
+</ul>
+<p>Commands to execute after generating or updating a project from your template.</p>
+<p>They run ordered, and with the <code>$STAGE=task</code> variable in their environment.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># Strings get executed under system&#39;s default shell</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;git</span><span class="nv"> </span><span class="s">init&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;rm</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">name_of_the_project</span><span class="nv"> </span><span class="s">}}/README.md&quot;</span>
+<span class="w">    </span><span class="c1"># Arrays are executed without shell, saving you the work of escaping arguments</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">invoke</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--search-root={{</span><span class="nv"> </span><span class="s">_krupy_conf.src_path</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">after-copy</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="c1"># You are able to output the full conf to JSON, to be parsed by your script</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">invoke</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">end-process</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;--full-conf={{</span><span class="nv"> </span><span class="s">_krupy_conf|to_json</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="c1"># Your script can be run by the same Python environment used to run Krupy</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">_krupy_python</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">task.py</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="c1"># OS-specific task (supported values are &quot;linux&quot;, &quot;macos&quot;, &quot;windows&quot; and `None`)</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<span class="w">      </span><span class="no">{% if _krupy_conf.os in [&#39;linux&#39;, &#39;macos&#39;] %}</span>
+<span class="w">      </span><span class="no">rm {{ name_of_the_project }}/README.md</span>
+<span class="w">      </span><span class="no">{% elif _krupy_conf.os == &#39;windows&#39; %}</span>
+<span class="w">      </span><span class="no">Remove-Item {{ name_of_the_project }}/README.md</span>
+<span class="w">      </span><span class="no">{% endif %}</span>
+</code></pre></div>
+<p>Note: the example assumes you use <a href="https://www.pyinvoke.org/">Invoke</a> as
+your task manager. But it's just an example. The point is that we're showing
+how to build and call commands.</p>
+</div>
+<h3 id="templates_suffix"><code>templates_suffix</code><a class="headerlink" href="#templates_suffix" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>.jinja</code></li>
+</ul>
+<p>Suffix that instructs which files are to be processed by Jinja as templates.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_templates_suffix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.my-custom-suffix</span>
+</code></pre></div>
+</div>
+<p>An empty suffix is also valid, and will instruct Krupy to copy and render <em>every file</em>,
+except those that are <a class="autorefs autorefs-internal" href="#exclude">excluded by default</a>. If an error happens while trying
+to read a file as a template, it will fallback to a simple copy (it will typically
+happen for binary files like images). At the contrary, if such an error happens and the
+templates suffix is <em>not</em> empty, Krupy will abort and print an error message.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">_templates_suffix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</code></pre></div>
+</div>
+<p>If there is a file with the template suffix next to another one without it, the one
+without suffix will be ignored.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p><div class="highlight"><pre><span></span><code>📁<span class="w"> </span>my_krupy_template
+├──<span class="w"> </span>📄<span class="w"> </span>README.md<span class="w">           </span><span class="c1"># Your template&#39;s README, ignored at rendering</span>
+├──<span class="w"> </span>📄<span class="w"> </span>README.md.jinja<span class="w">     </span><span class="c1"># README that will be rendered</span>
+└──<span class="w"> </span>📄<span class="w"> </span>CONTRIBUTING.md<span class="w">     </span><span class="c1"># Used both for the template and the subprojects</span>
+</code></pre></div><div class="markdown-exec"></div>
+</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Krupy and older had a different default value: <code>.tmpl</code>. If you wish to keep it,
+add it to your <code>krupy.yml</code> to keep it future-proof.</p>
+<p>Krupy will apply that old default if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
+than 0.</p>
+<p>Krupy no longer uses the old default independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
+</div>
+<h3 id="unsafe"><code>unsafe</code><a class="headerlink" href="#unsafe" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>--UNSAFE</code>, <code>--trust</code></li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Krupy templates can use dangerous features that allow arbitrary code execution:</p>
+<ul>
+<li><a class="autorefs autorefs-internal" href="#jinja_extensions">Jinja extensions</a></li>
+<li><a class="autorefs autorefs-internal" href="#migrations">Migrations</a></li>
+<li><a class="autorefs autorefs-internal" href="#tasks">Tasks</a></li>
+</ul>
+<p>Therefore, these features are disabled by default and Krupy will raise an error (and
+exit from the CLI with code <code>4</code>) when they are found in a template. In this case, please
+verify that no malicious code gets executed by any of the used features. When you're
+sufficiently confident or willing to take the risk, set <code>unsafe=True</code> or pass the CLI
+switch <code>--UNSAFE</code> or <code>--trust</code>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Please be sure you understand the risks when allowing unsafe features!</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="use_prereleases"><code>use_prereleases</code><a class="headerlink" href="#use_prereleases" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>bool</code></li>
+<li>CLI flags: <code>g</code>, <code>--prereleases</code></li>
+<li>Default value: <code>False</code></li>
+</ul>
+<p>Imagine that the template supports updates and contains these 2 Git tags: <code>v1.0.0</code> and
+<code>v2.0.0a1</code>. Krupy will copy by default <code>v1.0.0</code> unless you add <code>--prereleases</code>.</p>
+<!-- prettier-ignore-start -->
+<p>Also, if you run <a class="autorefs autorefs-internal" href="../reference/krupy/cli/#krupy.cli.KrupyUpdateSubApp"><code>krupy update</code></a>, Krupy would ignore
+the <code>v2.0.0a1</code> tag unless this flag is enabled.</p>
+<!-- prettier-ignore-end -->
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This behavior is new from Krupy. Before that release, prereleases were
+never ignored.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<h3 id="vcs_ref"><code>vcs_ref</code><a class="headerlink" href="#vcs_ref" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>str</code></li>
+<li>CLI flags: <code>-r</code>, <code>--vcs-ref</code></li>
+<li>Default value: N/A (use latest release)</li>
+</ul>
+<p>When copying or updating from a Git-versioned template, indicate which template version
+to copy.</p>
+<p>This is stored automatically in the answers file, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">_commit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.0.0</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Not supported in <code>krupy.yml</code>.</p>
+</div>
+<p>By default, Krupy will copy from the last release found in template Git tags, sorted as
+<a href="https://www.python.org/dev/peps/pep-0440/">PEP 440</a>.</p>
+<h3 id="_envquestions"><code>_envquestions</code><a class="headerlink" href="#_envquestions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>dict</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>{"is_visible_count": false, "is_visible_mark": false, "is_visible_type": false, "is_visible_default_value": false}</code></li>
+</ul>
+<p>Configurations for the Krupy environment.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Krupy and older had different, bracket-based defaults.</p>
+<p>If your template was created for Krupy, you need to add this configuration to
+your <code>krupy.yaml</code> to keep it working just like before:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">_envquestions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">is_visible_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">is_visible_mark</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">is_visible_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">is_visible_default_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">style</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="w"> </span><span class="s">&quot;qmark&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;fg:#5F819D&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;question&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;fg:#FF9D00&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="err">,</span>
+</code></pre></div>
+<p>By specifying this, your template will be compatible with Krupy.</p>
+<p>Krupy will apply these older defaults if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
+than 0.</p>
+<p>Krupy no longer uses the old defaults independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
+</div>
+<h2 id="patterns-syntax">Patterns syntax<a class="headerlink" href="#patterns-syntax" title="Permanent link">&para;</a></h2>
+<p>Krupy supports matching names against patterns in a gitignore style fashion. This works
+for the options <code>exclude</code> and <code>skip</code>. This means you can write patterns as you would for
+any <code>.gitignore</code> file. The full range of the gitignore syntax is supported via
+<a href="https://github.com/cpburnz/python-path-specification">pathspec</a>.</p>
+<p>For example, with the following settings in your <code>krupy.yml</code> file would exclude all
+files ending with <code>txt</code> from being copied to the destination folder, except the file
+<code>a.txt</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">_exclude</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># match all text files...</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;*.txt&quot;</span>
+<span class="w">    </span><span class="c1"># .. but not this one:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;!a.txt&quot;</span>
+</code></pre></div>
+<h2 id="the-krupy-answersyml-file">The <code>.krupy-answers.yml</code> file<a class="headerlink" href="#the-krupy-answersyml-file" title="Permanent link">&para;</a></h2>
+<p>If the destination path exists and a <code>.krupy-answers.yml</code> file is present there, it
+will be used to load the last user's answers to the questions made in <span data-autorefs-identifier="the-krupyyml-file">the <code>krupy.yml</code>
+file</span>.</p>
+<p>This makes projects easier to update because when the user is asked, the default answers
+will be the last ones they used.</p>
+<p>The file <strong>must be called exactly <code>{{ _krupy_conf.answers_file }}.jinja</code></strong> (or ended
+with <a class="autorefs autorefs-internal" href="#templates_suffix">your chosen suffix</a>) in your template's root folder) to allow
+<span data-autorefs-identifier="applying-multiple-templates-to-the-same-subproject">applying multiple templates to the same
+subproject</span>.</p>
+<p>The default name will be <code>.krupy-answers.yml</code>, but <span data-autorefs-identifier="answers_file">you can define a different default
+path for this file</span>.</p>
+<p>The file must have this content:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Changes here will be overwritten by Krupy; NEVER EDIT MANUALLY</span>
+<span class="cp">{{</span> <span class="nv">_krupy_answers</span><span class="o">|</span><span class="nf">to_nice_yaml</span> -<span class="cp">}}</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Did you notice that <code>NEVER EDIT MANUALLY</code> part?
+<a class="autorefs autorefs-internal" href="../updating/#never-change-the-answers-file-manually">It is important</a>.</p>
+</div>
+<p>The builtin <code>_krupy_answers</code> variable includes all data needed to smooth future updates
+of this project. This includes (but is not limited to) all JSON-serializable values
+declared as user questions in <a class="autorefs autorefs-internal" href="#the-krupyyml-file">the krupy.yml file</a>.</p>
+<p>As you can see, you also have the power to customize what will be logged here. Keys that
+start with an underscore (<code>_</code>) are specific to Krupy. Other keys should match questions
+in <code>krupy.yml</code>.</p>
+<p>The path to the answers file must be expressed relative to the project root, because:</p>
+<ul>
+<li>Its value must be available at render time.</li>
+<li>It is used to update projects, and for that a project must be git-tracked. So, the
+    file must be in the repo anyway.</li>
+</ul>
+<h3 id="applying-multiple-templates-to-the-same-subproject">Applying multiple templates to the same subproject<a class="headerlink" href="#applying-multiple-templates-to-the-same-subproject" title="Permanent link">&para;</a></h3>
+<p>Imagine this scenario:</p>
+<ol>
+<li>You use one framework that has a public template to generate a project. It's
+   available at <code>https://github.com/example-framework/framework-template.git</code>.</li>
+<li>You have a generic template that you apply to all your projects to use the same
+   pre-commit configuration (formatters, linters, static type checkers...). You have
+   published that in <code>https://gitlab.com/my-stuff/pre-commit-template.git</code>.</li>
+<li>You have a private template that configures your subproject to run in your internal
+   CI. It's found in <code>git@gitlab.example.com:my-company/ci-template.git</code>.</li>
+</ol>
+<p>All 3 templates are completely independent:</p>
+<ul>
+<li>Anybody can generate a project for the specific framework, no matter if they want to
+    use pre-commit or not.</li>
+<li>You want to share the same pre-commit configurations, no matter if the subproject is
+    for one or another framework.</li>
+<li>You want to have a centralized CI configuration for all your company projects, no
+    matter their pre-commit configuration or the framework they rely on.</li>
+</ul>
+<p>Well, don't worry. Krupy has you covered. You just need to use a different answers file
+for each one. All of them contain a <code>{{ _krupy_conf.answers_file }}.jinja</code> file <span data-autorefs-identifier="the-krupy-answersyml-file">as
+specified above</span>. Then you apply all the templates to the
+same project:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>my-project
+<span class="nb">cd</span><span class="w"> </span>my-project
+git<span class="w"> </span>init
+<span class="c1"># Apply framework template</span>
+krupy<span class="w"> </span>copy<span class="w"> </span>-a<span class="w"> </span>.krupy-answers.main.yml<span class="w"> </span>https://github.com/example-framework/framework-template.git<span class="w"> </span>.
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Start project based on framework template&#39;</span>
+<span class="c1"># Apply pre-commit template</span>
+krupy<span class="w"> </span>copy<span class="w"> </span>-a<span class="w"> </span>.krupy-answers.pre-commit.yml<span class="w"> </span>https://gitlab.com/my-stuff/pre-commit-template.git<span class="w"> </span>.
+git<span class="w"> </span>add<span class="w"> </span>.
+pre-commit<span class="w"> </span>run<span class="w"> </span>-a<span class="w">  </span><span class="c1"># Just in case 😉</span>
+git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s1">&#39;Apply pre-commit template&#39;</span>
+<span class="c1"># Apply internal CI template</span>
+krupy<span class="w"> </span>copy<span class="w"> </span>-a<span class="w"> </span>.krupy-answers.ci.yml<span class="w"> </span>git@gitlab.example.com:my-company/ci-template.git<span class="w"> </span>.
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Apply internal CI template&#39;</span>
+</code></pre></div>
+<p>Done!</p>
+<p>After a while, when templates get new releases, updates are handled separately for each
+template:</p>
+<div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>update<span class="w"> </span>-a<span class="w"> </span>.krupy-answers.main.yml
+krupy<span class="w"> </span>update<span class="w"> </span>-a<span class="w"> </span>.krupy-answers.pre-commit.yml
+krupy<span class="w"> </span>update<span class="w"> </span>-a<span class="w"> </span>.krupy-answers.ci.yml
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "navigation.top", "navigation."], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+    
+  </body>
+</html>

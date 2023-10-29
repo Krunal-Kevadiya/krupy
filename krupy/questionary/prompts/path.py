@@ -27,7 +27,7 @@ from ..styles import merge_styles_default
 
 
 class GreatUXPathCompleter(PathCompleter):
-    """Wraps :class:`prompt_toolkit.completion.PathCompleter`.
+    """Wraps [prompt_toolkit.completion.PathCompleter]().
 
     Makes sure completions for directories end with a path separator. Also make sure
     the right path separator is used. Checks if `get_paths` returns list of existing
@@ -42,7 +42,7 @@ class GreatUXPathCompleter(PathCompleter):
         min_input_len: int = 0,
         expanduser: bool = False,
     ) -> None:
-        """Adds validation of 'get_paths' to :class:`prompt_toolkit.completion.PathCompleter`.
+        """Adds validation of 'get_paths' to [prompt_toolkit.completion.PathCompleter]().
 
         Args:
             only_directories (bool): If True, only directories will be
@@ -87,7 +87,7 @@ class GreatUXPathCompleter(PathCompleter):
     ) -> Iterable[Completion]:
         """Get completions.
 
-        Wraps :class:`prompt_toolkit.completion.PathCompleter`. Makes sure completions
+        Wraps [prompt_toolkit.completion.PathCompleter](). Makes sure completions
         for directories end with a path separator. Also make sure the right path
         separator is used.
         """
@@ -138,7 +138,7 @@ def path(
         ? What's the path to the projects version file? ./pyproject.toml
         './pyproject.toml'
 
-    .. image:: ../images/path.gif
+    <img alt="../../../../images/path.gif" src="../../../../images/path.gif">
 
     This is just a really basic example, the prompt can be customized using the
     parameters.
@@ -153,7 +153,7 @@ def path(
 
         complete_style: How autocomplete menu would be shown, it could be ``COLUMN``
                         ``MULTI_COLUMN`` or ``READLINE_LIKE`` from
-                        :class:`prompt_toolkit.shortcuts.CompleteStyle`.
+                        [prompt_toolkit.shortcuts.CompleteStyle]().
 
         validate: Require the entered value to pass a validation. The
                   value can not be submitted until the validator accepts
@@ -186,7 +186,7 @@ def path(
                      ``validate`` in combination with the ``file_filter``.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """  # noqa: W505, E501
     merged_style = merge_styles_default([style])
 

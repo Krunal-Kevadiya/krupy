@@ -1,0 +1,94 @@
+site_name: krupy
+site_description: Library and command-line utility for rendering projects templates.
+site_url: https://krunal-kevadiya.github.io/krupy/
+repo_url: https://github.com/Krunal-Kevadiya/krupy
+repo_name: Krunal-Kevadiya/krupy
+watch: [krupy]
+
+nav:
+  - Overview: "index.md"
+  - Creating a template: "creating.md"
+  - Configuring a template: "configuring.md"
+  - Generating a project: "generating.md"
+  - Updating a project: "updating.md"
+  - Reference:
+    - Krupy:
+      - cli.py: "reference/krupy/cli.md"
+      - errors.py: "reference/krupy/errors.md"
+      - main.py: "reference/krupy/main.md"
+      - subproject.py: "reference/krupy/subproject.md"
+      - template.py: "reference/krupy/template.md"
+      - tools.py: "reference/krupy/tools.md"
+      - types.py: "reference/krupy/types.md"
+      - user_data.py: "reference/krupy/user_data.md"
+      - vcs.py: "reference/krupy/vcs.md"
+    - Questionary:
+      - Quick Start: "reference/questionary/quickstart.md"
+      - form.py: "reference/questionary/form.md"
+      - prompt.py: "reference/questionary/prompt.md"
+      - question.py: "reference/questionary/question.md"
+      - Prompts:
+        - autocomplete.py: "reference/questionary/prompts/autocomplete.md"
+        - checkbox.py: "reference/questionary/prompts/checkbox.md"
+        - common.py: "reference/questionary/prompts/common.md"
+        - confirm.py: "reference/questionary/prompts/confirm.md"
+        - password.py: "reference/questionary/prompts/password.md"
+        - path.py: "reference/questionary/prompts/path.md"
+        - press_any_key_to_continue.py: "reference/questionary/prompts/press_any_key_to_continue.md"
+        - rawselect.py: "reference/questionary/prompts/rawselect.md"
+        - select.py: "reference/questionary/prompts/select.md"
+        - text.py: "reference/questionary/prompts/text.md"
+  - Comparisons: comparisons.md
+  - Frequently Asked Questions: faq.md
+  - Contributing: "contributing.md"
+  - Changelog: "changelog.md"
+
+theme:
+  name: material
+  features:
+    - content.code.annotate
+    - navigation.top
+    - navigation.
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: pink
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: pink
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra_css:
+  - css/mkdocstrings.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji
+  - pymdownx.magiclink
+  - toc:
+      permalink: true
+  - footnotes
+
+plugins:
+  - autorefs
+  - search
+  - markdown-exec
+  - mkdocstrings

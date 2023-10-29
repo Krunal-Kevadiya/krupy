@@ -1,0 +1,21 @@
+name: Publish to gh-pages
+
+on:
+  repository_dispatch:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Site distribution
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.REPO_TOKEN }}
+          publish_dir: ./site

@@ -1,0 +1,3336 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Library and command-line utility for rendering projects templates.">
+      
+      
+      
+        <link rel="canonical" href="https://krunal-kevadiya.github.io/krupy/reference/krupy/template/">
+      
+      
+        <link rel="prev" href="../subproject/">
+      
+      
+        <link rel="next" href="../tools/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
+    
+    
+      
+        <title>template.py - krupy</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.fad675c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../css/mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#krupy.template" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="krupy" class="md-header__button md-logo" aria-label="krupy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            krupy
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              template.py
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Krunal-Kevadiya/krupy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Krunal-Kevadiya/krupy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="krupy" class="md-nav__button md-logo" aria-label="krupy" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    krupy
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Krunal-Kevadiya/krupy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Krunal-Kevadiya/krupy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../creating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuring/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring a template
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../generating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generating a project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../updating/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Updating a project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Krupy
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Krupy
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    cli.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    errors.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../main/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    main.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subproject/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    subproject.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    template.py
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    template.py
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template" class="md-nav__link">
+    <span class="md-ellipsis">
+      krupy.template
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.Task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.Template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Template">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.answers_relpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      answers_relpath
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      commit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.commit_hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      commit_hash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.config_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      config_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.envops" class="md-nav__link">
+    <span class="md-ellipsis">
+      envops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.envquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      envquestions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.exclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      exclude
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.jinja_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      jinja_extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.local_abspath" class="md-nav__link">
+    <span class="md-ellipsis">
+      local_abspath
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_after_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_after_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_before_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_before_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      metadata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.min_krupy_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      min_krupy_version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.preserve_symlinks" class="md-nav__link">
+    <span class="md-ellipsis">
+      preserve_symlinks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.questions_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      questions_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.secret_questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      secret_questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.skip_if_exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      skip_if_exists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.subdirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      subdirectory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.templates_suffix" class="md-nav__link">
+    <span class="md-ellipsis">
+      templates_suffix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.url_expanded" class="md-nav__link">
+    <span class="md-ellipsis">
+      url_expanded
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.vcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      vcs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.version" class="md-nav__link">
+    <span class="md-ellipsis">
+      version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.migration_tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      migration_tasks()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.filter_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      filter_config()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.load_template_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_template_config()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.verify_krupy_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      verify_krupy_version()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tools.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    types.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    user_data.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vcs.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Questionary
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Questionary
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/quickstart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Start
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/form/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    form.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    prompt.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/question/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    question.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2_5" id="__nav_6_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Prompts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Prompts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/autocomplete/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    autocomplete.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/checkbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    checkbox.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    common.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/confirm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    confirm.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/password/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    password.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/path/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    path.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/press_any_key_to_continue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    press_any_key_to_continue.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/rawselect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    rawselect.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/select/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    select.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../questionary/prompts/text/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    text.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../comparisons/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Comparisons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Frequently Asked Questions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template" class="md-nav__link">
+    <span class="md-ellipsis">
+      krupy.template
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.Task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.Template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Template">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.answers_relpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      answers_relpath
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      commit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.commit_hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      commit_hash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.config_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      config_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.envops" class="md-nav__link">
+    <span class="md-ellipsis">
+      envops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.envquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      envquestions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.exclude" class="md-nav__link">
+    <span class="md-ellipsis">
+      exclude
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.jinja_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      jinja_extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.local_abspath" class="md-nav__link">
+    <span class="md-ellipsis">
+      local_abspath
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_after_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_after_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_after_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_before_copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_copy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.message_before_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      message_before_update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      metadata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.min_krupy_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      min_krupy_version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.preserve_symlinks" class="md-nav__link">
+    <span class="md-ellipsis">
+      preserve_symlinks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.questions_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      questions_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.secret_questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      secret_questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.skip_if_exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      skip_if_exists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.subdirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      subdirectory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      tasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.templates_suffix" class="md-nav__link">
+    <span class="md-ellipsis">
+      templates_suffix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.url_expanded" class="md-nav__link">
+    <span class="md-ellipsis">
+      url_expanded
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.vcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      vcs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.version" class="md-nav__link">
+    <span class="md-ellipsis">
+      version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#krupy.template.Template.migration_tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      migration_tasks()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.filter_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      filter_config()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.load_template_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_template_config()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#krupy.template.verify_krupy_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      verify_krupy_version()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>template.py</h1>
+
+<div class="doc doc-object doc-module">
+
+<a id="krupy.template"></a>
+    <div class="doc doc-contents first">
+
+      <p>Tools related to template management.</p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="krupy.template.Task" class="doc doc-heading">
+        <code>
+Task        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#krupy.template.Task" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Object that represents a task to execute.</p>
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>cmd</code></td>
+        <td><code>Union[str, Sequence[str]]</code></td>
+        <td><p>Command to execute.</p></td>
+      </tr>
+      <tr>
+        <td><code>extra_env</code></td>
+        <td><code>Mapping[str, str]</code></td>
+        <td><p>Additional environment variables to set while executing the command.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>krupy/template.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Task</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Object that represents a task to execute.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        cmd:</span>
+<span class="sd">            Command to execute.</span>
+
+<span class="sd">        extra_env:</span>
+<span class="sd">            Additional environment variables to set while executing the command.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cmd</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+    <span class="n">extra_env</span><span class="p">:</span> <span class="n">Env</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="krupy.template.Template" class="doc doc-heading">
+        <code>
+Template        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+<a href="#krupy.template.Template" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Object that represents a template and its current state.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#configuring-a-template">configuring a template</a>.</p>
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>url</code></td>
+        <td><code>str</code></td>
+        <td><p>Absolute origin that points to the template.</p>
+<p>It can be:</p>
+<ul>
+<li>A local path.</li>
+<li>A Git url. Note: if something fails, prefix the URL with <code>git+</code>.</li>
+</ul></td>
+      </tr>
+      <tr>
+        <td><code>ref</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The tag to checkout in the template.</p>
+<p>Only used if <code>url</code> points to a VCS-tracked template.</p>
+<p>If <code>None</code>, then it will checkout the latest tag, sorted by PEP440.
+Otherwise it will checkout the reference used here.</p>
+<p>Usually it should be a tag, or <code>None</code>.</p></td>
+      </tr>
+      <tr>
+        <td><code>use_prereleases</code></td>
+        <td><code>bool</code></td>
+        <td><p>When <code>True</code>, the template's <em>latest</em> release will consider prereleases.</p>
+<p>Only used if:</p>
+<ul>
+<li><code>url</code> points to a VCS-tracked template</li>
+<li><code>ref</code> is <code>None</code>.</li>
+</ul>
+<p>Helpful if you want to test templates before doing a proper release, but you
+need some features that require a proper PEP440 version identifier.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>krupy/template.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Template</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Object that represents a template and its current state.</span>
+
+<span class="sd">    See [configuring a template][configuring-a-template].</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        url:</span>
+<span class="sd">            Absolute origin that points to the template.</span>
+
+<span class="sd">            It can be:</span>
+
+<span class="sd">            - A local path.</span>
+<span class="sd">            - A Git url. Note: if something fails, prefix the URL with `git+`.</span>
+
+<span class="sd">        ref:</span>
+<span class="sd">            The tag to checkout in the template.</span>
+
+<span class="sd">            Only used if `url` points to a VCS-tracked template.</span>
+
+<span class="sd">            If `None`, then it will checkout the latest tag, sorted by PEP440.</span>
+<span class="sd">            Otherwise it will checkout the reference used here.</span>
+
+<span class="sd">            Usually it should be a tag, or `None`.</span>
+
+<span class="sd">        use_prereleases:</span>
+<span class="sd">            When `True`, the template&#39;s *latest* release will consider prereleases.</span>
+
+<span class="sd">            Only used if:</span>
+
+<span class="sd">            - `url` points to a VCS-tracked template</span>
+<span class="sd">            - `ref` is `None`.</span>
+
+<span class="sd">            Helpful if you want to test templates before doing a proper release, but you</span>
+<span class="sd">            need some features that require a proper PEP440 version identifier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">ref</span><span class="p">:</span> <span class="n">OptStr</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">use_prereleases</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">temp_clone</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temp_clone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">temp_clone</span><span class="p">:</span>
+            <span class="n">rmtree</span><span class="p">(</span>
+                <span class="n">temp_clone</span><span class="p">,</span>
+                <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">onerror</span><span class="o">=</span><span class="n">handle_remove_readonly</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_temp_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the path to the temporary clone of the template.</span>
+
+<span class="sd">        If the template hasn&#39;t yet been cloned, or if it was a local template,</span>
+<span class="sd">        then there&#39;s no temporary clone and this will return `None`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;local_abspath&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">clone_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_abspath</span>
+        <span class="n">original_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">OSError</span><span class="p">):</span>  <span class="c1"># triggered for URLs on Windows</span>
+            <span class="n">original_path</span> <span class="o">=</span> <span class="n">original_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">clone_path</span> <span class="o">!=</span> <span class="n">original_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">clone_path</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">_raw_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnyByStrDict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get template configuration, raw.</span>
+
+<span class="sd">        It reads [the `krupy.yml` file][the-krupyyml-file].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">conf_paths</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">p</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_abspath</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;krupy.*&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\.ya?ml&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">suffix</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conf_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MultipleConfigFilesError</span><span class="p">(</span><span class="n">conf_paths</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">conf_paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">load_template_config</span><span class="p">(</span><span class="n">conf_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">answers_relpath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the answers file relative path, as specified in the template.</span>
+
+<span class="sd">        If not specified, returns the default `.krupy-answers.yml`.</span>
+
+<span class="sd">        See [answers_file][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;answers_file&quot;</span><span class="p">,</span> <span class="s2">&quot;.krupy-answers.yml&quot;</span><span class="p">))</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptStr</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;If the template is VCS-tracked, get its commit description.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcs</span> <span class="o">==</span> <span class="s2">&quot;git&quot;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">local</span><span class="o">.</span><span class="n">cwd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_abspath</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">get_git</span><span class="p">()(</span><span class="s2">&quot;describe&quot;</span><span class="p">,</span> <span class="s2">&quot;--tags&quot;</span><span class="p">,</span> <span class="s2">&quot;--always&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">commit_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptStr</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;If the template is VCS-tracked, get its commit full hash.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcs</span> <span class="o">==</span> <span class="s2">&quot;git&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">get_git</span><span class="p">()(</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_abspath</span><span class="p">,</span> <span class="s2">&quot;rev-parse&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">config_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnyByStrDict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get config from the template.</span>
+
+<span class="sd">        It reads [the `krupy.yml` file][the-krupyyml-file] to get its</span>
+<span class="sd">        [settings][available-settings].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">filter_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw_config</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">verify_krupy_version</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;min_krupy_version&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">envops</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the Jinja configuration specified in the template, or default values.</span>
+
+<span class="sd">        See [envops][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;envops&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="s2">&quot;keep_trailing_newline&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="c1"># NOTE: we want to keep trailing newlines in templates as this is what a</span>
+            <span class="c1">#       user will most likely expects as a default.</span>
+            <span class="c1">#       See https://github.com/Krunal-Kevadiya/krupy/issues/464</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;keep_trailing_newline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">envquestions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the Jinja configuration specified in the template, or default values.</span>
+
+<span class="sd">        See [envquestions][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;envquestions&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="s2">&quot;is_visible_count&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;is_visible_count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="s2">&quot;is_visible_mark&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;is_visible_mark&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="s2">&quot;is_visible_type&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;is_visible_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="s2">&quot;is_visible_default_value&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;is_visible_default_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="s2">&quot;style&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;style&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">exclude</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get exclusions specified in the template, or default ones.</span>
+
+<span class="sd">        See [exclude][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s2">&quot;exclude&quot;</span><span class="p">,</span>
+                <span class="n">DEFAULT_EXCLUDE</span> <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subdirectory</span><span class="p">)</span> <span class="o">==</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">jinja_extensions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get Jinja2 extensions specified in the template, or `()`.</span>
+
+<span class="sd">        See [jinja_extensions][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;jinja_extensions&quot;</span><span class="p">,</span> <span class="p">()))</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">message_after_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get message to print after copy action specified in the template.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_after_copy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">message_after_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get message to print after update action specified in the template.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_after_update&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">message_before_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get message to print before copy action specified in the template.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_before_copy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">message_before_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get message to print before update action specified in the template.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_before_update&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnyByStrDict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get template metadata.</span>
+
+<span class="sd">        This data, if any, should be saved in the answers file to be able to</span>
+<span class="sd">        restore the template to this same state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">AnyByStrDict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;_src_path&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;_commit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commit</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">migration_tasks</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;before&quot;</span><span class="p">,</span> <span class="s2">&quot;after&quot;</span><span class="p">],</span> <span class="n">from_template</span><span class="p">:</span> <span class="s2">&quot;Template&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get migration objects that match current version spec.</span>
+
+<span class="sd">        Versions are compared using PEP 440.</span>
+
+<span class="sd">        See [migrations][].</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stage: A valid stage name to find tasks for.</span>
+<span class="sd">            from_template: Original template, from which we are migrating.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="ow">and</span> <span class="n">from_template</span><span class="o">.</span><span class="n">version</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="n">extra_env</span><span class="p">:</span> <span class="n">Env</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;STAGE&quot;</span><span class="p">:</span> <span class="n">stage</span><span class="p">,</span>
+            <span class="s2">&quot;VERSION_FROM&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">from_template</span><span class="o">.</span><span class="n">commit</span><span class="p">),</span>
+            <span class="s2">&quot;VERSION_TO&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">),</span>
+            <span class="s2">&quot;VERSION_PEP440_FROM&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">from_template</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+            <span class="s2">&quot;VERSION_PEP440_TO&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">migration</span><span class="p">:</span> <span class="nb">dict</span>
+        <span class="k">for</span> <span class="n">migration</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_migrations&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">migration</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">&gt;=</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">from_template</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+                <span class="n">extra_env</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="o">**</span><span class="n">extra_env</span><span class="p">,</span>
+                    <span class="s2">&quot;VERSION_CURRENT&quot;</span><span class="p">:</span> <span class="n">migration</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;VERSION_PEP440_CURRENT&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">current</span><span class="p">),</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">migration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="p">[]):</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Task</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">extra_env</span><span class="o">=</span><span class="n">extra_env</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">min_krupy_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get minimal krupy version for the template and validates it.</span>
+
+<span class="sd">        See [min_krupy_version][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="p">[</span><span class="s2">&quot;min_krupy_version&quot;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">questions_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnyByStrDict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get questions from the template.</span>
+
+<span class="sd">        See [questions][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">filter_config</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_raw_config</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;secret_questions&quot;</span><span class="p">,</span> <span class="p">[])):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;secret&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">secret_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get names of secret questions from the template.</span>
+
+<span class="sd">        These questions shouldn&#39;t be saved into the answers file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;secret_questions&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">questions_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;secret&quot;</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">skip_if_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StrSeq</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get skip patterns from the template.</span>
+
+<span class="sd">        These files will never be rewritten when rendering the template.</span>
+
+<span class="sd">        See [skip_if_exists][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;skip_if_exists&quot;</span><span class="p">,</span> <span class="p">())</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">subdirectory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the subdirectory as specified in the template.</span>
+
+<span class="sd">        The subdirectory points to the real template code, allowing the</span>
+<span class="sd">        templater to separate it from other template assets, such as docs,</span>
+<span class="sd">        tests, etc.</span>
+
+<span class="sd">        See [subdirectory][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subdirectory&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get tasks defined in the template.</span>
+
+<span class="sd">        See [tasks][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Task</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">extra_env</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;STAGE&quot;</span><span class="p">:</span> <span class="s2">&quot;task&quot;</span><span class="p">})</span>
+            <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tasks&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="p">]</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">templates_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the suffix defined for templates.</span>
+
+<span class="sd">        By default: `.jinja`.</span>
+
+<span class="sd">        See [templates_suffix][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;templates_suffix&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">DEFAULT_TEMPLATES_SUFFIX</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">preserve_symlinks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Know if Krupy should preserve symlinks when rendering the template.</span>
+
+<span class="sd">        See [preserve_symlinks][].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;preserve_symlinks&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">local_abspath</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the absolute path to the template on disk.</span>
+
+<span class="sd">        This may clone it if `url` points to a VCS-tracked template.</span>
+<span class="sd">        Dirty changes for local VCS-tracked templates will be copied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcs</span> <span class="o">==</span> <span class="s2">&quot;git&quot;</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url_expanded</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">checkout_latest_tag</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_prereleases</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Local template must be a directory.&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">OSError</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">url_expanded</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get usable URL.</span>
+
+<span class="sd">        `url` can be specified in shortcut</span>
+<span class="sd">        format, which wouldn&#39;t be understood by the underlying VCS system. This</span>
+<span class="sd">        property returns the expanded version, which should work properly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">get_repo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Version</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;PEP440-compliant version object.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcs</span> <span class="o">!=</span> <span class="s2">&quot;git&quot;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">local</span><span class="o">.</span><span class="n">cwd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_abspath</span><span class="p">):</span>
+                <span class="c1"># Leverage dunamai by default; usually it gets best results.</span>
+                <span class="c1"># `dunamai.Version.from_git` needs `Pattern.DefaultUnprefixed`</span>
+                <span class="c1"># to be PEP440 compliant on version reading</span>
+                <span class="k">return</span> <span class="n">Version</span><span class="p">(</span>
+                    <span class="n">dunamai</span><span class="o">.</span><span class="n">Version</span><span class="o">.</span><span class="n">from_git</span><span class="p">(</span>
+                        <span class="n">pattern</span><span class="o">=</span><span class="n">dunamai</span><span class="o">.</span><span class="n">Pattern</span><span class="o">.</span><span class="n">DefaultUnprefixed</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">dunamai</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">Pep440</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># A fully descriptive commit can be easily detected converted into a</span>
+            <span class="c1"># PEP440 version, because it has the format &quot;&lt;tag&gt;-&lt;count&gt;-g&lt;hash&gt;&quot;</span>
+            <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^.+-\d+-g\w+$&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">):</span>
+                <span class="n">base</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">git_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">Version</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">.post</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">+</span><span class="si">{</span><span class="n">git_hash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># If we get here, the commit string is a tag</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">packaging</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">InvalidVersion</span><span class="p">:</span>
+            <span class="c1"># appears to not be a version</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">vcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">VCSTypes</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get VCS system used by the template, if any.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">get_repo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s2">&quot;git&quot;</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.answers_relpath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">answers_relpath</span><span class="p">:</span> <span class="n">Path</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.answers_relpath" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the answers file relative path, as specified in the template.</p>
+<p>If not specified, returns the default <code>.krupy-answers.yml</code>.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#answers_file">answers_file</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.commit" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">commit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.commit" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>If the template is VCS-tracked, get its commit description.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.commit_hash" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">commit_hash</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.commit_hash" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>If the template is VCS-tracked, get its commit full hash.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.config_data" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">config_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.config_data" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get config from the template.</p>
+<p>It reads <a class="autorefs autorefs-internal" href="../../../configuring/#the-krupyyml-file">the <code>krupy.yml</code> file</a> to get its
+<a class="autorefs autorefs-internal" href="../../../configuring/#available-settings">settings</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.envops" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">envops</span><span class="p">:</span> <span class="n">Mapping</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.envops" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the Jinja configuration specified in the template, or default values.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#envops">envops</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.envquestions" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">envquestions</span><span class="p">:</span> <span class="n">Mapping</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.envquestions" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the Jinja configuration specified in the template, or default values.</p>
+<p>See [envquestions][].</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.exclude" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exclude</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.exclude" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get exclusions specified in the template, or default ones.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#exclude">exclude</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.jinja_extensions" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">jinja_extensions</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.jinja_extensions" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get Jinja2 extensions specified in the template, or <code>()</code>.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#jinja_extensions">jinja_extensions</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.local_abspath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">local_abspath</span><span class="p">:</span> <span class="n">Path</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.local_abspath" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the absolute path to the template on disk.</p>
+<p>This may clone it if <code>url</code> points to a VCS-tracked template.
+Dirty changes for local VCS-tracked templates will be copied.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.message_after_copy" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">message_after_copy</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.message_after_copy" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get message to print after copy action specified in the template.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.message_after_update" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">message_after_update</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.message_after_update" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get message to print after update action specified in the template.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.message_before_copy" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">message_before_copy</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.message_before_copy" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get message to print before copy action specified in the template.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.message_before_update" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">message_before_update</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.message_before_update" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get message to print before update action specified in the template.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.metadata" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.metadata" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get template metadata.</p>
+<p>This data, if any, should be saved in the answers file to be able to
+restore the template to this same state.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.min_krupy_version" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">min_krupy_version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">packaging</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">Version</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.min_krupy_version" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get minimal krupy version for the template and validates it.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#min_krupy_version">min_krupy_version</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.preserve_symlinks" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">preserve_symlinks</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.preserve_symlinks" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Know if Krupy should preserve symlinks when rendering the template.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#preserve_symlinks">preserve_symlinks</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.questions_data" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">questions_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.questions_data" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get questions from the template.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#questions">questions</a>.</p>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.secret_questions" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">secret_questions</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.secret_questions" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get names of secret questions from the template.</p>
+<p>These questions shouldn't be saved into the answers file.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.skip_if_exists" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">skip_if_exists</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.skip_if_exists" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get skip patterns from the template.</p>
+<p>These files will never be rewritten when rendering the template.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#skip_if_exists">skip_if_exists</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.subdirectory" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">subdirectory</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.subdirectory" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the subdirectory as specified in the template.</p>
+<p>The subdirectory points to the real template code, allowing the
+templater to separate it from other template assets, such as docs,
+tests, etc.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#subdirectory">subdirectory</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.tasks" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">tasks</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">krupy</span><span class="o">.</span><span class="n">template</span><span class="o">.</span><span class="n">Task</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.tasks" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get tasks defined in the template.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#tasks">tasks</a>.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.templates_suffix" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">templates_suffix</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.templates_suffix" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the suffix defined for templates.</p>
+<p>By default: <code>.jinja</code>.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#templates_suffix">templates_suffix</a>.</p>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.url_expanded" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">url_expanded</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.url_expanded" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get usable URL.</p>
+<p><code>url</code> can be specified in shortcut
+format, which wouldn't be understood by the underlying VCS system. This
+property returns the expanded version, which should work properly.</p>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.vcs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">vcs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;git&#39;</span><span class="p">]]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.vcs" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get VCS system used by the template, if any.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="krupy.template.Template.version" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">version</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">packaging</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">Version</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-cached"><code>cached</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+<a href="#krupy.template.Template.version" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>PEP440-compliant version object.</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="krupy.template.Template.migration_tasks" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">migration_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span> <span class="n">from_template</span><span class="p">)</span></code>
+
+
+<a href="#krupy.template.Template.migration_tasks" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Get migration objects that match current version spec.</p>
+<p>Versions are compared using PEP 440.</p>
+<p>See <a class="autorefs autorefs-internal" href="../../../configuring/#migrations">migrations</a>.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>stage</code></td>
+        <td><code>Literal[&#39;before&#39;, &#39;after&#39;]</code></td>
+        <td><p>A valid stage name to find tasks for.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>from_template</code></td>
+        <td><code>Template</code></td>
+        <td><p>Original template, from which we are migrating.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>krupy/template.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">migration_tasks</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;before&quot;</span><span class="p">,</span> <span class="s2">&quot;after&quot;</span><span class="p">],</span> <span class="n">from_template</span><span class="p">:</span> <span class="s2">&quot;Template&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Task</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get migration objects that match current version spec.</span>
+
+<span class="sd">    Versions are compared using PEP 440.</span>
+
+<span class="sd">    See [migrations][].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        stage: A valid stage name to find tasks for.</span>
+<span class="sd">        from_template: Original template, from which we are migrating.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="ow">and</span> <span class="n">from_template</span><span class="o">.</span><span class="n">version</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="n">extra_env</span><span class="p">:</span> <span class="n">Env</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;STAGE&quot;</span><span class="p">:</span> <span class="n">stage</span><span class="p">,</span>
+        <span class="s2">&quot;VERSION_FROM&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">from_template</span><span class="o">.</span><span class="n">commit</span><span class="p">),</span>
+        <span class="s2">&quot;VERSION_TO&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">),</span>
+        <span class="s2">&quot;VERSION_PEP440_FROM&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">from_template</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+        <span class="s2">&quot;VERSION_PEP440_TO&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="n">migration</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="k">for</span> <span class="n">migration</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_migrations&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">migration</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">&gt;=</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">from_template</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+            <span class="n">extra_env</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="o">**</span><span class="n">extra_env</span><span class="p">,</span>
+                <span class="s2">&quot;VERSION_CURRENT&quot;</span><span class="p">:</span> <span class="n">migration</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;VERSION_PEP440_CURRENT&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">current</span><span class="p">),</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">migration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="p">[]):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Task</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">extra_env</span><span class="o">=</span><span class="n">extra_env</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="krupy.template.filter_config" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">filter_config</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+
+
+<a href="#krupy.template.filter_config" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Separates config and questions data.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>krupy/template.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">filter_config</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">AnyByStrDict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">AnyByStrDict</span><span class="p">,</span> <span class="n">AnyByStrDict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Separates config and questions data.&quot;&quot;&quot;</span>
+    <span class="n">config_data</span><span class="p">:</span> <span class="n">AnyByStrDict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">questions_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="n">config_data</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Transform simplified questions format into complex</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">}</span>
+            <span class="n">questions_data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">config_data</span><span class="p">,</span> <span class="n">questions_data</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="krupy.template.load_template_config" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">load_template_config</span><span class="p">(</span><span class="n">conf_path</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#krupy.template.load_template_config" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Load the <code>krupy.yml</code> file.</p>
+<p>This is like a simple YAML load, but applying all specific quirks needed
+for <a class="autorefs autorefs-internal" href="../../../configuring/#the-krupyyml-file">the <code>krupy.yml</code> file</a>.</p>
+<p>For example, it supports the <code>!include</code> tag with glob includes, and
+merges multiple sections.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>conf_path</code></td>
+        <td><code>Path</code></td>
+        <td><p>The path to the <code>krupy.yml</code> file.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>quiet</code></td>
+        <td><code>bool</code></td>
+        <td><p>Used to configure the exception.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>InvalidConfigFileError</code></td>
+        <td><p>When the file is formatted badly.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>krupy/template.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">load_template_config</span><span class="p">(</span><span class="n">conf_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">quiet</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnyByStrDict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the `krupy.yml` file.</span>
+
+<span class="sd">    This is like a simple YAML load, but applying all specific quirks needed</span>
+<span class="sd">    for [the `krupy.yml` file][the-krupyyml-file].</span>
+
+<span class="sd">    For example, it supports the `!include` tag with glob includes, and</span>
+<span class="sd">    merges multiple sections.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        conf_path: The path to the `krupy.yml` file.</span>
+<span class="sd">        quiet: Used to configure the exception.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidConfigFileError: When the file is formatted badly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">_Loader</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Intermediate class to avoid monkey-patching main loader.&quot;&quot;&quot;</span>
+
+    <span class="n">YamlIncludeConstructor</span><span class="o">.</span><span class="n">add_to_loader_class</span><span class="p">(</span>
+        <span class="n">loader_class</span><span class="o">=</span><span class="n">_Loader</span><span class="p">,</span> <span class="n">base_dir</span><span class="o">=</span><span class="n">conf_path</span><span class="o">.</span><span class="n">parent</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">conf_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">flattened_result</span> <span class="o">=</span> <span class="n">lflatten</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load_all</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">_Loader</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">yaml</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">ParserError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidConfigFileError</span><span class="p">(</span><span class="n">conf_path</span><span class="p">,</span> <span class="n">quiet</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+    <span class="n">merged_options</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="s2">&quot;_exclude&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_jinja_extensions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_secret_questions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_skip_if_exists&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">flattened_result</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">merged_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ChainMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">merged_options</span><span class="p">),</span> <span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">flattened_result</span><span class="p">)))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="krupy.template.verify_krupy_version" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">verify_krupy_version</span><span class="p">(</span><span class="n">version_str</span><span class="p">)</span></code>
+
+
+<a href="#krupy.template.verify_krupy_version" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Raise an error if the current Krupy version is less than the given version.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>version_str</code></td>
+        <td><code>str</code></td>
+        <td><p>Minimal krupy version for the template.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>krupy/template.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">verify_krupy_version</span><span class="p">(</span><span class="n">version_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raise an error if the current Krupy version is less than the given version.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        version_str:</span>
+<span class="sd">            Minimal krupy version for the template.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">installed_version</span> <span class="o">=</span> <span class="n">krupy_version</span><span class="p">()</span>
+
+    <span class="c1"># Disable check when running krupy as editable installation</span>
+    <span class="k">if</span> <span class="n">installed_version</span> <span class="o">==</span> <span class="n">Version</span><span class="p">(</span><span class="s2">&quot;0.0.0&quot;</span><span class="p">):</span>
+        <span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Cannot check Krupy version constraint.&quot;</span><span class="p">,</span>
+            <span class="n">UnknownKrupyVersionWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">parsed_min</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="n">version_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">installed_version</span> <span class="o">&lt;</span> <span class="n">parsed_min</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UnsupportedVersionError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;This template requires Krupy version &gt;= </span><span class="si">{</span><span class="n">version_str</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;while your version of Krupy is </span><span class="si">{</span><span class="n">installed_version</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">installed_version</span><span class="o">.</span><span class="n">major</span> <span class="o">&gt;</span> <span class="n">parsed_min</span><span class="o">.</span><span class="n">major</span><span class="p">:</span>
+        <span class="n">warn</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;This template was designed for Krupy </span><span class="si">{</span><span class="n">version_str</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;but your version of Krupy is </span><span class="si">{</span><span class="n">installed_version</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;You could find some incompatibilities.&quot;</span><span class="p">,</span>
+            <span class="n">OldTemplateWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "navigation.top", "navigation."], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+    
+  </body>
+</html>

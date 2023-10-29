@@ -35,7 +35,7 @@ def press_any_key_to_continue(
                configure colors as well as font types for different elements.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
     merged_style = merge_styles_default([style])
 

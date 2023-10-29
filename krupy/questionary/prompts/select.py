@@ -43,7 +43,7 @@ def select(
     """A list of items to select **one** option from.
 
     The user can pick one option and confirm it (if you want to allow
-    the user to select multiple options, use :meth:`questionary.checkbox` instead).
+    the user to select multiple options, use [questionary.checkbox]() instead).
 
     Example:
         >>> import questionary
@@ -57,7 +57,7 @@ def select(
         ? What do you want to do? Order a pizza
         'Order a pizza'
 
-    .. image:: ../images/select.gif
+    <img alt="../../../../images/select.gif" src="../../../../images/select.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -66,9 +66,9 @@ def select(
     Args:
         message: Question text
 
-        choices: Items shown in the selection, this can contain :class:`Choice` or
-                 or :class:`Separator` objects or simple items as strings. Passing
-                 :class:`Choice` objects, allows you to configure the item more
+        choices: Items shown in the selection, this can contain [Choice]() or
+                 or [Separator]() objects or simple items as strings. Passing
+                 [Choice]() objects, allows you to configure the item more
                  (e.g. preselecting it or disabling it).
 
         default: A value corresponding to a selectable item in the choices,
@@ -113,7 +113,7 @@ def select(
         show_selected: Display current selection choice at the bottom of list.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
     if not (use_arrow_keys or use_shortcuts or use_jk_keys or use_emacs_keys):
         raise ValueError(
