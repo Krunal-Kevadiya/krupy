@@ -8,47 +8,47 @@ on:
   workflow_dispatch:
 
 jobs:
-  # build:
-  #   name: Build Python distribution
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os:
-  #         - macos-latest
-  #         # Enable once all are done and issue resolved for both os
-  #         # - ubuntu-latest
-  #         # - windows-latest
-  #       # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-  #       python-version: ["3.8", "3.9", "3.10", "3.11"]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     # HACK https://github.com/actions/cache/issues/315
-  #     - name: Enable msys binaries
-  #       if: ${{ runner.os == 'Windows' }}
-  #       run: |
-  #         echo "C:\msys64\usr\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-  #         rm C:\msys64\usr\bin\bash.exe
+  build:
+    name: Build Python distribution
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          # Enable once all are done and issue resolved for both os
+          # - ubuntu-latest
+          # - windows-latest
+        # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      # HACK https://github.com/actions/cache/issues/315
+      - name: Enable msys binaries
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          echo "C:\msys64\usr\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          rm C:\msys64\usr\bin\bash.exe
 
-  #     - uses: actions/checkout@main
+      - uses: actions/checkout@main
 
-  #     - name: Set up Python ${{ matrix.python-version }}
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
 
-  #     - name: Install dependencies
-  #       run: |
-  #         python -m pip install poetry
-  #         poetry install --with dev -v
+      - name: Install dependencies
+        run: |
+          python -m pip install poetry
+          poetry install --with dev -v
 
-  #     - name: Run pytest
-  #       run: poetry run poe test --cov=./ --cov-report=xml -ra .
+      - name: Run pytest
+        run: poetry run poe test --cov=./ --cov-report=xml -ra .
 
   publish:
       name: Publish Python distribution
       runs-on: ubuntu-latest
-      # needs:
-      #   - build
+      needs:
+        - build
       steps:
           - uses: actions/checkout@main
 
