@@ -1,6 +1,10 @@
 name: Publish Python distributions to PyPI and TestPyPI
 
 on:
+  pull_request:
+    push:
+      branches: [master]
+      tags: ["v*"]
   workflow_dispatch:
 
 jobs:
@@ -74,3 +78,20 @@ jobs:
             with:
               user: __token__
               password: ${{ secrets.PYPI_TOKEN }}
+
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          - name: Create Release
+            id: create_release
+            uses: actions/create-release@v1
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+            with:
+              tag_name: v${{ github.ref }}
+              release_name: Release v${{ github.ref }}
+              body: |
+                Changes in this Release
+                - Bug Fixes
+              draft: false
+              prerelease: false
