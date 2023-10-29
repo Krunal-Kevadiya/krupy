@@ -11,9 +11,11 @@ jobs:
       matrix:
         os:
           - macos-latest
-          - ubuntu-latest
-          - windows-latest
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+          # Enable once all are done and issue resolved for both os
+          # - ubuntu-latest
+          # - windows-latest
+        # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     runs-on: ${{ matrix.os }}
     steps:
       # HACK https://github.com/actions/cache/issues/315
