@@ -40,7 +40,7 @@ def rawselect(
         ? What do you want to do? Order a pizza
         'Order a pizza'
 
-    .. image:: ../images/rawselect.gif
+    <img alt="../../../../images/rawselect.gif" src="../../../../images/rawselect.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -48,9 +48,9 @@ def rawselect(
     Args:
         message: Question text.
 
-        choices: Items shown in the selection, this can contain :class:`Choice` or
-                 or :class:`Separator` objects or simple items as strings. Passing
-                 :class:`Choice` objects, allows you to configure the item more
+        choices: Items shown in the selection, this can contain [Choice]() or
+                 or [Separator]() objects or simple items as strings. Passing
+                 [Choice]() objects, allows you to configure the item more
                  (e.g. preselecting it or disabling it).
 
         default: Default return value (single value).
@@ -66,7 +66,7 @@ def rawselect(
                configure colors as well as font types for different elements.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
     return select.select(
         message,

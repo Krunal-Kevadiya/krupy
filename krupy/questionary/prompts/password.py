@@ -29,7 +29,7 @@ def password(
         ? What's your secret? ********
         'secret42'
 
-    .. image:: ../images/password.gif
+    <img alt="../../../../images/password.gif" src="../../../../images/password.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -55,7 +55,7 @@ def password(
                configure colors as well as font types for different elements.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
 
     return text.text(

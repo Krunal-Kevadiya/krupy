@@ -1,0 +1,1 @@
+::: krupy.questionary.prompts.rawselect

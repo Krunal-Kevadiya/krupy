@@ -1,0 +1,1 @@
+::: krupy.errors

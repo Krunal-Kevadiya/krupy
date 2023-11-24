@@ -59,7 +59,7 @@ def checkbox(
         ? Select toppings done (2 selections)
         ['Cheese', 'Pineapple']
 
-    .. image:: ../images/checkbox.gif
+    <img alt="../../../../images/checkbox.gif" src="../../../../images/checkbox.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -68,9 +68,9 @@ def checkbox(
     Args:
         message: Question text
 
-        choices: Items shown in the selection, this can contain :class:`Choice` or
-                 or :class:`Separator` objects or simple items as strings. Passing
-                 :class:`Choice` objects, allows you to configure the item more
+        choices: Items shown in the selection, this can contain [Choice]() or
+                 or [Separator]() objects or simple items as strings. Passing
+                 [Choice]() objects, allows you to configure the item more
                  (e.g. preselecting it or disabling it).
 
         default: Default return value (single value). If you want to preselect
@@ -109,7 +109,7 @@ def checkbox(
         instruction: A message describing how to navigate the menu.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
 
     if not (use_arrow_keys or use_jk_keys or use_emacs_keys):
