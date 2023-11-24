@@ -39,7 +39,7 @@ def text(
         ? What's your first name? Tom
         'Tom'
 
-    .. image:: ../images/text.gif
+    <img alt="../../../../images/text.gif" src="../../../../images/text.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -75,7 +75,7 @@ def text(
         kwargs: Additional arguments, they will be passed to prompt toolkit.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
     merged_style = merge_styles_default([style])
     lexer = lexer or SimpleLexer("class:answer")

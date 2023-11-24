@@ -38,7 +38,7 @@ AnyFormattedText = Union[
 
 
 class Choice:
-    """One choice in a :meth:`select`, :meth:`rawselect` or :meth:`checkbox`.
+    """One choice in a [select]](), [rawselect]() or [checkbox]().
 
     Args:
         title: Text shown in the selection list.
@@ -105,12 +105,12 @@ class Choice:
         """Create a choice object from different representations.
 
         Args:
-            c: Either a :obj:`str`, :class:`Choice` or :obj:`dict` with
+            c: Either a :obj:`str`, [Choice]() or :obj:`dict` with
                ``name``, ``value``, ``disabled``, ``checked`` and
                ``key`` properties.
 
         Returns:
-            An instance of the :class:`Choice` object.
+            An instance of the [Choice]() object.
         """
 
         if isinstance(c, Choice):
@@ -534,7 +534,7 @@ def print_formatted_text(text: str, style: Optional[str] = None, **kwargs: Any) 
     """Print formatted text.
 
     Sometimes you want to spice up your printed messages a bit,
-    :meth:`questionary.print` is a helper to do just that.
+    [questionary.print]() is a helper to do just that.
 
     Example:
 
@@ -542,7 +542,7 @@ def print_formatted_text(text: str, style: Optional[str] = None, **kwargs: Any) 
         >>> questionary.print("Hello World 🦄", style="bold italic fg:darkred")
         Hello World 🦄
 
-    .. image:: ../images/print.gif
+    <img alt="../../../../images/print.gif" src="../../../../images/print.gif">
 
     Args:
         text: Text to be printed.

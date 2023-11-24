@@ -39,7 +39,7 @@ def confirm(
         ? Are you amazed? Yes
         True
 
-    .. image:: ../images/confirm.gif
+    <img alt="../../../../images/confirm.gif" src="../../../../images/confirm.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -64,7 +64,7 @@ def confirm(
         instruction: A message describing how to proceed through the
                      confirmation prompt.
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using `.ask()`).
+        [Question](): Question instance, ready to be prompted (using `.ask()`).
     """
     merged_style = merge_styles_default([style])
 

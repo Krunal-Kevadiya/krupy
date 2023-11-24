@@ -499,7 +499,7 @@ class Question:
 def parse_yaml_string(string: str) -> Any:
     """Parse a YAML string and raise a ValueError if parsing failed.
 
-    This method is needed because :meth:`prompt` requires a ``ValueError``
+    This method is needed because [prompt]() requires a ``ValueError``
     to repeat failed questions.
     """
     try:

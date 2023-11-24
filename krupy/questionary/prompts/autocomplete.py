@@ -132,7 +132,7 @@ def autocomplete(
         ? Choose ant specie Atta colombica
         'Atta colombica'
 
-    .. image:: ../images/autocomplete.gif
+    <img alt="../../../../images/autocomplete.gif" src="../../../../images/autocomplete.gif">
 
     This is just a really basic example, the prompt can be customised using the
     parameters.
@@ -148,7 +148,7 @@ def autocomplete(
         qmark: Question prefix displayed in front of the question.
                By default this is a ``?``
 
-        completer: A prompt_toolkit :class:`prompt_toolkit.completion.Completion`
+        completer: A prompt_toolkit [prompt_toolkit.completion.Completion]()
                    implementation. If not set, a questionary completer implementation
                    will be used.
 
@@ -161,7 +161,7 @@ def autocomplete(
 
         complete_style: How autocomplete menu would be shown, it could be ``COLUMN``
                         ``MULTI_COLUMN`` or ``READLINE_LIKE`` from
-                        :class:`prompt_toolkit.shortcuts.CompleteStyle`.
+                        [prompt_toolkit.shortcuts.CompleteStyle]().
 
         validate: Require the entered value to pass a validation. The
                   value can not be submitted until the validator accepts
@@ -175,7 +175,7 @@ def autocomplete(
                configure colors as well as font types for different elements.
 
     Returns:
-        :class:`Question`: Question instance, ready to be prompted (using ``.ask()``).
+        [Question](): Question instance, ready to be prompted (using ``.ask()``).
     """
     merged_style = merge_styles_default([style])
 
