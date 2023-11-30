@@ -717,6 +717,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_envquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      _envquestions
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1902,6 +1911,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_envquestions" class="md-nav__link">
+    <span class="md-ellipsis">
+      _envquestions
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1971,7 +1989,7 @@
 <p>Krupy reads <strong>settings</strong> from these sources, in this order of priority:</p>
 <ol>
 <li>Command line or API arguments.</li>
-<li><a class="autorefs autorefs-internal" href="#the-krupyyml-file">The <code>krupy.yml</code> file</a>. Settings here always start with an
+<li><a class="autorefs autorefs-internal" href="#the-krupyyml-file">The krupy.yml file</a>. Settings here always start with an
    underscore (e.g. <code>_min_krupy_version</code>).</li>
 </ol>
 <div class="admonition info">
@@ -1986,9 +2004,9 @@ defined. <a class="autorefs autorefs-internal" href="#available-settings">Check 
 <li>Asking the user. Notice that Krupy will not ask any questions answered in the
    previous source.</li>
 <li><a class="autorefs autorefs-internal" href="#the-krupy-answersyml-file">Answer from last execution</a>.</li>
-<li>Default values defined in <a class="autorefs autorefs-internal" href="#the-krupyyml-file">the <code>krupy.yml</code> file</a>.</li>
+<li>Default values defined in <a class="autorefs autorefs-internal" href="#the-krupyyml-file">the krupy.yml file</a>.</li>
 </ol>
-<h2 id="the-krupyyml-file">The <code>krupy.yml</code> file<a class="headerlink" href="#the-krupyyml-file" title="Permanent link">&para;</a></h2>
+<h2 id="the-krupyyml-file">The krupy.yml file<a class="headerlink" href="#the-krupyyml-file" title="Permanent link">&para;</a></h2>
 <p>The <code>krupy.yml</code> (or <code>krupy.yaml</code>) file is found in the root of the template, and it is
 the main entrypoint for managing your template configuration. It will be read and used
 for two purposes:</p>
@@ -2010,9 +2028,9 @@ they become available to the project template.</p>
 <p>Will result in a questionary similar to:</p>
 <p><pre style="font-weight: bold">
 🎤 name_of_the_project
-  <span style="color:orange">My awesome project</span>
+  <span style="color:orangeRed">My awesome project</span>
 🎤 number_of_eels (int)
-  <span style="color:orange">1234</span>
+  <span style="color:orangeRed">1234</span>
 🎤 your_email
 </pre></p>
 </div>
@@ -2155,8 +2173,6 @@ available in the render context.</p>
 <span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">project_license</span><span class="nv"> </span><span class="s">!=</span><span class="nv"> </span><span class="s">&#39;Public</span><span class="nv"> </span><span class="s">domain&#39;</span><span class="nv"> </span><span class="s">}}&quot;</span>
 </code></pre></div>
 </div>
-</li>
-</ul>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="nt">love_krupy</span><span class="p">:</span>
@@ -2229,6 +2245,8 @@ available in the render context.</p>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">more than 100km</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">quite far away</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 </div>
+</li>
+</ul>
 <h4 id="prompt-templating">Prompt templating<a class="headerlink" href="#prompt-templating" title="Permanent link">&para;</a></h4>
 <p>Most of those options can be templated using Jinja.</p>
 <p>Keep in mind that the configuration is loaded as <strong>YAML</strong>, so the contents must be
@@ -2662,8 +2680,8 @@ template or set <code>keep_trailing_newline</code> to <code>false</code>.</p>
 to know available options.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Krupy 5 and older had different, bracket-based defaults.</p>
-<p>If your template was created for Krupy 5, you need to add this configuration to
+<p>Krupy and older had different, bracket-based defaults.</p>
+<p>If your template was created for Krupy, you need to add this configuration to
 your <code>krupy.yaml</code> to keep it working just like before:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">_envops</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">autoescape</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
@@ -2675,10 +2693,10 @@ your <code>krupy.yaml</code> to keep it working just like before:</p>
 <span class="w">    </span><span class="nt">variable_end_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;]]&quot;</span>
 <span class="w">    </span><span class="nt">variable_start_string</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;[[&quot;</span>
 </code></pre></div>
-<p>By specifying this, your template will be compatible with both Krupy 5 and 6.</p>
-<p>Krupy 6 will apply these older defaults if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
-than 6.</p>
-<p>Krupy 7+ no longer uses the old defaults independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
+<p>By specifying this, your template will be compatible with Krupy.</p>
+<p>Krupy will apply these older defaults if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
+than 0.</p>
+<p>Krupy no longer uses the old defaults independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
 </div>
 <h3 id="exclude"><code>exclude</code><a class="headerlink" href="#exclude" title="Permanent link">&para;</a></h3>
 <ul>
@@ -2704,7 +2722,7 @@ value.</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>When the <a class="autorefs autorefs-internal" href="#subdirectory"><code>subdirectory</code></a> parameter is defined and its value is the
+<p>When the <a class="autorefs autorefs-internal" href="#subdirectory">subdirectory</a> parameter is defined and its value is the
 path of an actual subdirectory (i.e. not <code>""</code> or <code>"."</code> or <code>"./"</code>), then the default
 value of the <code>exclude</code> parameter is <code>[]</code>.</p>
 </div>
@@ -2771,7 +2789,7 @@ sources</span>.</p>
 filters, global variables and functions, or tags to the environment.</p>
 <p>The following extensions are <em>always</em> loaded:</p>
 <ul>
-<li><a href="https://gitlab.com/dreamer-labs/libraries/jinja2-ansible-filters/"><code>jinja2_ansible_filters.AnsibleCoreFiltersExtension</code></a>:
+<li><a href="https://gitlab.com/dreamer-labs/libraries/jinja2-ansible-filters/">jinja2_ansible_filters.AnsibleCoreFiltersExtension</a>:
     this extension adds most of the
     <a href="https://docs.ansible.com/ansible/2.3/playbooks_filters.html">Ansible filters</a> to
     the environment.</li>
@@ -2822,11 +2840,11 @@ pipx<span class="w"> </span>inject<span class="w"> </span>krupy<span class="w"> 
 <li>
 <p>From <a href="https://cookiecutter.readthedocs.io/en/1.7.2/">cookiecutter</a>:</p>
 <ul>
-<li><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#jsonify-extension"><code>cookiecutter.extensions.JsonifyExtension</code></a>:
+<li><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#jsonify-extension">cookiecutter.extensions.JsonifyExtension</a>:
     provides a <code>jsonify</code> filter, to format a dictionary as JSON. Note that Krupy
     natively provides a <code>to_nice_json</code> filter that can achieve the same thing.</li>
 <li>
-<p><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#random-string-extension"><code>cookiecutter.extensions.RandomStringExtension</code></a>:
+<p><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#random-string-extension">cookiecutter.extensions.RandomStringExtension</a>:
     provides a <code>random_ascii_string(length, punctuation=False)</code> global function.
     Note that Krupy natively provides the <code>ans_random</code> and <code>hash</code> filters that can
     be used to achieve the same thing:</p>
@@ -2837,28 +2855,28 @@ pipx<span class="w"> </span>inject<span class="w"> </span>krupy<span class="w"> 
 </div>
 </li>
 <li>
-<p><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#slugify-extension"><code>cookiecutter.extensions.SlugifyExtension</code></a>:
+<p><a href="https://cookiecutter.readthedocs.io/en/latest/advanced/template_extensions.html#slugify-extension">cookiecutter.extensions.SlugifyExtension</a>:
     provides a <code>slugify</code> filter using
     <a href="https://github.com/un33k/python-slugify">python-slugify</a>.</p>
 </li>
 </ul>
 </li>
 <li>
-<p><a href="https://github.com/Krunal-Kevadiya/krupy-templates-extensions"><code>krupy_templates_extensions.TemplateExtensionLoader</code></a>:
+<p><a href="https://github.com/Krunal-Kevadiya/krupy-templates-extensions">krupy_templates_extensions.TemplateExtensionLoader</a>:
     enhances the extension loading mechanism to allow templates writers to put their
     extensions directly in their templates. It also allows to modify the rendering context
     (the Jinja variables that you can use in your templates) before
     rendering templates, see <a class="autorefs autorefs-internal" href="../faq/#how-can-i-alter-the-context-before-rendering-the-project">using a context hook</a>.</p>
 </li>
-<li><a href="https://github.com/jpsca/jinja-markdown"><code>jinja_markdown.MarkdownExtension</code></a>:
+<li><a href="https://github.com/jpsca/jinja-markdown">jinja_markdown.MarkdownExtension</a>:
     provides a <code>markdown</code> tag that will render Markdown to HTML using
     <a href="https://facelessuser.github.io/pymdown-extensions/">PyMdown extensions</a>.</li>
-<li><a href="https://pypi.org/project/jinja2-slug/#files"><code>jinja2_slug.SlugExtension</code></a>: provides
+<li><a href="https://pypi.org/project/jinja2-slug/#files">jinja2_slug.SlugExtension</a>: provides
     a <code>slug</code> filter using <a href="https://github.com/mozilla/unicode-slugify">unicode-slugify</a>.</li>
-<li><a href="https://github.com/hackebrot/jinja2-time"><code>jinja2_time.TimeExtension</code></a>: adds a
+<li><a href="https://github.com/hackebrot/jinja2-time">jinja2_time.TimeExtension</a>: adds a
     <code>now</code> tag that provides convenient access to the
     <a href="http://crsmithdev.com/arrow/#arrow.factory.ArrowFactory.now">arrow.now()</a> API.</li>
-<li><a href="https://github.com/Krunal-Kevadiya/jinja2-jsonschema"><code>jinja2_jsonschema.JsonSchemaExtension</code></a>:
+<li><a href="https://github.com/Krunal-Kevadiya/jinja2-jsonschema">jinja2_jsonschema.JsonSchemaExtension</a>:
     adds a <code>jsonschema</code> filter for validating data against a JSON/YAML schema.</li>
 </ul>
 <p>Search for more extensions on GitHub using the
@@ -2902,7 +2920,7 @@ may be used to import a message from a file.</p>
 <li>CLI flags: N/A</li>
 <li>Default value: <code>""</code></li>
 </ul>
-<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy"><code>message_after_copy</code></a> but printed after
+<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy">message_after_copy</a> but printed after
 <a href="../updating/"><em>updating</em></a> a project.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -2922,7 +2940,7 @@ may be used to import a message from a file.</p>
 <li>CLI flags: N/A</li>
 <li>Default value: <code>""</code></li>
 </ul>
-<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy"><code>message_after_copy</code></a> but printed <em>before</em>
+<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy">message_after_copy</a> but printed <em>before</em>
 <a href="../generating/">generating</a> or <a class="autorefs autorefs-internal" href="../generating/#regenerating-a-project">regenerating</a> a project.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -2943,7 +2961,7 @@ may be used to import a message from a file.</p>
 <li>CLI flags: N/A</li>
 <li>Default value: <code>""</code></li>
 </ul>
-<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy"><code>message_before_copy</code></a> but printed before
+<p>Like <a class="autorefs autorefs-internal" href="#message_after_copy">message_before_copy</a> but printed before
 <a href="../updating/"><em>updating</em></a> a project.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -3243,11 +3261,11 @@ without suffix will be ignored.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Krupy 5 and older had a different default value: <code>.tmpl</code>. If you wish to keep it,
+<p>Krupy and older had a different default value: <code>.tmpl</code>. If you wish to keep it,
 add it to your <code>krupy.yml</code> to keep it future-proof.</p>
-<p>Krupy 6 will apply that old default if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
-than 6.</p>
-<p>Krupy 7+ no longer uses the old default independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
+<p>Krupy will apply that old default if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
+than 0.</p>
+<p>Krupy no longer uses the old default independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
 </div>
 <h3 id="unsafe"><code>unsafe</code><a class="headerlink" href="#unsafe" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3289,7 +3307,7 @@ the <code>v2.0.0a1</code> tag unless this flag is enabled.</p>
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This behavior is new from Krupy 5.0.0. Before that release, prereleases were
+<p>This behavior is new from Krupy. Before that release, prereleases were
 never ignored.</p>
 </div>
 <div class="admonition info">
@@ -3313,6 +3331,30 @@ to copy.</p>
 </div>
 <p>By default, Krupy will copy from the last release found in template Git tags, sorted as
 <a href="https://www.python.org/dev/peps/pep-0440/">PEP 440</a>.</p>
+<h3 id="_envquestions"><code>_envquestions</code><a class="headerlink" href="#_envquestions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Format: <code>dict</code></li>
+<li>CLI flags: N/A</li>
+<li>Default value: <code>{"is_visible_count": false, "is_visible_mark": false, "is_visible_type": false, "is_visible_default_value": false}</code></li>
+</ul>
+<p>Configurations for the Krupy environment.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Krupy and older had different, bracket-based defaults.</p>
+<p>If your template was created for Krupy, you need to add this configuration to
+your <code>krupy.yaml</code> to keep it working just like before:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">_envquestions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">is_visible_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">is_visible_mark</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">is_visible_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">is_visible_default_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false,</span>
+<span class="w">    </span><span class="nt">style</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="w"> </span><span class="s">&quot;qmark&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;fg:#5F819D&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;question&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;fg:#FF9D00&quot;</span><span class="w"> </span><span class="p p-Indicator">}</span><span class="err">,</span>
+</code></pre></div>
+<p>By specifying this, your template will be compatible with Krupy.</p>
+<p>Krupy will apply these older defaults if your <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a> is lower
+than 0.</p>
+<p>Krupy no longer uses the old defaults independent of <a class="autorefs autorefs-internal" href="#min_krupy_version">min_krupy_version</a>.</p>
+</div>
 <h2 id="patterns-syntax">Patterns syntax<a class="headerlink" href="#patterns-syntax" title="Permanent link">&para;</a></h2>
 <p>Krupy supports matching names against patterns in a gitignore style fashion. This works
 for the options <code>exclude</code> and <code>skip</code>. This means you can write patterns as you would for
@@ -3350,7 +3392,7 @@ path for this file</span>.</p>
 </div>
 <p>The builtin <code>_krupy_answers</code> variable includes all data needed to smooth future updates
 of this project. This includes (but is not limited to) all JSON-serializable values
-declared as user questions in <a class="autorefs autorefs-internal" href="#the-krupyyml-file">the <code>krupy.yml</code> file</a>.</p>
+declared as user questions in <a class="autorefs autorefs-internal" href="#the-krupyyml-file">the krupy.yml file</a>.</p>
 <p>As you can see, you also have the power to customize what will be logged here. Keys that
 start with an underscore (<code>_</code>) are specific to Krupy. Other keys should match questions
 in <code>krupy.yml</code>.</p>

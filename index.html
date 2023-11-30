@@ -1237,8 +1237,10 @@
 <ol>
 <li>Install Python 3.8 or newer.</li>
 <li>Install Git 2.27 or newer.</li>
-<li>To use as a CLI app: 
-    ``</li>
+<li>To use as a CLI app:</br>
+   <code>brew untap Krunal-Kevadiya/tap</code></br>
+   <code>brew tap Krunal-Kevadiya/tap</code></br>
+   <code>brew install krupy</code></li>
 </ol>
 <h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <p>To create a template:</p>
@@ -1251,12 +1253,12 @@
 </code></pre></div>
 <div class="highlight"><span class="filename">krupy.yml</span><pre><span></span><code><span class="c1"># questions</span>
 <span class="nt">project_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
-<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What is your project name?</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">  </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What is your project name?</span>
 
 <span class="nt">module_name</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
-<span class="w">    </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What is your Python module name?</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<span class="w">  </span><span class="nt">help</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">What is your Python module name?</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">{{project_name}}/{{module_name}}.py.jinja</span><pre><span></span><code>print(&quot;Hello from {{module_name}}!&quot;)
 </code></pre></div>
@@ -1265,13 +1267,13 @@
 </code></pre></div>
 <p>To generate a project from the template:</p>
 <ul>
-<li>
-<p>On the command-line:</p>
+<li>On the command-line:</li>
+</ul>
 <div class="highlight"><pre><span></span><code>krupy<span class="w"> </span>copy<span class="w"> </span>path/to/project/template<span class="w"> </span>path/to/destination
 </code></pre></div>
-</li>
-<li>
-<p>Or in Python code, programmatically:</p>
+<ul>
+<li>Or in Python code, programmatically:</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">krupy</span> <span class="kn">import</span> <span class="n">run_copy</span>
 
 <span class="c1"># Create a project from a local path</span>
@@ -1286,8 +1288,6 @@
 <span class="c1"># Or &quot;gl:&quot; as a shortcut of &quot;https://gitlab.com/&quot;</span>
 <span class="n">run_copy</span><span class="p">(</span><span class="s2">&quot;gl:Krunal-Kevadiya/krupy.git&quot;</span><span class="p">,</span> <span class="s2">&quot;path/to/destination&quot;</span><span class="p">)</span>
 </code></pre></div>
-</li>
-</ul>
 <h2 id="basic-concepts">Basic concepts<a class="headerlink" href="#basic-concepts" title="Permanent link">&para;</a></h2>
 <p>Krupy is composed of these main concepts:</p>
 <ol>
@@ -1319,7 +1319,7 @@
 <p>Krupy tries to have a smooth learning curve that lets you create simple templates that can evolve into complex ones as needed.</p>
 <h2 id="browse-or-tag-public-templates">Browse or tag public templates<a class="headerlink" href="#browse-or-tag-public-templates" title="Permanent link">&para;</a></h2>
 <p>You can browse public Krupy templates on GitHub using
-<a href="https://github.com/topics/krupy-template">the <code>krupy-template</code> topic</a>. Use them as inspiration!</p>
+<a href="https://github.com/topics/krupy-template">the krupy-template topic</a>. Use them as inspiration!</p>
 <p>If you want your template to appear in that list, just add the topic to it! 🏷</p>
 
 
