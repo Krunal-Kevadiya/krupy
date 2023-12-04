@@ -1404,8 +1404,7 @@ Create a new project from a template.
 
 Docs in https://krupy.readthedocs.io/
 
-WARNING! Use only trusted project templates, as they might execute code with the same level of
-access as your user.
+WARNING! Use only trusted project templates, as they might execute code with the same level of access as your user.
 
 
 Usage:
@@ -1417,12 +1416,9 @@ Meta-switches:
     -v, --version      Prints the program&#39;s version and quits
 
 Sub-commands:
-    copy               Copy from a template source to a destination.; see &#39;krupy copy --help&#39;
-                       for more info
-    recopy             Recopy a subproject from its original template; see &#39;krupy recopy --help&#39;
-                       for more info
-    update             Update a subproject from its original template; see &#39;krupy update --help&#39;
-                       for more info
+    copy               Copy from a template source to a destination.; see &#39;krupy copy --help&#39; for more info
+    recopy             Recopy a subproject from its original template; see &#39;krupy recopy --help&#39; for more info
+    update             Update a subproject from its original template; see &#39;krupy update --help&#39; for more info
 
 krupy copy 0.1.6
 
@@ -1437,43 +1433,32 @@ Hidden-switches:
     -v, --version                      Prints the program&#39;s version and quits
 
 Switches:
-    -C, --no-cleanup                   On error, do not delete destination if it was created by
-                                       Krupy.
-    --UNSAFE, --trust                  Allow templates with unsafe features (Jinja extensions,
-                                       migrations, tasks)
-    -a, --answers-file VALUE:str       Update using this path (relative to `destination_path`)
-                                       to find the answers file
-    -d, --data VARIABLE=VALUE:str      Make VARIABLE available as VALUE when rendering the
-                                       template; may be given multiple times
+    -C, --no-cleanup                   On error, do not delete destination if it was created by Krupy.
+    --UNSAFE, --trust                  Allow templates with unsafe features (Jinja extensions, migrations, tasks)
+    -a, --answers-file VALUE:str       Update using this path (relative to `destination_path`) to find the answers file
+    -d, --data VARIABLE=VALUE:str      Make VARIABLE available as VALUE when rendering the template; may be given multiple times
     --data-file PATH:ExistingFile      Load data from a YAML file
     -f, --force                        Same as `--defaults --overwrite`.
     -g, --prereleases                  Use prereleases to compare template VCS tags.
-    -l, --defaults                     Use default answers to questions, which might be null if
-                                       not specified.
+    -l, --defaults                     Use default answers to questions, which might be null if not specified.
     -n, --pretend                      Run but do not make any changes
     -q, --quiet                        Suppress status output
-    -r, --vcs-ref VALUE:str            Git reference to checkout in `template_src`. If you do
-                                       not specify it, it will try to checkout the latest git
-                                       tag, as sorted using the PEP 440 algorithm. If you want
-                                       to checkout always the latest version, use `--vcs-
-                                       ref=HEAD`.
-    -s, --skip VALUE:str               Skip specified files if they exist already; may be given
-                                       multiple times
+    -r, --vcs-ref VALUE:str            Git reference to checkout in `template_src`. If you do not specify it, it will try to checkout the latest git tag, as
+                                       sorted using the PEP 440 algorithm. If you want to checkout always the latest version, use `--vcs-ref=HEAD`.
+    -s, --skip VALUE:str               Skip specified files if they exist already; may be given multiple times
     -w, --overwrite                    Overwrite files that already exist, without asking.
-    -x, --exclude VALUE:str            A name or shell-style pattern matching files or folders
-                                       that must not be copied; may be given multiple times
+    -x, --exclude VALUE:str            A name or shell-style pattern matching files or folders that must not be copied; may be given multiple times
 
 
 krupy recopy 0.1.6
 
 Recopy a subproject from its original template
 
-The copy must have a valid answers file which contains info from the last Krupy execution,
-including the source template (it must be a key called `_src_path`).
+The copy must have a valid answers file which contains info from the last Krupy execution, including the source template (it must be a key called
+`_src_path`).
 
-This command will ignore any diff that you have generated since the last `krupy` execution. It
-will act as if it were the 1st time you apply the template to the destination path. However, it
-will keep the answers.
+This command will ignore any diff that you have generated since the last `krupy` execution. It will act as if it were the 1st time you apply the template to
+the destination path. However, it will keep the answers.
 
 If you want a smarter update that respects your project evolution, use `krupy update` instead.
 
@@ -1487,41 +1472,31 @@ Hidden-switches:
 
 Switches:
     -A, --skip-answered                Skip questions that have already been answered
-    --UNSAFE, --trust                  Allow templates with unsafe features (Jinja extensions,
-                                       migrations, tasks)
-    -a, --answers-file VALUE:str       Update using this path (relative to `destination_path`)
-                                       to find the answers file
-    -d, --data VARIABLE=VALUE:str      Make VARIABLE available as VALUE when rendering the
-                                       template; may be given multiple times
+    --UNSAFE, --trust                  Allow templates with unsafe features (Jinja extensions, migrations, tasks)
+    -a, --answers-file VALUE:str       Update using this path (relative to `destination_path`) to find the answers file
+    -d, --data VARIABLE=VALUE:str      Make VARIABLE available as VALUE when rendering the template; may be given multiple times
     --data-file PATH:ExistingFile      Load data from a YAML file
     -f, --force                        Same as `--defaults --overwrite`.
     -g, --prereleases                  Use prereleases to compare template VCS tags.
-    -l, --defaults                     Use default answers to questions, which might be null if
-                                       not specified.
+    -l, --defaults                     Use default answers to questions, which might be null if not specified.
     -n, --pretend                      Run but do not make any changes
     -q, --quiet                        Suppress status output
-    -r, --vcs-ref VALUE:str            Git reference to checkout in `template_src`. If you do
-                                       not specify it, it will try to checkout the latest git
-                                       tag, as sorted using the PEP 440 algorithm. If you want
-                                       to checkout always the latest version, use `--vcs-
-                                       ref=HEAD`.
-    -s, --skip VALUE:str               Skip specified files if they exist already; may be given
-                                       multiple times
+    -r, --vcs-ref VALUE:str            Git reference to checkout in `template_src`. If you do not specify it, it will try to checkout the latest git tag, as
+                                       sorted using the PEP 440 algorithm. If you want to checkout always the latest version, use `--vcs-ref=HEAD`.
+    -s, --skip VALUE:str               Skip specified files if they exist already; may be given multiple times
     -w, --overwrite                    Overwrite files that already exist, without asking.
-    -x, --exclude VALUE:str            A name or shell-style pattern matching files or folders
-                                       that must not be copied; may be given multiple times
+    -x, --exclude VALUE:str            A name or shell-style pattern matching files or folders that must not be copied; may be given multiple times
 
 
 krupy update 0.1.6
 
 Update a subproject from its original template
 
-The copy must have a valid answers file which contains info from the last Krupy execution,
-including the source template (it must be a key called `_src_path`).
+The copy must have a valid answers file which contains info from the last Krupy execution, including the source template (it must be a key called
+`_src_path`).
 
-If that file contains also `_commit`, and `destination_path` is a git repository, this command
-will do its best to respect the diff that you have generated since the last `krupy` execution.
-To avoid that, use `krupy recopy` instead.
+If that file contains also `_commit`, and `destination_path` is a git repository, this command will do its best to respect the diff that you have generated
+since the last `krupy` execution. To avoid that, use `krupy recopy` instead.
 
 Usage:
     krupy update [SWITCHES] [destination_path=.]
@@ -1533,33 +1508,22 @@ Hidden-switches:
 
 Switches:
     -A, --skip-answered                     Skip questions that have already been answered
-    --UNSAFE, --trust                       Allow templates with unsafe features (Jinja
-                                            extensions, migrations, tasks)
-    -a, --answers-file VALUE:str            Update using this path (relative to
-                                            `destination_path`) to find the answers file
-    -c, --context-lines VALUE:int           Lines of context to use for detecting conflicts.
-                                            Increase for accuracy, decrease for resilience.; the
-                                            default is 3
-    -d, --data VARIABLE=VALUE:str           Make VARIABLE available as VALUE when rendering the
-                                            template; may be given multiple times
+    --UNSAFE, --trust                       Allow templates with unsafe features (Jinja extensions, migrations, tasks)
+    -a, --answers-file VALUE:str            Update using this path (relative to `destination_path`) to find the answers file
+    -c, --context-lines VALUE:int           Lines of context to use for detecting conflicts. Increase for accuracy, decrease for resilience.; the default is
+                                            3
+    -d, --data VARIABLE=VALUE:str           Make VARIABLE available as VALUE when rendering the template; may be given multiple times
     --data-file PATH:ExistingFile           Load data from a YAML file
     -g, --prereleases                       Use prereleases to compare template VCS tags.
-    -l, -f, --defaults                      Use default answers to questions, which might be
-                                            null if not specified.
+    -l, -f, --defaults                      Use default answers to questions, which might be null if not specified.
     -n, --pretend                           Run but do not make any changes
-    -o, --conflict VALUE:{rej, inline}      Behavior on conflict: Create .rej files, or add
-                                            inline conflict markers.; the default is inline
+    -o, --conflict VALUE:{rej, inline}      Behavior on conflict: Create .rej files, or add inline conflict markers.; the default is inline
     -q, --quiet                             Suppress status output
-    -r, --vcs-ref VALUE:str                 Git reference to checkout in `template_src`. If you
-                                            do not specify it, it will try to checkout the
-                                            latest git tag, as sorted using the PEP 440
-                                            algorithm. If you want to checkout always the latest
-                                            version, use `--vcs-ref=HEAD`.
-    -s, --skip VALUE:str                    Skip specified files if they exist already; may be
-                                            given multiple times
-    -x, --exclude VALUE:str                 A name or shell-style pattern matching files or
-                                            folders that must not be copied; may be given
-                                            multiple times
+    -r, --vcs-ref VALUE:str                 Git reference to checkout in `template_src`. If you do not specify it, it will try to checkout the latest git
+                                            tag, as sorted using the PEP 440 algorithm. If you want to checkout always the latest version, use `--vcs-
+                                            ref=HEAD`.
+    -s, --skip VALUE:str                    Skip specified files if they exist already; may be given multiple times
+    -x, --exclude VALUE:str                 A name or shell-style pattern matching files or folders that must not be copied; may be given multiple times
 </code></pre></div>
 
 
