@@ -303,10 +303,11 @@ class Question:
         for choice in choices:
             # If a choice is a value pair
             if isinstance(choice, (tuple, list)):
-                name, value = choice
+                name, value, checked = choice
             # If a choice is a single value
             else:
                 name = value = choice
+                checked = False
             # The name must always be a str
             name = str(self.render_value(name))
             # Extract the extended syntax for dict-like (dict-style or
@@ -321,7 +322,7 @@ class Question:
                 value = value["value"]
             # The value can be templated
             value = self.render_value(value)
-            c = Choice(name, value, disabled=disabled)
+            c = Choice(name, value, disabled=disabled, checked=checked)
             # Try to cast the value according to the question's type to raise
             # an error in case the value is incompatible.
             self.cast_answer(c.value)
@@ -339,7 +340,7 @@ class Question:
                 return self.qmark
             return self.render_value(self.qmark)
         if self.secret:
-            return "🕵️"
+            return "🕵️ "
         return DEFAULT_QUESTION_PREFIX
 
     def get_placeholder(self) -> AnyFormattedText:

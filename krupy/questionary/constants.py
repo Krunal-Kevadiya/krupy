@@ -36,16 +36,16 @@ INVALID_INPUT = "Invalid input"
 # Default message style
 DEFAULT_STYLE = Style(
     [
-        ("qcount", "fg:#f94144 bold italic"),  # question count down
-        ("qmark", "fg:#f3722c bold italic"),  # question mark
-        ("question", "fg:#f8961e bold"),  # question text
-        ("type", "fg:#f9c74f bold italic"),  # question type
-        ("default", "fg:#90be6d bold italic blink"),  # question default value
-        ("answer", "fg:#43aa8b"),  # submitted answer text behind the question
-        ("pointer", "fg:#0077b6 bold"),  # pointer used in select and checkbox prompts
+        ("qcount", "fg:#801336 bold italic"),  # question count down
+        ("qmark", "fg:#C81912 bold italic"),  # question mark
+        ("question", "fg:#CC561E bold"),  # question text
+        ("type", "fg:#3E7063 bold italic"),  # question type
+        ("default", "fg:#0F4C75 bold italic blink"),  # question default value
+        ("answer", "fg:#004E32"),  # submitted answer text behind the question
+        ("pointer", "fg:#05478A bold"),  # pointer used in select and checkbox prompts
         ("instruction", "fg:#673AB7 bold"),  # user instructions for select, rawselect, checkbox
-        ("text", "fg:#000000 bold"),  # any other text
-        ("selected", "fg:#FFFFFF bg:#87a330 bold italic"),  # style for a selected item of a checkbox
+        ("text", "fg:default bold"),  # any other text
+        ("selected", "fg:#87a330 bg:default noreverse bold italic"),  # style for a selected item of a checkbox
         ("highlighted", "fg:#cc3399 bold"),  # any other hight light text
         ("separator", "fg:#6C6C6C"),  # separator in lists
         ("disabled", "fg:#858585"),  # any other disable text
