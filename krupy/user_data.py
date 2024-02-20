@@ -303,7 +303,8 @@ class Question:
         for choice in choices:
             # If a choice is a value pair
             if isinstance(choice, (tuple, list)):
-                name, value, checked = choice
+                name, value, *checked = choice
+                checked = checked[0] if checked else False
             # If a choice is a single value
             else:
                 name = value = choice
